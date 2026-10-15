@@ -26,11 +26,12 @@ body, html {
     padding: 3.5vh 5vw;
 }
 
-/* Премиальная шапка */
+/* Шапка сайта */
 .header-section {
     display: flex;
     align-items: center;
     width: 100%;
+    z-index: 10;
 }
 
 .logo-box {
@@ -62,6 +63,7 @@ body, html {
 
 /* Основной рабочий контент */
 .main-content {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,28 +73,35 @@ body, html {
     margin: 0 auto;
 }
 
-/* Здание слева с мягким неоном */
+/* Левая часть: увеличиваем здание, делаем фоновым элементом с наплывом на центр */
 .building-box {
-    width: 38vw;
-    display: flex;
-    align-items: flex-end;
+    position: absolute;
+    left: -4vw;
+    bottom: -3vh;
+    width: 52vw; /* Увеличенный размер для масштабности */
+    z-index: 1;
+    pointer-events: none; /* Чтобы клики проходили сквозь него при необходимости */
 }
 
 .building-img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.3)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.35)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
 }
 
-/* Правый блок: помещаем в премиальную полупрозрачную карточку (как на референсе) */
+/* Правая часть: центрируем карточку строго в правой половине экрана */
 .info-buttons-wrapper {
-    width: 42vw;
-    background: linear-gradient(135deg, rgba(8, 25, 50, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
-    border: 1px solid rgba(0, 210, 255, 0.2);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    border-radius: 16px;
+    position: relative;
+    z-index: 5;
+    width: 41vw;
+    margin-left: auto; /* Сдвигает блок в правую половину */
+    margin-right: 2vw;
+    background: linear-gradient(135deg, rgba(8, 25, 50, 0.82) 0%, rgba(4, 14, 30, 0.92) 100%);
+    border: 1px solid rgba(0, 210, 255, 0.25);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
     padding: 2.5vw 3vw;
     display: flex;
     flex-direction: column;
@@ -101,7 +110,7 @@ body, html {
 
 .text-block h2 {
     color: #ffffff;
-    font-size: 2.2vw;
+    font-size: 2.1vw;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1vw;
@@ -164,10 +173,14 @@ body, html {
         gap: 30px;
     }
     .building-box {
-        width: 85vw;
+        position: static;
+        width: 90vw;
+        margin-top: 10px;
     }
     .info-buttons-wrapper {
         width: 100%;
+        margin-left: 0;
+        margin-right: 0;
         padding: 25px;
     }
     .text-block h2 {
