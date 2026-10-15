@@ -22,10 +22,10 @@
             background: linear-gradient(135deg, #f4f8fc 0%, #eef4f9 100%);
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Центрируем контент по вертикали, убирая дыры */
+            justify-content: flex-start;
             align-items: center;
-            padding: 2vh 5vw;
-            gap: 2vh;
+            padding: 2.5vh 5vw;
+            gap: 20px;
             box-sizing: border-box;
         }
 
@@ -63,17 +63,17 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
             text-align: center;
         }
 
-        /* Индикатор прогресса ровно по ширине сетки из 3 шагов */
+        /* Индикатор прогресса */
         .progress-box {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 4px 15px rgba(0, 150, 255, 0.08);
             border-radius: 14px;
-            padding: 12px 25px;
+            padding: 10px 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -95,7 +95,7 @@
 
         .progress-bar-bg {
             flex: 1;
-            height: 10px;
+            height: 9px;
             background: #e2e8f0;
             border-radius: 10px;
             overflow: hidden;
@@ -112,9 +112,9 @@
 
         .testdrive-title h2 {
             color: #030b18;
-            font-size: 2vw;
+            font-size: 1.9vw;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .testdrive-title h2 span {
@@ -141,11 +141,11 @@
             box-shadow: 0 10px 30px rgba(0, 150, 255, 0.12);
             backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 22px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
@@ -155,12 +155,12 @@
         .step-card:hover {
             border-color: #00d2ff;
             box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .step-number {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             background: #e0f2fe;
             color: #0284c7;
             font-weight: 700;
@@ -169,22 +169,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.05vw;
+            font-size: 1vw;
             box-shadow: 0 2px 8px rgba(0, 180, 255, 0.2);
             align-self: flex-start;
         }
 
         .step-info h3 {
             color: #030b18;
-            font-size: 1.1vw;
+            font-size: 1.05vw;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .step-info p {
             color: #64748b;
-            font-size: 0.88vw;
-            line-height: 1.4;
+            font-size: 0.85vw;
+            line-height: 1.35;
         }
 
         /* Выполненный шаг */
@@ -210,10 +210,10 @@
 
         .check-overlay {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 28px;
-            height: 28px;
+            top: 12px;
+            right: 12px;
+            width: 26px;
+            height: 26px;
             background: #00d2ff;
             color: #030b18;
             border-radius: 50%;
@@ -221,7 +221,7 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
@@ -229,31 +229,49 @@
             display: flex;
         }
 
-        /* Секция сертификата */
+        /* Секция сертификата (изначально неактивная, заполняет пространство снизу) */
         .certificate-section {
-            display: none;
-            background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
-            border: 2px solid #4df3ff;
-            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
+            border: 2px solid rgba(0, 210, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border-radius: 16px;
-            padding: 20px 30px;
-            animation: fadeIn 0.5s ease forwards;
+            padding: 18px 25px;
             text-align: center;
             width: 100%;
             box-sizing: border-box;
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(30%);
+            transition: all 0.5s ease;
+        }
+
+        /* Активное состояние после прохождения всех 3 шагов */
+        .certificate-section.active {
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
+            border-color: #4df3ff;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
+            opacity: 1;
+            pointer-events: auto;
+            filter: none;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { border-color: #4df3ff; box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3); }
+            100% { border-color: #ffffff; box-shadow: 0 20px 45px rgba(0, 210, 255, 0.6); }
         }
 
         .certificate-section h3 {
             color: #4df3ff;
-            font-size: 1.5vw;
-            margin-bottom: 5px;
+            font-size: 1.4vw;
+            margin-bottom: 4px;
             text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
         }
 
         .certificate-section p {
             color: #ffffff;
-            font-size: 0.9vw;
-            margin-bottom: 12px;
+            font-size: 0.88vw;
+            margin-bottom: 10px;
         }
 
         .cert-form {
@@ -270,12 +288,12 @@
 
         .cert-input {
             flex: 1;
-            padding: 10px 16px;
+            padding: 9px 15px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             background: #ffffff;
             color: #030b18;
-            font-size: 0.95vw;
+            font-size: 0.9vw;
             outline: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
@@ -289,7 +307,6 @@
             justify-content: space-between;
             align-items: center;
             gap: 15px;
-            margin-top: 2px;
         }
 
         .checkbox-container {
@@ -298,20 +315,15 @@
             gap: 8px;
             text-align: left;
             color: #b8d4f0;
-            font-size: 0.85vw;
+            font-size: 0.82vw;
             cursor: pointer;
         }
 
         .checkbox-container input {
             accent-color: #00d2ff;
             cursor: pointer;
-            width: 16px;
-            height: 16px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            width: 15px;
+            height: 15px;
         }
     </style>
 </head>
@@ -322,7 +334,7 @@
         <!-- Шапка БГУТ -->
         <header class="testdrive-header">
             <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 48px; height: 48px;">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 45px; height: 45px;">
                 <div class="logo-text">
                     <h1>Pro-БГУТ: студент на час</h1>
                     <p>Твой путь начинается здесь</p>
@@ -331,7 +343,7 @@
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">На главную</button>
         </header>
 
-        <!-- Основная часть с вертикальным центрированием -->
+        <!-- Основная часть -->
         <main class="testdrive-main">
 
             <!-- Индикатор прогресса -->
@@ -382,7 +394,7 @@
 
             </div>
 
-            <!-- Секция сертификата -->
+            <!-- Секция сертификата (изначально неактивна и заполнена внизу) -->
             <div class="certificate-section" id="certSection">
                 <h3>Поздравляем! Все 3 шага пройдены!</h3>
                 <p>Введите ваши данные, чтобы получить именной сертификат:</p>
@@ -398,7 +410,7 @@
                             <input type="checkbox" id="userConsent">
                             <span>Я даю согласие на обработку персональных данных</span>
                         </label>
-                        <button class="pro-btn" style="width: auto; padding: 10px 22px; font-size: 0.95vw; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
+                        <button class="pro-btn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
                     </div>
                 </div>
             </div>
@@ -427,29 +439,29 @@
             document.getElementById('progressBar').style.width = (count / 3 * 100) + '%';
 
             if (count === allSteps.length) {
-                if (certSection.style.display !== 'block') {
-                    certSection.style.display = 'block';
+                if (!certSection.classList.contains('active')) {
+                    certSection.classList.add('active');
                     certSection.scrollIntoView({ behavior: 'smooth' });
                     launchFireworks();
                 }
             } else {
-                certSection.style.display = 'none';
+                certSection.classList.remove('active');
             }
         }
 
         function launchFireworks() {
             if (typeof confetti === 'function') {
                 confetti({
-                    particleCount: 80,
+                    particleCount: 90,
                     angle: 60,
-                    spread: 70,
+                    spread: 80,
                     origin: { x: 0, y: 0.7 },
                     colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
                 });
                 confetti({
-                    particleCount: 80,
+                    particleCount: 90,
                     angle: 120,
-                    spread: 70,
+                    spread: 80,
                     origin: { x: 1, y: 0.7 },
                     colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
                 });
