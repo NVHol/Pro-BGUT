@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест-драйв специальностей БГУТ</title>
+    <link rel="stylesheet" href="style.css"> <!-- Подключаем те же стили -->
+</head>
+<body>
+    <div class="page-container" style="background-image: url('fon.jpg'); justify-content: center; align-items: center;">
+        <div class="info-buttons-wrapper" style="text-align: center; width: auto; max-width: 600px;">
+            <div class="text-block">
+                <h2><span>Тест-драйв</span></h2>
+                <p>Страница находится в разработке. Здесь будет проходить виртуальный тест-драйв специальностей.</p>
+            </div>
+            <div class="buttons-block" style="margin-top: 20px;">
+                <button class="pro-btn" id="btnBack">Назад на главную</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Скрипт только для этой страницы, чтобы вернуться назад
+        document.getElementById('btnBack').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
