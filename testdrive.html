@@ -158,6 +158,7 @@
             transform: translateY(-2px);
         }
 
+        /* Исходный кружок с цифрой */
         .step-number {
             width: 34px;
             height: 34px;
@@ -172,6 +173,7 @@
             font-size: 1vw;
             box-shadow: 0 2px 8px rgba(0, 180, 255, 0.2);
             align-self: flex-start;
+            transition: all 0.3s ease;
         }
 
         .step-info h3 {
@@ -194,10 +196,12 @@
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
         }
 
+        /* Кружок с цифрой после выполнения становится ярко-голубым */
         .step-card.completed .step-number {
-            background: #4df3ff;
+            background: #00d2ff;
             color: #030b18;
             border-color: #ffffff;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
         .step-card.completed .step-info h3 {
@@ -208,30 +212,29 @@
             color: #a5c3e8;
         }
 
-        /* Галочка в кружке (изменена на голубой стиль) */
+        /* Галочка в правом верхнем углу (бирюзовая) */
         .check-overlay {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 30px;
-            height: 30px;
-            background: #e0f2fe; /* Светло-голубой фон */
-            color: #0284c7; /* Синий цвет галочки */
-            border: 2px solid #38bdf8;
+            top: 12px;
+            right: 12px;
+            width: 26px;
+            height: 26px;
+            background: #00d2ff;
+            color: #030b18;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            font-size: 14px;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
         .step-card.completed .check-overlay {
             display: flex;
         }
 
-        /* Секция сертификата */
+        /* Секция сертификата (изначально неактивная) */
         .certificate-section {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
             border: 2px solid rgba(0, 210, 255, 0.2);
