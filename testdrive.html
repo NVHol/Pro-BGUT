@@ -22,9 +22,11 @@
             padding: 3vh 5vw;
         }
 
-        /* Шапка в фирменном синем стиле сайта */
+        /* Шапка с фоном как на главной */
         .testdrive-header {
-            background: linear-gradient(135deg, rgba(8, 25, 50, 0.95) 0%, rgba(4, 14, 30, 0.98) 100%);
+            background-image: url('fon.jpg');
+            background-size: cover;
+            background-position: center;
             border: 1px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             padding: 1.2vw 2.5vw;
@@ -72,7 +74,7 @@
             font-size: 1.05vw;
         }
 
-        /* Сетка из 3 шагов (стеклянные рамки) */
+        /* Сетка из 3 шагов */
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -132,7 +134,7 @@
             line-height: 1.5;
         }
 
-        /* Состояние выполненного шага (синяя галочка на всю рамку) */
+        /* Выполненный шаг */
         .step-card.completed {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
             border-color: #4df3ff;
@@ -152,7 +154,6 @@
             color: #a5c3e8;
         }
 
-        /* Галочка поверх карточки */
         .check-overlay {
             position: absolute;
             top: 15px;
@@ -174,23 +175,25 @@
             display: flex;
         }
 
-        /* Блок сертификата (скрыт пока не пройдены все 3 шага) */
+        /* Секция сертификата */
         .certificate-section {
             display: none;
-            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(4, 14, 30, 0.98) 100%);
+            position: relative;
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
             border: 2px solid #4df3ff;
-            box-shadow: 0 20px 50px rgba(0, 210, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 210, 255, 0.4);
             border-radius: 18px;
-            padding: 30px;
-            animation: fadeIn 0.5s ease forwards;
+            padding: 35px;
+            animation: fadeIn 0.6s ease forwards;
             text-align: center;
+            overflow: hidden;
         }
 
         .certificate-section h3 {
             color: #4df3ff;
             font-size: 1.8vw;
             margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
         }
 
         .certificate-section p {
@@ -201,14 +204,14 @@
 
         .cert-form {
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            justify-content: center;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         .cert-input {
-            flex: 1;
+            width: 100%;
             padding: 12px 18px;
             border-radius: 10px;
             border: 1px solid rgba(0, 210, 255, 0.4);
@@ -222,16 +225,42 @@
             color: #93bde8;
         }
 
+        /* Чекбокс согласия */
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            color: #b8d4f0;
+            font-size: 0.9vw;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .checkbox-container input {
+            margin-top: 3px;
+            accent-color: #00d2ff;
+            cursor: pointer;
+        }
+
+        /* Анимация фейерверка / искр */
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 4px #00d2ff, 0 0 30px 8px #ffffff;
+            animation: explode 1s infinite ease-out;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0.1); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Кнопка назад */
-        .back-box {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -239,13 +268,13 @@
 
     <div class="testdrive-container">
         
-        <!-- Шапка БГУТ -->
+        <!-- Шапка БГУТ с фоном-текстурой -->
         <header class="testdrive-header">
             <div class="logo-box">
                 <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 55px; height: 55px;">
                 <div class="logo-text">
                     <h1>Pro-БГУТ: студент на час</h1>
-                    <p>Твой путь начинается здесь</p>
+                    <p>Твой путь начинается здесь!</p>
                 </div>
             </div>
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 10px 20px; font-size: 0.95vw;">На главную</button>
@@ -258,7 +287,7 @@
                 <p>Выполни все задания и получи именной сертификат!</p>
             </div>
 
-            <!-- Три шага (стеклянные рамки) -->
+            <!-- Три шага -->
             <div class="steps-grid">
                 
                 <!-- Шаг 1 -->
@@ -277,7 +306,7 @@
                     <div class="step-number">2</div>
                     <div class="step-info">
                         <h3>Пройди квест</h3>
-                        <p>Реши интерактивный инженерные кейс, проверь свои силы.</p>
+                        <p>Реши интерактивный инженерный кейс, проверь свои силы.</p>
                     </div>
                 </div>
 
@@ -293,13 +322,25 @@
 
             </div>
 
-            <!-- Секция сертификата (появляется при сборе всех 3 галочек) -->
+            <!-- Секция сертификата с салютом -->
             <div class="certificate-section" id="certSection">
-                <h3>🎉 Поздравляем! Все 3 шага пройдены!</h3>
-                <p>Введите ваши данные, чтобы сгенерировать и забрать именной сертификат участника «Pro-БГУТ: студент на час»:</p>
+                <div class="firework" style="top: 20%; left: 15%;"></div>
+                <div class="firework" style="top: 60%; right: 20%; animation-delay: 0.4s;"></div>
+                <div class="firework" style="top: 30%; right: 10%; animation-delay: 0.7s;"></div>
+
+                <h3>Поздравляем! Все 3 шага пройдены!</h3>
+                <p>Введите ваши данные, чтобы получить именной сертификат участника «Pro-БГУТ: студент на час»:</p>
+                
                 <div class="cert-form">
                     <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName">
-                    <button class="pro-btn" style="width: auto; padding: 12px 25px; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
+                    <input type="email" class="cert-input" placeholder="Ваш Email (для получения сертификата)" id="userEmail">
+                    
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="userConsent">
+                        <span>Я даю согласие на обработку персональных данных</span>
+                    </label>
+
+                    <button class="pro-btn" style="width: 100%; padding: 12px; text-align: center; margin-top: 10px;" onclick="getCertificate()">Получить сертификат</button>
                 </div>
             </div>
 
@@ -310,18 +351,15 @@
     </div>
 
     <script>
-        // Кнопка возврата на главную
         document.getElementById('btnBack').addEventListener('click', function() {
             window.location.href = 'index.html';
         });
 
-        // Функция переключения шагов (клик по рамке)
         function toggleStep(card) {
             card.classList.toggle('completed');
             checkAllSteps();
         }
 
-        // Проверка: если все 3 шага отмечены, показываем форму сертификата
         function checkAllSteps() {
             const allSteps = document.querySelectorAll('.step-card');
             const completedSteps = document.querySelectorAll('.step-card.completed');
@@ -337,11 +375,18 @@
 
         function getCertificate() {
             const name = document.getElementById('userName').value.trim();
-            if(!name) {
-                alert('Пожалуйста, введите ваше ФИО!');
+            const email = document.getElementById('userEmail').value.trim();
+            const consent = document.getElementById('userConsent').checked;
+
+            if(!name || !email) {
+                alert('Пожалуйста, заполните ФИО и Email!');
                 return;
             }
-            alert(name + ', ваш именной сертификат успешно создан! (Здесь будет скачивание файла).');
+            if(!consent) {
+                alert('Необходимо согласие на обработку персональных данных!');
+                return;
+            }
+            alert(name + ', ваш именной сертификат успешно отправлен на почту ' + email + '!');
         }
     </script>
 </body>
