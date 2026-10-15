@@ -23,14 +23,15 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2.5vh 4vw;
+    padding: 4vh 4.5vw 3vh 4.5vw;
 }
 
-/* Шапка сайта с эмблемой */
+/* Шапка сайта: опустили ниже и добавили отступ */
 .header-section {
     display: flex;
     align-items: center;
     width: 100%;
+    margin-top: 1vh;
 }
 
 .logo-box {
@@ -57,37 +58,39 @@ body, html {
     font-size: 1vw;
 }
 
-/* Основной блок */
+/* Основной блок: распределяем элементы по ширине без пустот */
 .main-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     flex: 1;
+    padding: 0 1vw;
 }
 
-/* Здание университета: уменьшено на 10% и добавлено белое неоновое свечение */
+/* Здание слева (сдвинуто чуть правее для гармонии) */
 .building-box {
-    width: 40vw; /* Оптимальный размер (уменьшено на 10%) */
+    width: 39vw;
     display: flex;
     align-items: flex-end;
-    margin-left: -1vw;
+    margin-left: 1vw;
 }
 
 .building-img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    /* Белый неон вокруг здания */
-    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 35px rgba(0, 210, 255, 0.4));
+    /* Еле заметная мягкая голубая подсветка здания */
+    filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.35)) drop-shadow(0 0 40px rgba(0, 150, 255, 0.2));
 }
 
-/* Правый блок: текст и кнопки */
+/* Правый блок (текст и кнопки смещены правее, чтобы убрать пустоту у края) */
 .info-buttons-wrapper {
-    width: 42vw;
+    width: 43vw;
     display: flex;
     flex-direction: column;
     gap: 2vw;
+    margin-right: 1vw;
 }
 
 .text-block h2 {
@@ -110,7 +113,7 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 1vw;
-    width: 25vw;
+    width: 26vw;
 }
 
 /* Стиль кнопок */
@@ -156,6 +159,7 @@ body, html {
     }
     .info-buttons-wrapper {
         width: 100%;
+        margin-right: 0;
     }
     .text-block h2 {
         font-size: 22px;
