@@ -24,7 +24,7 @@
             padding: 2.5vh 5vw;
         }
 
-        /* Шапка с фирменным фоном сайта */
+        /* Шапка БГУТ */
         .testdrive-header {
             background-image: url('fon.jpg');
             background-size: cover;
@@ -53,11 +53,54 @@
         .testdrive-main {
             max-width: 1200px;
             width: 100%;
-            margin: 1vh auto;
+            margin: 1.5vh auto;
             display: flex;
             flex-direction: column;
             gap: 20px;
             text-align: center;
+        }
+
+        /* Индикатор прогресса в свободном пространстве */
+        .progress-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 150, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .progress-text {
+            font-size: 0.9vw;
+            color: #030b18;
+            font-weight: 600;
+        }
+
+        .progress-text span {
+            color: #0099ff;
+        }
+
+        .progress-bar-bg {
+            flex: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #0099ff 0%, #00d2ff 100%);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+            transition: width 0.4s ease;
         }
 
         .testdrive-title h2 {
@@ -107,12 +150,11 @@
             transform: translateY(-3px);
         }
 
-        /* Светлый фон кружка с цифрой */
         .step-number {
             width: 38px;
             height: 38px;
-            background: #e0f2fe; /* Светло-голубой фон */
-            color: #0284c7; /* Контрастный синий цвет цифры */
+            background: #e0f2fe;
+            color: #0284c7;
             font-weight: 700;
             border: 2px solid #38bdf8;
             border-radius: 50%;
@@ -233,11 +275,6 @@
             color: #94a3b8;
         }
 
-        .cert-input:focus {
-            border-color: #00d2ff;
-            box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
-        }
-
         .action-row {
             display: flex;
             justify-content: space-between;
@@ -287,6 +324,15 @@
 
         <!-- Основная часть -->
         <main class="testdrive-main">
+
+            <!-- Индикатор прогресса -->
+            <div class="progress-box">
+                <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+            </div>
+
             <div class="testdrive-title">
                 <h2>Пройди <span>три шага</span> к своему будущему</h2>
                 <p>Выполни все задания и получи именной сертификат!</p>
@@ -368,22 +414,25 @@
             const allSteps = document.querySelectorAll('.step-card');
             const completedSteps = document.querySelectorAll('.step-card.completed');
             const certSection = document.getElementById('certSection');
+            
+            // Обновляем шкалу прогресса
+            const count = completedSteps.length;
+            document.getElementById('progressCount').innerText = count;
+            document.getElementById('progressBar').style.width = (count / 3 * 100) + '%';
 
-            if (completedSteps.length === allSteps.length) {
+            if (count === allSteps.length) {
                 if (certSection.style.display !== 'block') {
                     certSection.style.display = 'block';
                     certSection.scrollIntoView({ behavior: 'smooth' });
-                    launchFireworks(); // Запуск яркого салюта/конфетти
+                    launchFireworks();
                 }
             } else {
                 certSection.style.display = 'none';
             }
         }
 
-        // Запуск праздничного салюта конфетти по всему экрану
         function launchFireworks() {
             if (typeof confetti === 'function') {
-                // Первый залп слева и справа
                 confetti({
                     particleCount: 80,
                     angle: 60,
