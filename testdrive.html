@@ -49,18 +49,19 @@
             font-size: 0.9vw;
         }
 
-        /* Основной контент */
+        /* Основной контент: сбалансированные вертикальные отступы */
         .testdrive-main {
             max-width: 1200px;
             width: 100%;
-            margin: 1.5vh auto;
+            margin: auto auto; /* Автоматические отступы сверху и снизу для идеального центрирования */
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 22px;
             text-align: center;
+            padding: 2vh 0;
         }
 
-        /* Индикатор прогресса в свободном пространстве */
+        /* Индикатор прогресса ровно по ширине сетки из 3 шагов */
         .progress-box {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 210, 255, 0.3);
@@ -71,15 +72,15 @@
             align-items: center;
             justify-content: space-between;
             gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
+            width: 100%; /* Занимает всю ширину родителя (равно ширине 3 шагов) */
+            box-sizing: border-box;
         }
 
         .progress-text {
             font-size: 0.9vw;
             color: #030b18;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .progress-text span {
@@ -124,6 +125,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            width: 100%;
         }
 
         .step-card {
@@ -228,30 +230,31 @@
             border: 2px solid #4df3ff;
             box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
             border-radius: 16px;
-            padding: 25px 30px;
+            padding: 22px 30px;
             animation: fadeIn 0.5s ease forwards;
             text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .certificate-section h3 {
             color: #4df3ff;
-            font-size: 1.6vw;
-            margin-bottom: 6px;
+            font-size: 1.5vw;
+            margin-bottom: 5px;
             text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
         }
 
         .certificate-section p {
             color: #ffffff;
-            font-size: 0.95vw;
-            margin-bottom: 15px;
+            font-size: 0.9vw;
+            margin-bottom: 12px;
         }
 
         .cert-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-width: 800px;
-            margin: 0 auto;
+            gap: 10px;
+            width: 100%;
         }
 
         .inputs-row {
@@ -280,7 +283,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 15px;
-            margin-top: 5px;
+            margin-top: 2px;
         }
 
         .checkbox-container {
@@ -322,10 +325,10 @@
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">На главную</button>
         </header>
 
-        <!-- Основная часть -->
+        <!-- Основная часть с идеальным центрированием -->
         <main class="testdrive-main">
 
-            <!-- Индикатор прогресса -->
+            <!-- Индикатор прогресса (по ширине трех шагов) -->
             <div class="progress-box">
                 <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
                 <div class="progress-bar-bg">
