@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест-драйв специальностей — Pro-БГУТ</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Подключаем библиотеку для настоящего конфетти -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.min.js"></script>
     <style>
         body.testdrive-body {
             background-color: #ffffff;
@@ -19,17 +21,17 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 3vh 5vw;
+            padding: 2.5vh 5vw;
         }
 
-        /* Шапка с фоном как на главной */
+        /* Шапка с фирменным фоном-текстурой сайта */
         .testdrive-header {
             background-image: url('fon.jpg');
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 1.2vw 2.5vw;
+            padding: 1vw 2.5vw;
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -47,22 +49,22 @@
             font-size: 0.9vw;
         }
 
-        /* Основной контент */
+        /* Основной контент с уменьшенным верхним отступом */
         .testdrive-main {
             max-width: 1200px;
             width: 100%;
-            margin: 2vh auto;
+            margin: 1vh auto;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             text-align: center;
         }
 
         .testdrive-title h2 {
             color: #030b18;
-            font-size: 2.2vw;
+            font-size: 2.1vw;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .testdrive-title h2 span {
@@ -71,15 +73,14 @@
 
         .testdrive-title p {
             color: #557090;
-            font-size: 1.05vw;
+            font-size: 1vw;
         }
 
         /* Сетка из 3 шагов */
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-top: 10px;
+            gap: 20px;
         }
 
         .step-card {
@@ -89,11 +90,11 @@
             box-shadow: 0 10px 30px rgba(0, 150, 255, 0.12);
             backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 30px 20px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
@@ -103,35 +104,37 @@
         .step-card:hover {
             border-color: #00d2ff;
             box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3);
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
 
+        /* Цифры в цвет основного фона сайта (темно-синие с неоном) */
         .step-number {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: #030b18;
             color: #4df3ff;
             font-weight: 700;
+            border: 1.5px solid #00d2ff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1vw;
+            font-size: 1vw;
             box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
             align-self: flex-start;
         }
 
         .step-info h3 {
             color: #030b18;
-            font-size: 1.2vw;
+            font-size: 1.15vw;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .step-info p {
             color: #64748b;
-            font-size: 0.95vw;
-            line-height: 1.5;
+            font-size: 0.9vw;
+            line-height: 1.4;
         }
 
         /* Выполненный шаг */
@@ -158,8 +161,8 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             background: #00d2ff;
             color: #030b18;
             border-radius: 50%;
@@ -167,7 +170,7 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
@@ -175,91 +178,94 @@
             display: flex;
         }
 
-        /* Секция сертификата */
+        /* Компактная секция сертификата */
         .certificate-section {
             display: none;
-            position: relative;
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
             border: 2px solid #4df3ff;
-            box-shadow: 0 20px 50px rgba(0, 210, 255, 0.4);
-            border-radius: 18px;
-            padding: 35px;
-            animation: fadeIn 0.6s ease forwards;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
+            border-radius: 16px;
+            padding: 25px 30px;
+            animation: fadeIn 0.5s ease forwards;
             text-align: center;
-            overflow: hidden;
         }
 
         .certificate-section h3 {
             color: #4df3ff;
-            font-size: 1.8vw;
-            margin-bottom: 10px;
+            font-size: 1.6vw;
+            margin-bottom: 6px;
             text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
         }
 
         .certificate-section p {
             color: #ffffff;
-            font-size: 1.05vw;
-            margin-bottom: 20px;
+            font-size: 0.95vw;
+            margin-bottom: 15px;
         }
 
         .cert-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-width: 500px;
+            gap: 12px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
+        /* Строка с ФИО и Email на белом фоне */
+        .inputs-row {
+            display: flex;
+            gap: 15px;
+        }
+
         .cert-input {
-            width: 100%;
-            padding: 12px 18px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 210, 255, 0.4);
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 1vw;
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff; /* Белый фон */
+            color: #030b18; /* Темный текст для контраста */
+            font-size: 0.95vw;
             outline: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .cert-input::placeholder {
-            color: #93bde8;
+            color: #94a3b8;
         }
 
-        /* Чекбокс согласия */
-        .checkbox-container {
+        .cert-input:focus {
+            border-color: #00d2ff;
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Нижняя строка: Согласие и Кнопка */
+        .action-row {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            text-align: left;
-            color: #b8d4f0;
-            font-size: 0.9vw;
-            cursor: pointer;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
             margin-top: 5px;
         }
 
-        .checkbox-container input {
-            margin-top: 3px;
-            accent-color: #00d2ff;
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+            color: #b8d4f0;
+            font-size: 0.85vw;
             cursor: pointer;
         }
 
-        /* Анимация фейерверка / искр */
-        .firework {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px 4px #00d2ff, 0 0 30px 8px #ffffff;
-            animation: explode 1s infinite ease-out;
-        }
-
-        @keyframes explode {
-            0% { transform: scale(0.1); opacity: 1; }
-            100% { transform: scale(4); opacity: 0; }
+        .checkbox-container input {
+            accent-color: #00d2ff;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -271,13 +277,13 @@
         <!-- Шапка БГУТ с фоном-текстурой -->
         <header class="testdrive-header">
             <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 55px; height: 55px;">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 50px; height: 50px;">
                 <div class="logo-text">
                     <h1>Pro-БГУТ: студент на час</h1>
                     <p>Твой путь начинается здесь!</p>
                 </div>
             </div>
-            <button class="pro-btn" id="btnBack" style="width: auto; padding: 10px 20px; font-size: 0.95vw;">На главную</button>
+            <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">На главную</button>
         </header>
 
         <!-- Основная часть -->
@@ -322,25 +328,26 @@
 
             </div>
 
-            <!-- Секция сертификата с салютом -->
+            <!-- Секция сертификата (компактная) -->
             <div class="certificate-section" id="certSection">
-                <div class="firework" style="top: 20%; left: 15%;"></div>
-                <div class="firework" style="top: 60%; right: 20%; animation-delay: 0.4s;"></div>
-                <div class="firework" style="top: 30%; right: 10%; animation-delay: 0.7s;"></div>
-
                 <h3>Поздравляем! Все 3 шага пройдены!</h3>
-                <p>Введите ваши данные, чтобы получить именной сертификат участника «Pro-БГУТ: студент на час»:</p>
+                <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                 
                 <div class="cert-form">
-                    <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName">
-                    <input type="email" class="cert-input" placeholder="Ваш Email (для получения сертификата)" id="userEmail">
+                    <!-- Строка ФИО и Email на белом фоне -->
+                    <div class="inputs-row">
+                        <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName">
+                        <input type="email" class="cert-input" placeholder="Ваш Email (для отправки сертификата)" id="userEmail">
+                    </div>
                     
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="userConsent">
-                        <span>Я даю согласие на обработку персональных данных</span>
-                    </label>
-
-                    <button class="pro-btn" style="width: 100%; padding: 12px; text-align: center; margin-top: 10px;" onclick="getCertificate()">Получить сертификат</button>
+                    <!-- Нижняя строка: Чекбокс и Кнопка -->
+                    <div class="action-row">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="userConsent">
+                            <span>Я даю согласие на обработку персональных данных</span>
+                        </label>
+                        <button class="pro-btn" style="width: auto; padding: 10px 22px; font-size: 0.95vw; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
+                    </div>
                 </div>
             </div>
 
@@ -368,9 +375,22 @@
             if (completedSteps.length === allSteps.length) {
                 certSection.style.display = 'block';
                 certSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Запуск однократного праздничного конфетти на весь экран
+                triggerConfetti();
             } else {
                 certSection.style.display = 'none';
             }
+        }
+
+        // Функция красивого конфетти на весь экран
+        function triggerConfetti() {
+            confetti({
+                particleCount: 120,
+                spread: 90,
+                origin: { y: 0.6 },
+                colors: ['#00d2ff', '#ffffff', '#4df3ff', '#1e40af']
+            });
         }
 
         function getCertificate() {
