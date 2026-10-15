@@ -12,7 +12,7 @@ body, html {
     overflow: hidden;
 }
 
-/* Фон снова растягивается на весь экран без обрезки краев */
+/* Фон на весь экран */
 .page-container {
     position: relative;
     width: 100vw;
@@ -45,7 +45,6 @@ body, html {
     object-fit: contain;
 }
 
-/* Неоновое свечение для текста в шапке */
 .logo-text h1 {
     color: #ffffff;
     font-size: 1.8vw;
@@ -67,9 +66,9 @@ body, html {
     flex: 1;
 }
 
-/* Здание университета: уменьшено еще на 20% и сдвинуто влево/вверх */
+/* Здание университета: уменьшено на 10% и добавлено белое неоновое свечение */
 .building-box {
-    width: 35vw; /* Уменьшено по сравнению с предыдущим вариантом */
+    width: 40vw; /* Оптимальный размер (уменьшено на 10%) */
     display: flex;
     align-items: flex-end;
     margin-left: -1vw;
@@ -79,6 +78,8 @@ body, html {
     width: 100%;
     height: auto;
     object-fit: contain;
+    /* Белый неон вокруг здания */
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 35px rgba(0, 210, 255, 0.4));
 }
 
 /* Правый блок: текст и кнопки */
@@ -89,7 +90,6 @@ body, html {
     gap: 2vw;
 }
 
-/* Неоновое свечение для главного заголовка */
 .text-block h2 {
     color: #4df3ff;
     font-size: 2.4vw;
@@ -151,7 +151,7 @@ body, html {
         gap: 20px;
     }
     .building-box {
-        width: 80vw;
+        width: 85vw;
         margin-left: 0;
     }
     .info-buttons-wrapper {
