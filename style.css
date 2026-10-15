@@ -5,34 +5,41 @@
 }
 
 body, html {
-    height: 100%;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #0b1c33; /* Глубокий синий цвет подложки */
-}
-
-/* Настраиваем фон так, чтобы он не обрезался сверху и показывал всю верхнюю часть */
-.hero-container {
-    background-image: url('fon.jpg');
-    /* Меняем cover на contain или подгоняем по ширине */
-    background-size: 100% auto; /* Картинка подстраивается по ширине экрана */
-    background-position: top center; /* Прижимаем к верху, чтобы логотип и заголовок не резались */
-    background-repeat: no-repeat;
-    min-height: 100vh;
     width: 100%;
-    position: relative;
+    height: 100%;
+    background-color: #051326; /* Темно-синий фон по краям, если экран шире 16:9 */
     display: flex;
-    align-items: flex-end; 
-    justify-content: flex-end; 
-    padding-bottom: 12vh; /* Поднимаем кнопки выше от низа */
-    padding-right: 8vw;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
 }
 
-/* Контейнер для трех кнопок */
+/* Главный контейнер размером строго под пропорции 16:9 вашего фона */
+.page-container {
+    position: relative;
+    width: 100%;
+    max-width: 1920px; /* Максимальная ширина для больших экранов */
+    aspect-ratio: 16 / 9; /* Жестко держим пропорции вашей картинки */
+    max-height: 100vh;
+}
+
+/* Картинка заполняет контейнер и никогда не обрезается */
+.bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Картинка масштабируется целиком, без потери краев */
+    display: block;
+}
+
+/* Блок с кнопками позиционируется поверх картинки в правой нижней части */
 .buttons-block {
+    position: absolute;
+    right: 9.5%;   /* Положение справа */
+    bottom: 15%;   /* Положение снизу под текстом */
     display: flex;
     flex-direction: column;
-    gap: 12px; 
-    width: 280px;
+    gap: 1.2vw;    нодальный отступ
+    width: 24%;    /* Ширина блока кнопок относительно картинки */
 }
 
 /* Стиль кнопок */
@@ -40,14 +47,15 @@ body, html {
     background: rgba(13, 37, 69, 0.85); 
     color: #4df3ff; 
     border: 2px solid #00d2ff; 
-    padding: 12px 18px;
-    font-size: 15px;
+    padding: 1vw 1.5vw;
+    font-size: 1.05vw; /* Размер текста подстраивается под экран */
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     text-align: left;
     box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 /* Эффект при наведении мышки */
@@ -59,20 +67,28 @@ body, html {
     box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
 }
 
-/* Адаптивность для мобильных телефонов */
+/* Адаптивность для мобильных телефонов и узких экранов */
 @media (max-width: 768px) {
-    .hero-container {
-        background-size: cover;
-        background-position: center;
-        align-items: center;
+    .page-container {
+        aspect-ratio: auto;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
-        padding: 0;
+    }
+    .bg-image {
+        height: auto;
+        max-height: 50vh;
+        object-fit: cover;
     }
     .buttons-block {
-        width: 85%;
-        background: rgba(5, 15, 30, 0.75);
-        padding: 20px;
-        border-radius: 15px;
-        backdrop-filter: blur(5px);
+        position: static;
+        width: 90%;
+        margin: 20px auto 0 auto;
+        gap: 10px;
+    }
+    .pro-btn {
+        font-size: 16px;
+        padding: 12px;
     }
 }
