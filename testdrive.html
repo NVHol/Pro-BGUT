@@ -3,24 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест-драйв специальностей БГУТ</title>
-    <link rel="stylesheet" href="style.css"> <!-- Подключаем те же стили -->
+    <title>Тест-драйв специальностей — Pro-БГУТ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специальные стили для страницы тест-драйва с белым фоном */
+        body.testdrive-body {
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
+
+        .testdrive-container {
+            width: 100vw;
+            min-height: 100vh;
+            background-color: #f4f8fc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3.5vh 5vw;
+        }
+
+        /* Шапка на странице тест-драйва (с темным фирменным фоном для читаемости) */
+        .testdrive-header {
+            background: #030b18;
+            padding: 1.5vw 2.5vw;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Карточка с небесно-голубой неоновой подсветкой */
+        .testdrive-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #00d2ff; /* Небесно-голубая неоновая рамка */
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4), 0 20px 50px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3vw 4vw;
+            max-width: 800px;
+            width: 100%;
+            margin: 4vh auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .testdrive-card h2 {
+            color: #030b18;
+            font-size: 2.2vw;
+            font-weight: 700;
+        }
+
+        .testdrive-card h2 span {
+            color: #0099ff;
+        }
+
+        .testdrive-card p {
+            color: #4a5568;
+            font-size: 1.1vw;
+            line-height: 1.6;
+        }
+    </style>
 </head>
-<body>
-    <div class="page-container" style="background-image: url('fon.jpg'); justify-content: center; align-items: center;">
-        <div class="info-buttons-wrapper" style="text-align: center; width: auto; max-width: 600px;">
-            <div class="text-block">
-                <h2><span>Тест-драйв</span></h2>
-                <p>Страница находится в разработке. Здесь будет проходить виртуальный тест-драйв специальностей.</p>
+<body class="testdrive-body">
+
+    <div class="testdrive-container">
+        
+        <!-- Шапка сайта -->
+        <header class="testdrive-header">
+            <div class="logo-box">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img">
+                <div class="logo-text">
+                    <h1>Pro-БГУТ: студент на час</h1>
+                    <p>Твой путь начинается здесь</p>
+                </div>
             </div>
-            <div class="buttons-block" style="margin-top: 20px;">
-                <button class="pro-btn" id="btnBack">Назад на главную</button>
+        </header>
+
+        <!-- Основной контент страницы тест-драйва -->
+        <main style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            <div class="testdrive-card">
+                <div class="text-block">
+                    <h2>Виртуальный <span>тест-драйв</span> специальностей</h2>
+                    <p>Здесь будущие абитуриенты смогут попробовать себя в роли студентов разных направлений подготовки БГУТ, ознакомиться с интерактивными заданиями и погрузиться в атмосферу университета.</p>
+                </div>
+
+                <div class="buttons-block" style="width: 250px; margin-top: 10px;">
+                    <button class="pro-btn" id="btnBack" style="background: #030b18; color: #4df3ff; text-align: center;">На главную</button>
+                </div>
             </div>
-        </div>
+        </main>
+
     </div>
 
     <script>
-        // Скрипт только для этой страницы, чтобы вернуться назад
+        // Кнопка возврата на главную
         document.getElementById('btnBack').addEventListener('click', function() {
             window.location.href = 'index.html';
         });
