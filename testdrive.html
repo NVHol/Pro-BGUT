@@ -12,6 +12,8 @@
             background-color: #ffffff;
             overflow-y: auto;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .testdrive-container {
@@ -20,8 +22,11 @@
             background: linear-gradient(135deg, #f4f8fc 0%, #eef4f9 100%);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 2.5vh 5vw;
+            justify-content: center; /* Центрируем контент по вертикали, убирая дыры */
+            align-items: center;
+            padding: 2vh 5vw;
+            gap: 2vh;
+            box-sizing: border-box;
         }
 
         /* Шапка БГУТ */
@@ -36,6 +41,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
         }
 
         .testdrive-header .logo-text h1 {
@@ -49,16 +57,14 @@
             font-size: 0.9vw;
         }
 
-        /* Основной контент: сбалансированные вертикальные отступы */
+        /* Основной контент */
         .testdrive-main {
             max-width: 1200px;
             width: 100%;
-            margin: auto auto; /* Автоматические отступы сверху и снизу для идеального центрирования */
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 18px;
             text-align: center;
-            padding: 2vh 0;
         }
 
         /* Индикатор прогресса ровно по ширине сетки из 3 шагов */
@@ -72,7 +78,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 20px;
-            width: 100%; /* Занимает всю ширину родителя (равно ширине 3 шагов) */
+            width: 100%;
             box-sizing: border-box;
         }
 
@@ -106,9 +112,9 @@
 
         .testdrive-title h2 {
             color: #030b18;
-            font-size: 2.1vw;
+            font-size: 2vw;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .testdrive-title h2 span {
@@ -117,7 +123,7 @@
 
         .testdrive-title p {
             color: #557090;
-            font-size: 1vw;
+            font-size: 0.95vw;
         }
 
         /* Сетка из 3 шагов */
@@ -135,7 +141,7 @@
             box-shadow: 0 10px 30px rgba(0, 150, 255, 0.12);
             backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 25px 20px;
+            padding: 22px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -153,8 +159,8 @@
         }
 
         .step-number {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             background: #e0f2fe;
             color: #0284c7;
             font-weight: 700;
@@ -163,21 +169,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1vw;
+            font-size: 1.05vw;
             box-shadow: 0 2px 8px rgba(0, 180, 255, 0.2);
             align-self: flex-start;
         }
 
         .step-info h3 {
             color: #030b18;
-            font-size: 1.15vw;
+            font-size: 1.1vw;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
         .step-info p {
             color: #64748b;
-            font-size: 0.9vw;
+            font-size: 0.88vw;
             line-height: 1.4;
         }
 
@@ -206,8 +212,8 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             background: #00d2ff;
             color: #030b18;
             border-radius: 50%;
@@ -215,7 +221,7 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
@@ -230,7 +236,7 @@
             border: 2px solid #4df3ff;
             box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
             border-radius: 16px;
-            padding: 22px 30px;
+            padding: 20px 30px;
             animation: fadeIn 0.5s ease forwards;
             text-align: center;
             width: 100%;
@@ -316,7 +322,7 @@
         <!-- Шапка БГУТ -->
         <header class="testdrive-header">
             <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 50px; height: 50px;">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 48px; height: 48px;">
                 <div class="logo-text">
                     <h1>Pro-БГУТ: студент на час</h1>
                     <p>Твой путь начинается здесь!</p>
@@ -325,10 +331,10 @@
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">На главную</button>
         </header>
 
-        <!-- Основная часть с идеальным центрированием -->
+        <!-- Основная часть с вертикальным центрированием -->
         <main class="testdrive-main">
 
-            <!-- Индикатор прогресса (по ширине трех шагов) -->
+            <!-- Индикатор прогресса -->
             <div class="progress-box">
                 <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
                 <div class="progress-bar-bg">
@@ -399,8 +405,6 @@
 
         </main>
 
-        <footer></footer>
-
     </div>
 
     <script>
@@ -418,7 +422,6 @@
             const completedSteps = document.querySelectorAll('.step-card.completed');
             const certSection = document.getElementById('certSection');
             
-            // Обновляем шкалу прогресса
             const count = completedSteps.length;
             document.getElementById('progressCount').innerText = count;
             document.getElementById('progressBar').style.width = (count / 3 * 100) + '%';
