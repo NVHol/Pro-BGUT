@@ -7,12 +7,12 @@
 body, html {
     width: 100%;
     height: 100%;
-    background-color: #051326;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #030b18;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     overflow: hidden;
 }
 
-/* Фон на весь экран */
+/* Главный экран */
 .page-container {
     position: relative;
     width: 100vw;
@@ -23,15 +23,14 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 4vh 4.5vw 3vh 4.5vw;
+    padding: 3.5vh 5vw;
 }
 
-/* Шапка сайта: опустили ниже и добавили отступ */
+/* Премиальная шапка */
 .header-section {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-top: 1vh;
 }
 
 .logo-box {
@@ -41,71 +40,82 @@ body, html {
 }
 
 .logo-img {
-    width: 4.5vw;
-    height: 4.5vw;
+    width: 4vw;
+    height: 4vw;
     object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
 }
 
 .logo-text h1 {
     color: #ffffff;
-    font-size: 1.8vw;
+    font-size: 1.6vw;
     font-weight: 700;
-    text-shadow: 0 0 12px rgba(0, 210, 255, 0.6), 0 0 25px rgba(0, 210, 255, 0.3);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
 }
 
 .logo-text p {
-    color: #a5c3e8;
-    font-size: 1vw;
+    color: #93bde8;
+    font-size: 0.95vw;
+    letter-spacing: 0.3px;
 }
 
-/* Основной блок: распределяем элементы по ширине без пустот */
+/* Основной рабочий контент */
 .main-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     flex: 1;
-    padding: 0 1vw;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
-/* Здание слева (сдвинуто чуть правее для гармонии) */
+/* Здание слева с мягким неоном */
 .building-box {
-    width: 39vw;
+    width: 38vw;
     display: flex;
     align-items: flex-end;
-    margin-left: 1vw;
 }
 
 .building-img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    /* Еле заметная мягкая голубая подсветка здания */
-    filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.35)) drop-shadow(0 0 40px rgba(0, 150, 255, 0.2));
+    filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.3)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
 }
 
-/* Правый блок (текст и кнопки смещены правее, чтобы убрать пустоту у края) */
+/* Правый блок: помещаем в премиальную полупрозрачную карточку (как на референсе) */
 .info-buttons-wrapper {
-    width: 43vw;
+    width: 42vw;
+    background: linear-gradient(135deg, rgba(8, 25, 50, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 2.5vw 3vw;
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    margin-right: 1vw;
 }
 
 .text-block h2 {
-    color: #4df3ff;
-    font-size: 2.4vw;
+    color: #ffffff;
+    font-size: 2.2vw;
     font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 0.8vw;
-    text-shadow: 0 0 15px rgba(0, 210, 255, 0.7), 0 0 30px rgba(0, 210, 255, 0.4);
+    line-height: 1.2;
+    margin-bottom: 1vw;
+    text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+}
+
+.text-block h2 span {
+    color: #4df3ff;
 }
 
 .text-block p {
-    color: #ffffff;
-    font-size: 1.1vw;
-    line-height: 1.5;
+    color: #b8d4f0;
+    font-size: 1.05vw;
+    line-height: 1.6;
 }
 
 /* Блок кнопок */
@@ -113,34 +123,34 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 1vw;
-    width: 26vw;
+    width: 100%;
 }
 
-/* Стиль кнопок */
+/* Премиальный стиль кнопок */
 .pro-btn {
-    background: rgba(13, 37, 69, 0.85); 
+    background: linear-gradient(90deg, rgba(13, 40, 75, 0.9) 0%, rgba(10, 30, 55, 0.9) 100%);
     color: #4df3ff; 
-    border: 2px solid #00d2ff; 
-    padding: 1vw 1.5vw;
-    font-size: 1.05vw;
+    border: 1.5px solid rgba(0, 210, 255, 0.4); 
+    padding: 1.1vw 1.5vw;
+    font-size: 1vw;
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
     text-align: left;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     width: 100%;
 }
 
 .pro-btn:hover {
-    background: rgba(0, 210, 255, 0.25);
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.25) 0%, rgba(13, 40, 75, 0.9) 100%);
     color: #ffffff;
-    border-color: #ffffff;
+    border-color: #4df3ff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+    box-shadow: 0 6px 25px rgba(0, 210, 255, 0.4);
 }
 
-/* Адаптивность для мобильных */
+/* Адаптивность */
 @media (max-width: 900px) {
     .page-container {
         height: auto;
@@ -151,15 +161,14 @@ body, html {
     .main-content {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 30px;
     }
     .building-box {
         width: 85vw;
-        margin-left: 0;
     }
     .info-buttons-wrapper {
         width: 100%;
-        margin-right: 0;
+        padding: 25px;
     }
     .text-block h2 {
         font-size: 22px;
@@ -167,14 +176,8 @@ body, html {
     .text-block p {
         font-size: 14px;
     }
-    .buttons-block {
-        width: 100%;
-    }
-    .logo-img {
-        width: 45px;
-        height: 45px;
-    }
-    .logo-text h1 {
-        font-size: 18px;
+    .pro-btn {
+        font-size: 15px;
+        padding: 12px;
     }
 }
