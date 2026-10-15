@@ -12,21 +12,18 @@ body, html {
     overflow: hidden;
 }
 
-/* Главный экран (строго держим пропорции 16:9 вашего фона) */
+/* Фон снова растягивается на весь экран без обрезки краев */
 .page-container {
     position: relative;
     width: 100vw;
-    height: 56.25vw; /* 16:9 пропорция */
-    max-height: 100vh;
-    max-width: 177.78vh;
-    margin: auto;
+    height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 2vw 3vw;
+    justify-content: space-between;
+    padding: 2.5vh 4vw;
 }
 
 /* Шапка сайта с эмблемой */
@@ -34,7 +31,6 @@ body, html {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 1vw;
 }
 
 .logo-box {
@@ -44,15 +40,17 @@ body, html {
 }
 
 .logo-img {
-    width: 5vw;
-    height: 5vw;
+    width: 4.5vw;
+    height: 4.5vw;
     object-fit: contain;
 }
 
+/* Неоновое свечение для текста в шапке */
 .logo-text h1 {
     color: #ffffff;
-    font-size: 1.7vw;
+    font-size: 1.8vw;
     font-weight: 700;
+    text-shadow: 0 0 12px rgba(0, 210, 255, 0.6), 0 0 25px rgba(0, 210, 255, 0.3);
 }
 
 .logo-text p {
@@ -64,17 +62,17 @@ body, html {
 .main-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    position: relative;
+    flex: 1;
 }
 
-/* Здание университета: поднимаем выше и сдвигаем левее по референсу */
+/* Здание университета: уменьшено еще на 20% и сдвинуто влево/вверх */
 .building-box {
-    position: absolute;
-    left: -1.5vw;
-    top: -2vw;
-    width: 44vw;
+    width: 35vw; /* Уменьшено по сравнению с предыдущим вариантом */
+    display: flex;
+    align-items: flex-end;
+    margin-left: -1vw;
 }
 
 .building-img {
@@ -85,21 +83,20 @@ body, html {
 
 /* Правый блок: текст и кнопки */
 .info-buttons-wrapper {
-    width: 42%;
-    margin-left: auto; /* Прижимаем к правой стороне */
+    width: 42vw;
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    padding-top: 1vw;
 }
 
+/* Неоновое свечение для главного заголовка */
 .text-block h2 {
     color: #4df3ff;
-    font-size: 2.2vw;
+    font-size: 2.4vw;
     font-weight: 700;
     line-height: 1.25;
     margin-bottom: 0.8vw;
-    text-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    text-shadow: 0 0 15px rgba(0, 210, 255, 0.7), 0 0 30px rgba(0, 210, 255, 0.4);
 }
 
 .text-block p {
@@ -145,23 +142,20 @@ body, html {
     .page-container {
         height: auto;
         min-height: 100vh;
-        max-height: none;
         overflow-y: auto;
         padding: 20px;
     }
     .main-content {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
     }
     .building-box {
-        position: static;
-        width: 100%;
-        max-width: 400px;
-        margin-bottom: 20px;
+        width: 80vw;
+        margin-left: 0;
     }
     .info-buttons-wrapper {
         width: 100%;
-        margin-left: 0;
     }
     .text-block h2 {
         font-size: 22px;
