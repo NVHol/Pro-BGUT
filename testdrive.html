@@ -158,7 +158,6 @@
             transform: translateY(-2px);
         }
 
-        /* Исходный кружок с цифрой */
         .step-number {
             width: 34px;
             height: 34px;
@@ -196,7 +195,6 @@
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
         }
 
-        /* Кружок с цифрой после выполнения становится ярко-голубым */
         .step-card.completed .step-number {
             background: #00d2ff;
             color: #030b18;
@@ -212,7 +210,6 @@
             color: #a5c3e8;
         }
 
-        /* Галочка в правом верхнем углу (бирюзовая) */
         .check-overlay {
             position: absolute;
             top: 12px;
@@ -367,8 +364,8 @@
             <!-- Три шага -->
             <div class="steps-grid">
                 
-                <!-- Шаг 1 -->
-                <div class="step-card" onclick="toggleStep(this)">
+                <!-- Шаг 1 (Переход на отдельную страницу) -->
+                <div class="step-card" onclick="openStep1()">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">1</div>
                     <div class="step-info">
@@ -428,6 +425,11 @@
         document.getElementById('btnBack').addEventListener('click', function() {
             window.location.href = 'index.html';
         });
+
+        // Функция перехода на страницу первого шага
+        function openStep1() {
+            window.location.href = 'specialty.html';
+        }
 
         function toggleStep(card) {
             card.classList.toggle('completed');
