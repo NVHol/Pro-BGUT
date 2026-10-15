@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест-драйв специальностей — Pro-БГУТ</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключаем библиотеку для настоящего конфетти -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.min.js"></script>
+    <!-- Подключение библиотеки конфетти -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body.testdrive-body {
             background-color: #ffffff;
@@ -24,7 +24,7 @@
             padding: 2.5vh 5vw;
         }
 
-        /* Шапка с фирменным фоном-текстурой сайта */
+        /* Шапка с фирменным фоном сайта */
         .testdrive-header {
             background-image: url('fon.jpg');
             background-size: cover;
@@ -49,7 +49,7 @@
             font-size: 0.9vw;
         }
 
-        /* Основной контент с уменьшенным верхним отступом */
+        /* Основной контент */
         .testdrive-main {
             max-width: 1200px;
             width: 100%;
@@ -107,20 +107,20 @@
             transform: translateY(-3px);
         }
 
-        /* Цифры в цвет основного фона сайта (темно-синие с неоном) */
+        /* Светлый фон кружка с цифрой */
         .step-number {
             width: 38px;
             height: 38px;
-            background: #030b18;
-            color: #4df3ff;
+            background: #e0f2fe; /* Светло-голубой фон */
+            color: #0284c7; /* Контрастный синий цвет цифры */
             font-weight: 700;
-            border: 1.5px solid #00d2ff;
+            border: 2px solid #38bdf8;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1vw;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+            font-size: 1.1vw;
+            box-shadow: 0 2px 8px rgba(0, 180, 255, 0.2);
             align-self: flex-start;
         }
 
@@ -147,6 +147,7 @@
         .step-card.completed .step-number {
             background: #4df3ff;
             color: #030b18;
+            border-color: #ffffff;
         }
 
         .step-card.completed .step-info h3 {
@@ -178,7 +179,7 @@
             display: flex;
         }
 
-        /* Компактная секция сертификата */
+        /* Секция сертификата */
         .certificate-section {
             display: none;
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
@@ -211,7 +212,6 @@
             margin: 0 auto;
         }
 
-        /* Строка с ФИО и Email на белом фоне */
         .inputs-row {
             display: flex;
             gap: 15px;
@@ -222,8 +222,8 @@
             padding: 10px 16px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
-            background: #ffffff; /* Белый фон */
-            color: #030b18; /* Темный текст для контраста */
+            background: #ffffff;
+            color: #030b18;
             font-size: 0.95vw;
             outline: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -238,7 +238,6 @@
             box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
         }
 
-        /* Нижняя строка: Согласие и Кнопка */
         .action-row {
             display: flex;
             justify-content: space-between;
@@ -274,7 +273,7 @@
 
     <div class="testdrive-container">
         
-        <!-- Шапка БГУТ с фоном-текстурой -->
+        <!-- Шапка БГУТ -->
         <header class="testdrive-header">
             <div class="logo-box">
                 <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 50px; height: 50px;">
@@ -328,19 +327,17 @@
 
             </div>
 
-            <!-- Секция сертификата (компактная) -->
+            <!-- Секция сертификата -->
             <div class="certificate-section" id="certSection">
                 <h3>Поздравляем! Все 3 шага пройдены!</h3>
                 <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                 
                 <div class="cert-form">
-                    <!-- Строка ФИО и Email на белом фоне -->
                     <div class="inputs-row">
                         <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName">
                         <input type="email" class="cert-input" placeholder="Ваш Email (для отправки сертификата)" id="userEmail">
                     </div>
                     
-                    <!-- Нижняя строка: Чекбокс и Кнопка -->
                     <div class="action-row">
                         <label class="checkbox-container">
                             <input type="checkbox" id="userConsent">
@@ -373,24 +370,35 @@
             const certSection = document.getElementById('certSection');
 
             if (completedSteps.length === allSteps.length) {
-                certSection.style.display = 'block';
-                certSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Запуск однократного праздничного конфетти на весь экран
-                triggerConfetti();
+                if (certSection.style.display !== 'block') {
+                    certSection.style.display = 'block';
+                    certSection.scrollIntoView({ behavior: 'smooth' });
+                    launchFireworks(); // Запуск яркого салюта/конфетти
+                }
             } else {
                 certSection.style.display = 'none';
             }
         }
 
-        // Функция красивого конфетти на весь экран
-        function triggerConfetti() {
-            confetti({
-                particleCount: 120,
-                spread: 90,
-                origin: { y: 0.6 },
-                colors: ['#00d2ff', '#ffffff', '#4df3ff', '#1e40af']
-            });
+        // Запуск праздничного салюта конфетти по всему экрану
+        function launchFireworks() {
+            if (typeof confetti === 'function') {
+                // Первый залп слева и справа
+                confetti({
+                    particleCount: 80,
+                    angle: 60,
+                    spread: 70,
+                    origin: { x: 0, y: 0.7 },
+                    colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
+                });
+                confetti({
+                    particleCount: 80,
+                    angle: 120,
+                    spread: 70,
+                    origin: { x: 1, y: 0.7 },
+                    colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
+                });
+            }
         }
 
         function getCertificate() {
