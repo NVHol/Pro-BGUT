@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Настраиваем ваш фон: картинка растягивается на весь экран */
+.hero-container {
+    /* Внимание: здесь будет использоваться ваш фоновый файл фон.jpg */
+    background-image: url('fon.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    align-items: flex-end; /* Прижимаем кнопки к нижней части под текст */
+    justify-content: flex-end; /* Смещаем правее, под блок с текстом */
+    padding-bottom: 8vh;
+    padding-right: 10vw;
+}
+
+/* Контейнер для трех кнопок */
+.buttons-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px; /* Расстояние между кнопками */
+    width: 320px;
+}
+
+/* Стиль кнопок под цветовую гамму макета */
+.pro-btn {
+    background: rgba(13, 37, 69, 0.75); /* Глубокий полупрозрачный синий тон */
+    color: #4df3ff; /* Бирюзово-неоновый цвет текста в тон заголовкам */
+    border: 2px solid #00d2ff; /* Аккуратная светящаяся рамка */
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Эффект при наведении мышки */
+.pro-btn:hover {
+    background: rgba(0, 210, 255, 0.2);
+    color: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.4);
+}
+
+/* Адаптивность для мобильных телефонов */
+@media (max-width: 768px) {
+    .hero-container {
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background-position: 70% center;
+    }
+    .buttons-block {
+        width: 85%;
+        background: rgba(5, 15, 30, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+    }
+}
