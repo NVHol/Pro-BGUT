@@ -7,51 +7,52 @@
 body, html {
     height: 100%;
     font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #0b1c33; /* Глубокий синий цвет подложки */
 }
 
-/* Настраиваем ваш фон: картинка растягивается на весь экран */
+/* Настраиваем фон так, чтобы он не обрезался сверху и показывал всю верхнюю часть */
 .hero-container {
-    /* Внимание: здесь будет использоваться ваш фоновый файл фон.jpg */
     background-image: url('fon.jpg');
-    background-size: cover;
-    background-position: center;
+    /* Меняем cover на contain или подгоняем по ширине */
+    background-size: 100% auto; /* Картинка подстраивается по ширине экрана */
+    background-position: top center; /* Прижимаем к верху, чтобы логотип и заголовок не резались */
     background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    width: 100%;
     position: relative;
     display: flex;
-    align-items: flex-end; /* Прижимаем кнопки к нижней части под текст */
-    justify-content: flex-end; /* Смещаем правее, под блок с текстом */
-    padding-bottom: 8vh;
-    padding-right: 10vw;
+    align-items: flex-end; 
+    justify-content: flex-end; 
+    padding-bottom: 12vh; /* Поднимаем кнопки выше от низа */
+    padding-right: 8vw;
 }
 
 /* Контейнер для трех кнопок */
 .buttons-block {
     display: flex;
     flex-direction: column;
-    gap: 14px; /* Расстояние между кнопками */
-    width: 320px;
+    gap: 12px; 
+    width: 280px;
 }
 
-/* Стиль кнопок под цветовую гамму макета */
+/* Стиль кнопок */
 .pro-btn {
-    background: rgba(13, 37, 69, 0.75); /* Глубокий полупрозрачный синий тон */
-    color: #4df3ff; /* Бирюзово-неоновый цвет текста в тон заголовкам */
-    border: 2px solid #00d2ff; /* Аккуратная светящаяся рамка */
-    padding: 14px 20px;
-    font-size: 16px;
+    background: rgba(13, 37, 69, 0.85); 
+    color: #4df3ff; 
+    border: 2px solid #00d2ff; 
+    padding: 12px 18px;
+    font-size: 15px;
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
     text-align: left;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
     transition: all 0.3s ease;
 }
 
 /* Эффект при наведении мышки */
 .pro-btn:hover {
-    background: rgba(0, 210, 255, 0.2);
+    background: rgba(0, 210, 255, 0.25);
     color: #ffffff;
     border-color: #ffffff;
     transform: translateY(-2px);
@@ -61,14 +62,15 @@ body, html {
 /* Адаптивность для мобильных телефонов */
 @media (max-width: 768px) {
     .hero-container {
+        background-size: cover;
+        background-position: center;
         align-items: center;
         justify-content: center;
         padding: 0;
-        background-position: 70% center;
     }
     .buttons-block {
         width: 85%;
-        background: rgba(5, 15, 30, 0.6);
+        background: rgba(5, 15, 30, 0.75);
         padding: 20px;
         border-radius: 15px;
         backdrop-filter: blur(5px);
