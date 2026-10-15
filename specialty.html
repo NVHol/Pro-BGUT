@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор специальности — Pro-БГУТ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body.specialty-body {
+            background-color: #ffffff;
+            overflow-y: auto;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .specialty-container {
+            width: 100vw;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f4f8fc 0%, #eef4f9 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2.5vh 5vw;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Шапка БГУТ */
+        .specialty-header {
+            background-image: url('fon.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 1vw 2.5vw;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .specialty-header .logo-text h1 {
+            color: #ffffff;
+            font-size: 1.5vw;
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+        }
+
+        .specialty-header .logo-text p {
+            color: #93bde8;
+            font-size: 0.9vw;
+        }
+
+        /* Основной контент */
+        .specialty-main {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .specialty-title h2 {
+            color: #030b18;
+            font-size: 2.1vw;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .specialty-title h2 span {
+            color: #0099ff;
+        }
+
+        .specialty-title p {
+            color: #557090;
+            font-size: 1vw;
+        }
+
+        /* Карточка-контейнер для контента шага */
+        .content-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid rgba(0, 210, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 150, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 35px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .content-card h3 {
+            color: #030b18;
+            font-size: 1.4vw;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            color: #64748b;
+            font-size: 1vw;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="specialty-body">
+
+    <div class="specialty-container">
+        
+        <!-- Шапка БГУТ с кнопкой "Назад" -->
+        <header class="specialty-header">
+            <div class="logo-box">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 45px; height: 45px;">
+                <div class="logo-text">
+                    <h1>Pro-БГУТ: студент на час</h1>
+                    <p>Твой путь начинается здесь</p>
+                </div>
+            </div>
+            <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">Назад</button>
+        </header>
+
+        <!-- Основная часть -->
+        <main class="specialty-main">
+            <div class="specialty-title">
+                <h2>Выбор <span>специальности</span></h2>
+                <p>Изучите направления подготовки и найдите то, что подходит именно вам</p>
+            </div>
+
+            <!-- Здесь мы будем наполнять страницу выбором специальностей -->
+            <div class="content-card">
+                <h3>Шаг 1 в разработке</h3>
+                <p>Здесь будет размещен каталог образовательных программ, описание кафедр, технологий и особенностей поступления. Абитуриент сможет ознакомиться с направлениями и зачесть этот шаг.</p>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        // Кнопка возврата на страницу тест-драйва
+        document.getElementById('btnBack').addEventListener('click', function() {
+            window.location.href = 'testdrive.html';
+        });
+    </script>
+</body>
+</html>
