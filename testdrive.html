@@ -208,28 +208,30 @@
             color: #a5c3e8;
         }
 
+        /* Галочка в кружке (изменена на голубой стиль) */
         .check-overlay {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 26px;
-            height: 26px;
-            background: #00d2ff;
-            color: #030b18;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            background: #e0f2fe; /* Светло-голубой фон */
+            color: #0284c7; /* Синий цвет галочки */
+            border: 2px solid #38bdf8;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
 
         .step-card.completed .check-overlay {
             display: flex;
         }
 
-        /* Секция сертификата (изначально неактивная, заполняет пространство снизу) */
+        /* Секция сертификата */
         .certificate-section {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
             border: 2px solid rgba(0, 210, 255, 0.2);
@@ -245,7 +247,7 @@
             transition: all 0.5s ease;
         }
 
-        /* Активное состояние после прохождения всех 3 шагов */
+        /* Активное состояние */
         .certificate-section.active {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
             border-color: #4df3ff;
@@ -394,7 +396,7 @@
 
             </div>
 
-            <!-- Секция сертификата (изначально неактивна и заполнена внизу) -->
+            <!-- Секция сертификата -->
             <div class="certificate-section" id="certSection">
                 <h3>Поздравляем! Все 3 шага пройдены!</h3>
                 <p>Введите ваши данные, чтобы получить именной сертификат:</p>
