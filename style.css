@@ -9,70 +9,75 @@ body, html {
     height: 100%;
     background-color: #051326;
     font-family: 'Segoe UI', Arial, sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-/* Главный экран */
+/* Главный экран (строго держим пропорции 16:9 вашего фона) */
 .page-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 56.25vw; /* 16:9 пропорция */
+    max-height: 100vh;
+    max-width: 177.78vh;
+    margin: auto;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 50px;
+    justify-content: flex-start;
+    padding: 2vw 3vw;
 }
 
-/* Шапка сайта */
+/* Шапка сайта с эмблемой */
 .header-section {
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom: 1vw;
 }
 
 .logo-box {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1.2vw;
 }
 
-/* Жестко фиксируем размер эмблемы, чтобы она никогда не была гигантской */
 .logo-img {
-    width: 75px;
-    height: 75px;
+    width: 5vw;
+    height: 5vw;
     object-fit: contain;
 }
 
 .logo-text h1 {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 1.7vw;
     font-weight: 700;
 }
 
 .logo-text p {
     color: #a5c3e8;
-    font-size: 14px;
+    font-size: 1vw;
 }
 
-/* Основной блок: здание слева, текст и кнопки справа */
+/* Основной блок */
 .main-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     width: 100%;
-    padding-bottom: 20px;
+    position: relative;
 }
 
-/* Здание университета */
+/* Здание университета: поднимаем выше и сдвигаем левее по референсу */
 .building-box {
-    max-width: 45%;
+    position: absolute;
+    left: -1.5vw;
+    top: -2vw;
+    width: 44vw;
 }
 
 .building-img {
-    max-width: 550px;
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -81,23 +86,25 @@ body, html {
 /* Правый блок: текст и кнопки */
 .info-buttons-wrapper {
     width: 42%;
+    margin-left: auto; /* Прижимаем к правой стороне */
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 2vw;
+    padding-top: 1vw;
 }
 
 .text-block h2 {
     color: #4df3ff;
-    font-size: 32px;
+    font-size: 2.2vw;
     font-weight: 700;
     line-height: 1.25;
-    margin-bottom: 12px;
+    margin-bottom: 0.8vw;
     text-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
 }
 
 .text-block p {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 1.1vw;
     line-height: 1.5;
 }
 
@@ -105,9 +112,8 @@ body, html {
 .buttons-block {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: 320px;
+    gap: 1vw;
+    width: 25vw;
 }
 
 /* Стиль кнопок */
@@ -115,8 +121,8 @@ body, html {
     background: rgba(13, 37, 69, 0.85); 
     color: #4df3ff; 
     border: 2px solid #00d2ff; 
-    padding: 14px 20px;
-    font-size: 16px;
+    padding: 1vw 1.5vw;
+    font-size: 1.05vw;
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
@@ -139,25 +145,38 @@ body, html {
     .page-container {
         height: auto;
         min-height: 100vh;
-        padding: 20px;
+        max-height: none;
         overflow-y: auto;
+        padding: 20px;
     }
     .main-content {
         flex-direction: column;
         align-items: center;
-        gap: 30px;
     }
-    .building-box, .info-buttons-wrapper {
+    .building-box {
+        position: static;
         width: 100%;
-        max-width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
     }
-    .building-img {
-        max-width: 100%;
+    .info-buttons-wrapper {
+        width: 100%;
+        margin-left: 0;
     }
     .text-block h2 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+    .text-block p {
+        font-size: 14px;
     }
     .buttons-block {
-        max-width: 100%;
+        width: 100%;
+    }
+    .logo-img {
+        width: 45px;
+        height: 45px;
+    }
+    .logo-text h1 {
+        font-size: 18px;
     }
 }
