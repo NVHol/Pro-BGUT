@@ -374,7 +374,7 @@
             text-align: center;
         }
 
-        /* Стиль для крупных кнопок без иконок */
+        /* Крупные кнопки */
         .cert-buttons-row {
             display: flex;
             gap: 20px;
@@ -509,7 +509,7 @@
                     </div>
                 </div>
 
-                <!-- Блок готового сертификата с крупными кнопками -->
+                <!-- Блок готового сертификата -->
                 <div class="certificate-preview-box" id="previewContainer">
                     <h3>Ваш именной сертификат готов!</h3>
                     
@@ -519,7 +519,7 @@
                     </div>
 
                     <div class="cert-buttons-row">
-                        <button class="action-btn-large btn-download" onclick="downloadCertificate()">СКАЧАТЬ</button>
+                        <button class="action-btn-large btn-download" onclick="downloadCertificateWithData()">СКАЧАТЬ</button>
                         <button class="action-btn-large btn-share" onclick="shareCertificate()">ПОДЕЛИТЬСЯ</button>
                     </div>
                 </div>
@@ -623,14 +623,50 @@
             launchFireworks();
         }
 
-        // Автоматическое скачивание файла cert.jpg в загрузки пользователя
-        function downloadCertificate() {
-            const link = document.createElement('a');
-            link.href = 'cert.jpg';
-            link.download = 'Sertifikat_Pro_BGUT.jpg';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Программная генерация и скачивание сертификата С ИМЕНЕМ в папки Загрузки
+        function downloadCertificateWithData() {
+            const name = document.getElementById('userName').value.trim() || 'Участник';
+            const imgElement = document.getElementById('certTemplateImg');
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = imgElement.src;
+
+            img.onload = function() {
+                canvas.width = img.naturalWidth || 1200;
+                canvas.height = img.naturalHeight || 800;
+
+                // Рисуем шаблон
+                ctx.drawImage(img, 0, 0);
+
+                // Настраиваем шрифт для вписания имени (адаптивно под размер шаблона)
+                const fontSize = Math.floor(canvas.width * 0.045);
+                ctx.font = `bold ${fontSize}px Georgia, serif`;
+                ctx.fillStyle = '#030b18';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Координаты центра имени (52% по ширине и высоте)
+                const x = canvas.width * 0.5;
+                const y = canvas.height * 0.52;
+
+                // Рисуем легкую тень для читаемости
+                ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+                ctx.shadowBlur = 10;
+
+                ctx.fillText(name, x, y);
+
+                // Создаем ссылку для скачивания готового изображения
+                const link = document.createElement('a');
+                link.download = `Sertifikat_${name.replace(/\s+/g, '_')}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.95);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
         }
 
         function shareCertificate() {
