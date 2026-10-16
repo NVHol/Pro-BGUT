@@ -5,47 +5,241 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #06152d;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            width: 100vw;
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% 30%, #0d3260 0%, #040d1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Шапка */
+        .index-header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .index-header img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .index-header-text h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .index-header-text p {
+            font-size: 0.85rem;
+            color: #7dd3fc;
+        }
+
+        /* Центральная часть со зданием */
+        .building-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 10px 0;
+            z-index: 5;
+        }
+
+        .building-box img {
+            max-width: 100%;
+            max-height: 42vh;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 30px rgba(0, 210, 255, 0.25));
+        }
+
+        /* Нижняя карточка с кнопками */
+        .content-card {
+            width: 100%;
+            max-width: 650px;
+            background: rgba(8, 24, 48, 0.85);
+            border: 1.5px solid rgba(0, 210, 255, 0.4);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 25px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            margin-bottom: 10px;
+        }
+
+        .content-card h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+
+        .content-card h2 span {
+            color: #38bdf8;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+        }
+
+        .content-card p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .buttons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .main-btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(15, 42, 74, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 12px;
+            color: #e0f2fe;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .main-btn:hover {
+            background: linear-gradient(90deg, #0284c7 0%, #00d2ff 100%);
+            color: #030b18;
+            border-color: #ffffff;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .main-btn.primary {
+            background: linear-gradient(90deg, #0284c7 0%, #00d2ff 100%);
+            color: #030b18;
+            border: none;
+        }
+
+        /* СТРОГО ДЛЯ ТЕЛЕФОНОВ (МОБИЛЬНАЯ АДАПТАЦИЯ) */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px 12px;
+                justify-content: space-between;
+            }
+
+            .index-header img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .index-header-text h1 {
+                font-size: 15px;
+            }
+
+            .index-header-text p {
+                font-size: 11px;
+            }
+
+            /* Уменьшаем высоту здания, чтобы карточка снизу помещалась полностью */
+            .building-box {
+                padding: 5px 0;
+            }
+
+            .building-box img {
+                max-height: 28vh;
+            }
+
+            .content-card {
+                padding: 18px 16px;
+                border-radius: 16px;
+            }
+
+            .content-card h2 {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+
+            .content-card p {
+                font-size: 12px;
+                margin-bottom: 14px;
+            }
+
+            .buttons-list {
+                gap: 10px;
+            }
+
+            .main-btn {
+                padding: 12px 14px;
+                font-size: 13.5px;
+                border-radius: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="page-container" style="background-image: url('fon.jpg');">
-        
-        <!-- Шапка: Эмблема и заголовок -->
-        <header class="header-section">
-            <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img">
-                <div class="logo-text">
-                    <h1>Pro-БГУТ: студент на час</h1>
-                    <p>Твой путь начинается здесь</p>
-                </div>
+    <div class="main-container">
+
+        <!-- Шапка -->
+        <header class="index-header">
+            <img src="emblema.png" alt="Эмблема БГУТ">
+            <div class="index-header-text">
+                <h1>Pro-БГУТ: студент на час</h1>
+                <p>Твой путь начинается здесь</p>
             </div>
         </header>
 
-        <!-- Центральный контент -->
-        <main class="main-content">
-            <!-- Здание университета слева -->
-            <div class="building-box">
-                <img src="zdanie.png" alt="Здание БГУТ" class="building-img">
-            </div>
+        <!-- Картинка здания -->
+        <div class="building-box">
+            <img src="zdanil.jpg" alt="Здание БГУТ">
+        </div>
 
-            <!-- Правая карточка: текст и кнопки -->
-            <div class="info-buttons-wrapper">
-                <div class="text-block">
-                    <h2>Выбор профессии —<br><span>инвестиции в будущее!</span></h2>
-                    <p>Пройди виртуальный тест-драйв специальностей БГУТ. Сделай осознанный выбор своего будущего!</p>
-                </div>
+        <!-- Карточка с текстом и кнопками -->
+        <div class="content-card">
+            <h2>Выбор профессии — <span>инвестиции в будущее!</span></h2>
+            <p>Пройди виртуальный тест-драйв специальностей БГУТ. Сделай осознанный выбор своего будущего!</p>
 
-                <!-- Три интерактивные кнопки -->
-                <div class="buttons-block">
-                    <button class="pro-btn" id="btnTour">Виртуальный 360°-тур по университету</button>
-                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв специальностей</button>
-                    <button class="pro-btn" id="btnMore">Узнать больше о приемной кампании</button>
-                </div>
+            <div class="buttons-list">
+                <a href="https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb" target="_blank" class="main-btn">Виртуальный 360°-тур по университету</a>
+                <a href="testdrive.html" class="main-btn primary">Начать тест-драйв специальностей</a>
+                <a href="specialty.html" class="main-btn">Узнать больше о приемной кампании</a>
             </div>
-        </main>
+        </div>
 
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>
