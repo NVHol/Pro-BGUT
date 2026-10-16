@@ -170,6 +170,35 @@
             color: #4df3ff;
             min-height: 30px;
         }
+
+        /* Блок сообщения о разработке */
+        .dev-quest-box {
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
+            border: 2px solid #00d2ff;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            border-radius: 20px;
+            padding: 50px 30px;
+            color: #ffffff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .dev-quest-box h3 {
+            color: #4df3ff;
+            font-size: 1.6vw;
+            margin: 0;
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+        }
+
+        .dev-quest-box p {
+            color: #cbd5e1;
+            font-size: 1.05vw;
+            margin: 0;
+        }
     </style>
 </head>
 <body class="quest-body" onload="initQuest()">
@@ -195,24 +224,9 @@
                 <p id="specSubTitle">Загрузка выбранного направления...</p>
             </div>
 
-            <!-- Контент квеста для Автоматизации -->
-            <div class="quest-card">
-                <h3>Производственный кейс линии смешивания</h3>
-                <p>На автоматизированном предприятии пищевой промышленности произомдшел сбой в системе дозирования компонентов. Вам необходимо определить корректную последовательность управляющих сигналов для восстановления стабильной работы конвейера.</p>
-                
-                <div class="interactive-box">
-                    <h4>Интерактивная задача по автоматизации</h4>
-                    <p style="text-align: center; color: #cbd5e1;">Какой тип датчика обратной связи обеспечивает непрерывный контроль положения исполнительного механизма?</p>
-                    
-                    <div class="task-options">
-                        <button class="task-btn" onclick="checkAnswer(false)">Концевой выключатель (дискретный)</button>
-                        <button class="task-btn" onclick="checkAnswer(true)">Инкрементальный энкодер</button>
-                        <button class="task-btn" onclick="checkAnswer(false)">Плавкий предохранитель</button>
-                        <button class="task-btn" onclick="checkAnswer(false)">Биметаллический термостат</button>
-                    </div>
-
-                    <div class="task-result" id="taskResult"></div>
-                </div>
+            <!-- Динамический контейнер квеста -->
+            <div id="questContent">
+                <!-- Сюда подставится либо квест по Автоматизации, либо заглушка "в разработке" -->
             </div>
         </main>
 
@@ -223,17 +237,50 @@
             window.location.href = 'testdrive.html';
         });
 
-        // Проверяем выбранную специальность из localStorage при загрузке
+        // Проверяем выбранную специальность и выводим квест или заглушку
         function initQuest() {
-            const userSpecialty = localStorage.getItem('userSpecialty');
-            if (userSpecialty) {
-                document.getElementById('specSubTitle').innerHTML = `Выбранное направление: <b>${userSpecialty}</b>`;
-            } else {
-                document.getElementById('specSubTitle').innerHTML = `Направление не выбрано. Рекомендуем пройти Шаг 1!`;
+            const userSpecialty = localStorage.getItem('userSpecialty') || '';
+            const questContainer = document.getElementById('questContent');
+            const subTitle = document.getElementById('specSubTitle');
+
+            subTitle.innerHTML = `Выбранное направление: <b>${userSpecialty || 'Не выбрано'}</b>`;
+
+            // Если выбрана специальность "Автоматизация технологических процессов и производств"
+            if (userSpecialty.includes('Автоматизация технологических процессов')) {
+                questContainer.innerHTML = `
+                    <div class="quest-card">
+                        <h3>Производственный кейс линии смешивания</h3>
+                        <p>На автоматизированном предприятии пищевой промышленности произошел сбой в системе дозирования компонентов. Вам необходимо определить корректную последовательность управляющих сигналов для восстановления стабильной работы конвейера.</p>
+                        
+                        <div class="interactive-box">
+                            <h4>Интерактивная задача по автоматизации</h4>
+                            <p style="text-align: center; color: #cbd5e1;">Какой тип датчика обратной связи обеспечивает непрерывный контроль положения исполнительного механизма?</p>
+                            
+                            <div class="task-options">
+                                <button class="task-btn" onclick="checkAnswer(false)">Концевой выключатель (дискретный)</button>
+                                <button class="task-btn" onclick="checkAnswer(true)">Инкрементальный энкодер</button>
+                                <button class="task-btn" onclick="checkAnswer(false)">Плавкий предохранитель</button>
+                                <button class="task-btn" onclick="checkAnswer(false)">Биметаллический термостат</button>
+                            </div>
+
+                            <div class="task-result" id="taskResult"></div>
+                        </div>
+                    </div>
+                `;
+            } 
+            // Для всех остальных специальностей показываем сообщение, что квест в разработке
+            else {
+                questContainer.innerHTML = `
+                    <div class="dev-quest-box">
+                        <h3>🛠️ Квест для этого направления находится в разработке</h3>
+                        <p>Для выбранной вами специальности интерактивный инженерный кейс создается. Скоро здесь появится увлекательное задание!</p>
+                        <button class="pro-btn" style="width: auto; padding: 10px 25px; margin: 15px auto 0 auto; font-size: 1vw;" onclick="window.location.href='testdrive.html'">Вернуться к списку шагов</button>
+                    </div>
+                `;
             }
         }
 
-        // Проверка ответа в квесте
+        // Проверка ответа в квесте (только для Автоматизации)
         function checkAnswer(isCorrect) {
             const resultDiv = document.getElementById('taskResult');
             if (isCorrect) {
@@ -252,7 +299,7 @@
                     });
                 }
 
-                // Через 2 секунды предлагаем вернуться к шагам тест-драйва
+                // Через 1.5 секунды предлагаем вернуться к шагам тест-драйва
                 setTimeout(() => {
                     if(confirm('Поздравляем! Шаг 2 успешно пройден. Вернуться к списку шагов тест-драйва?')) {
                         window.location.href = 'testdrive.html';
