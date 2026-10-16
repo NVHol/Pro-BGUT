@@ -408,7 +408,7 @@
                     <div class="action-row">
                         <label class="checkbox-container">
                             <input type="checkbox" id="userConsent">
-                            <span>Я даю согласие на обработку персональных данных</span>
+                            <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных</a></span>
                         </label>
                         <button class="pro-btn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
                     </div>
@@ -437,20 +437,17 @@
             }
         }
 
-        // Шаг 3: Открытие виртуального тура по конкретной ссылке
+        // Шаг 3: Открытие виртуального тура и автоматическое засчитывание шага
         function openStep3() {
-            const userSpecialty = localStorage.getItem('userSpecialty') || '';
-            
-            // Ссылка на виртуальный тур для Автоматизации (и запасной вариант для других)
-            let tourUrl = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
+            const tourUrl = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
 
-            // Открываем тур в новой вкладке
+            // Открываем виртуальный тур в новой вкладке
             window.open(tourUrl, '_blank');
 
-            // Засчитываем Шаг 3 в localStorage
+            // Засчитываем Шаг 3
             localStorage.setItem('step3Completed', 'true');
             
-            // Отмечаем карточку Шага 3 галочкой
+            // Отмечаем карточку галочкой
             document.getElementById('step3Card').classList.add('completed');
             checkAllSteps();
         }
