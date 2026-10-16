@@ -49,11 +49,13 @@
             color: #ffffff;
             font-size: 1.5vw;
             text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            margin: 0;
         }
 
         .testdrive-header .logo-text p {
             color: #93bde8;
             font-size: 0.9vw;
+            margin: 0;
         }
 
         /* Основной контент */
@@ -425,7 +427,7 @@
             }
 
             .testdrive-header .logo-text p {
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .progress-box {
@@ -444,7 +446,6 @@
                 font-size: 13px;
             }
 
-            /* Шаги выстраиваем в одну колонку, увеличиваем шрифты */
             .steps-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
@@ -496,7 +497,6 @@
                 font-size: 12px;
             }
 
-            /* Адаптация текста внутри сертификата для мобильного экрана */
             .cert-subtitle { font-size: 11px; }
             .cert-intro { font-size: 10px; }
             .cert-name-highlight { font-size: 18px; }
@@ -524,8 +524,8 @@
             <div class="logo-box" style="display: flex; align-items: center; gap: 10px;">
                 <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 38px; height: 38px;">
                 <div class="logo-text">
-                    <h1>Pro-БГУТ</h1>
-                    <p>Студент на час</p>
+                    <h1>Pro-БГУТ: студент на час</h1>
+                    <p>Твой путь начинается здесь</p>
                 </div>
             </div>
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 12px; font-size: 12px;">На главную</button>
@@ -536,15 +536,15 @@
 
             <!-- Индикатор прогресса -->
             <div class="progress-box">
-                <div class="progress-text">Прогресс: <span id="progressCount">0</span> из 3</div>
+                <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" id="progressBar"></div>
                 </div>
             </div>
 
             <div class="testdrive-title">
-                <h2>Пройди <span>три шага</span> к успеху</h2>
-                <p>Выполни задания и получи сертификат!</p>
+                <h2>Пройди <span>три шага</span> к своему будущему</h2>
+                <p>Выполни все задания и получи именной сертификат!</p>
             </div>
 
             <!-- Три шага -->
@@ -556,7 +556,7 @@
                     <div class="step-number">1</div>
                     <div class="step-info">
                         <h3>Выбери специальность</h3>
-                        <p id="step1Text">Определи направление и изучи его особенности.</p>
+                        <p id="step1Text">Определи направление, которое тебе по душе, и изучи его особенности.</p>
                     </div>
                 </div>
 
@@ -566,7 +566,7 @@
                     <div class="step-number">2</div>
                     <div class="step-info">
                         <h3>Пройди квест</h3>
-                        <p>Реши интерактивный инженерный кейс.</p>
+                        <p>Реши интерактивный инженерный кейс, проверь свои силы.</p>
                     </div>
                 </div>
 
@@ -575,8 +575,8 @@
                     <div class="check-overlay">✓</div>
                     <div class="step-number">3</div>
                     <div class="step-info">
-                        <h3>Лаборатории</h3>
-                        <p>Соверши виртуальную экскурсию по базам.</p>
+                        <h3>Познакомься с лабораториями</h3>
+                        <p>Соверши виртуальную экскурсию по современным учебным пространствам.</p>
                     </div>
                 </div>
 
@@ -587,28 +587,28 @@
                 
                 <!-- Форма ввода данных -->
                 <div id="formContainer">
-                    <h3>Все шаги пройдены!</h3>
-                    <p>Введите ваши данные для получения сертификата:</p>
+                    <h3>Поздравляем! Все шаги пройдены!</h3>
+                    <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                     
                     <div class="cert-form">
                         <div class="inputs-row">
                             <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName" oninput="validateForm()">
-                            <input type="email" class="cert-input" placeholder="Ваш Email" id="userEmail" oninput="validateForm()">
+                            <input type="email" class="cert-input" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
                         </div>
                         
                         <div class="action-row">
                             <label class="checkbox-container">
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
-                                <span>Согласие на <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">обработку данных и рассылки</a></span>
+                                <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 18px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить</button>
+                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 20px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Блок готового сертификата -->
                 <div class="certificate-preview-box" id="previewContainer">
-                    <h3>Ваш сертификат готов!</h3>
+                    <h3>Ваш именной сертификат готов!</h3>
                     
                     <div class="cert-image-container" id="certCardToSave">
                         <img src="cert.jpg" alt="Шаблон сертификата" id="certTemplateImg">
@@ -789,7 +789,7 @@
 
             if (navigator.share) {
                 navigator.share({
-                    title: 'Pro-БГУT: Студент на час',
+                    title: 'Pro-БГУТ: Студент на час',
                     text: 'Пройди тест-драйв специальностей в БГУТ и получи свой сертификат!',
                     url: mainPageUrl,
                 }).catch(() => {});
