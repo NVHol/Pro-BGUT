@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инженерный квест — Pro-БГУТ</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключение библиотеки конфетти для победы в квесте -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body.quest-body {
+            background-color: #ffffff;
+            overflow-y: auto;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .quest-container {
+            width: 100vw;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.88)), url('fon2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2.5vh 5vw;
+            gap: 25px;
+            box-sizing: border-box;
+        }
+
+        /* Шапка БГУТ */
+        .quest-header {
+            background-image: url('fon.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 1vw 2.5vw;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .quest-header .logo-text h1 {
+            color: #ffffff;
+            font-size: 1.5vw;
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+        }
+
+        .quest-header .logo-text p {
+            color: #93bde8;
+            font-size: 0.9vw;
+        }
+
+        /* Основной контент */
+        .quest-main {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            text-align: center;
+        }
+
+        .quest-title h2 {
+            color: #030b18;
+            font-size: 2vw;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .quest-title h2 span {
+            color: #0099ff;
+        }
+
+        .quest-title p {
+            color: #475569;
+            font-size: 0.95vw;
+            font-weight: 600;
+        }
+
+        /* Карточка с игрой/кейсом */
+        .quest-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(0, 210, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 150, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            text-align: left;
+        }
+
+        .quest-card h3 {
+            color: #030b18;
+            font-size: 1.3vw;
+            margin: 0;
+        }
+
+        .quest-card p {
+            color: #334155;
+            font-size: 1vw;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Интерактивная зона кейса */
+        .interactive-box {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
+            border: 2px solid #4df3ff;
+            border-radius: 16px;
+            padding: 30px;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+        }
+
+        .interactive-box h4 {
+            color: #4df3ff;
+            font-size: 1.4vw;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        .task-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+
+        .task-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 210, 255, 0.5);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1vw;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .task-btn:hover {
+            background: rgba(0, 210, 255, 0.2);
+            border-color: #4df3ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .task-result {
+            font-size: 1.1vw;
+            font-weight: bold;
+            color: #4df3ff;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body class="quest-body" onload="initQuest()">
+
+    <div class="quest-container">
+        
+        <!-- Шапка БГУТ -->
+        <header class="quest-header">
+            <div class="logo-box">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 45px; height: 45px;">
+                <div class="logo-text">
+                    <h1>Pro-БГУТ: студент на час</h1>
+                    <p>Твой путь начинается здесь</p>
+                </div>
+            </div>
+            <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">Назад</button>
+        </header>
+
+        <!-- Основная часть -->
+        <main class="quest-main">
+            <div class="quest-title">
+                <h2>Инженерный <span>квест</span></h2>
+                <p id="specSubTitle">Загрузка выбранного направления...</p>
+            </div>
+
+            <!-- Контент квеста для Автоматизации -->
+            <div class="quest-card">
+                <h3>Производственный кейс линии смешивания</h3>
+                <p>На автоматизированном предприятии пищевой промышленности произомдшел сбой в системе дозирования компонентов. Вам необходимо определить корректную последовательность управляющих сигналов для восстановления стабильной работы конвейера.</p>
+                
+                <div class="interactive-box">
+                    <h4>Интерактивная задача по автоматизации</h4>
+                    <p style="text-align: center; color: #cbd5e1;">Какой тип датчика обратной связи обеспечивает непрерывный контроль положения исполнительного механизма?</p>
+                    
+                    <div class="task-options">
+                        <button class="task-btn" onclick="checkAnswer(false)">Концевой выключатель (дискретный)</button>
+                        <button class="task-btn" onclick="checkAnswer(true)">Инкрементальный энкодер</button>
+                        <button class="task-btn" onclick="checkAnswer(false)">Плавкий предохранитель</button>
+                        <button class="task-btn" onclick="checkAnswer(false)">Биметаллический термостат</button>
+                    </div>
+
+                    <div class="task-result" id="taskResult"></div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        document.getElementById('btnBack').addEventListener('click', function() {
+            window.location.href = 'testdrive.html';
+        });
+
+        // Проверяем выбранную специальность из localStorage при загрузке
+        function initQuest() {
+            const userSpecialty = localStorage.getItem('userSpecialty');
+            if (userSpecialty) {
+                document.getElementById('specSubTitle').innerHTML = `Выбранное направление: <b>${userSpecialty}</b>`;
+            } else {
+                document.getElementById('specSubTitle').innerHTML = `Направление не выбрано. Рекомендуем пройти Шаг 1!`;
+            }
+        }
+
+        // Проверка ответа в квесте
+        function checkAnswer(isCorrect) {
+            const resultDiv = document.getElementById('taskResult');
+            if (isCorrect) {
+                resultDiv.style.color = '#4df3ff';
+                resultDiv.innerHTML = '✅ Верно! Кейс успешно решен, система автоматизации восстановлена!';
+                
+                // Засчитываем Шаг 2 в localStorage
+                localStorage.setItem('step2Completed', 'true');
+
+                // Запускаем салют
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 80,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }
+
+                // Через 2 секунды предлагаем вернуться к шагам тест-драйва
+                setTimeout(() => {
+                    if(confirm('Поздравляем! Шаг 2 успешно пройден. Вернуться к списку шагов тест-драйва?')) {
+                        window.location.href = 'testdrive.html';
+                    }
+                }, 1500);
+
+            } else {
+                resultDiv.style.color = '#ff6b6b';
+                resultDiv.innerHTML = '❌ Ошибка в схеме управления. Попробуйте выбрать другой вариант!';
+            }
+        }
+    </script>
+</body>
+</html>
