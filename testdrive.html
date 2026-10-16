@@ -359,19 +359,50 @@
             display: block;
         }
 
-        /* Имя поверх шаблона cert.jpg */
-        .cert-name-overlay {
+        /* Красивое наложение текста поверх шаблона cert.jpg */
+        .cert-text-overlay {
             position: absolute;
-            top: 52%;
+            top: 48%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: #030b18;
-            font-size: 2.2vw;
-            font-weight: 800;
-            font-family: 'Georgia', serif;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            width: 90%;
+            width: 85%;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cert-subtitle {
+            font-size: 1.1vw;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .cert-name-highlight {
+            font-size: 2vw;
+            font-weight: 800;
+            color: #0284c7;
+            font-family: 'Georgia', serif;
+            border-bottom: 2px dashed #0284c7;
+            padding-bottom: 2px;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .cert-description {
+            font-size: 0.95vw;
+            line-height: 1.5;
+            color: #0f172a;
+        }
+
+        .cert-footer-date {
+            margin-top: 10px;
+            font-size: 0.9vw;
+            font-weight: 700;
+            color: #334155;
+            text-align: left;
+            padding-left: 5%;
         }
 
         /* Крупные кнопки */
@@ -515,7 +546,13 @@
                     
                     <div class="cert-image-container" id="certCardToSave">
                         <img src="cert.jpg" alt="Шаблон сертификата" id="certTemplateImg">
-                        <div class="cert-name-overlay" id="certUserNameDisplay">Имя Фамилия</div>
+                        <div class="cert-text-overlay">
+                            <div class="cert-subtitle">о прохождении интерактивной профориентационной программы</div>
+                            <div style="font-size: 0.9vw; color: #334155;">Настоящий сертификат подтверждает, что</div>
+                            <div class="cert-name-highlight" id="certUserNameDisplay">Фамилия Имя Отчество</div>
+                            <div class="cert-description">успешно прошел(а) виртуальный профориентационный квест «Pro-БГУТ: Студент на час», ознакомился(а) с материально-технической базой университета и продемонстрировал(а) высокий уровень интереса к инженерно-технологическому профилю.</div>
+                            <div class="cert-footer-date">г. Могилев, 2026 г.</div>
+                        </div>
                     </div>
 
                     <div class="cert-buttons-row">
@@ -623,7 +660,7 @@
             launchFireworks();
         }
 
-        // Программная генерация и скачивание сертификата С ИМЕНЕМ в папки Загрузки
+        // Программная отрисовка текста прямо на картинке сертификата для скачивания
         function downloadCertificateWithData() {
             const name = document.getElementById('userName').value.trim() || 'Участник';
             const imgElement = document.getElementById('certTemplateImg');
@@ -639,27 +676,47 @@
                 canvas.width = img.naturalWidth || 1200;
                 canvas.height = img.naturalHeight || 800;
 
-                // Рисуем шаблон
+                // Рисуем шаблон сертификата
                 ctx.drawImage(img, 0, 0);
 
-                // Настраиваем шрифт для вписания имени (адаптивно под размер шаблона)
-                const fontSize = Math.floor(canvas.width * 0.045);
-                ctx.font = `bold ${fontSize}px Georgia, serif`;
-                ctx.fillStyle = '#030b18';
+                const w = canvas.width;
+                const h = canvas.height;
+
+                // Настройка текста: Подзаголовок
+                ctx.fillStyle = '#1e293b';
+                ctx.font = `bold ${Math.floor(w * 0.022)}px 'Segoe UI', Arial, sans-serif`;
                 ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
+                ctx.fillText('о прохождении интерактивной профориентационной программы', w / 2, h * 0.38);
 
-                // Координаты центра имени (52% по ширине и высоте)
-                const x = canvas.width * 0.5;
-                const y = canvas.height * 0.52;
+                // Вводная фраза
+                ctx.fillStyle = '#334155';
+                ctx.font = `${Math.floor(w * 0.02)}px 'Segoe UI', Arial, sans-serif`;
+                ctx.fillText('Настоящий сертификат подтверждает, что', w / 2, h * 0.44);
 
-                // Рисуем легкую тень для читаемости
-                ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-                ctx.shadowBlur = 10;
+                // ФИО участника
+                ctx.fillStyle = '#0284c7';
+                ctx.font = `bold ${Math.floor(w * 0.038)}px Georgia, serif`;
+                ctx.fillText(name, w / 2, h * 0.52);
 
-                ctx.fillText(name, x, y);
+                // Основной текст описания (с переносом строк для аккуратности)
+                ctx.fillStyle = '#0f172a';
+                ctx.font = `${Math.floor(w * 0.017)}px 'Segoe UI', Arial, sans-serif`;
+                
+                const line1 = 'успешно прошел(а) виртуальный профориентационный квест «Pro-БГУТ: Студент на час»,';
+                const line2 = 'ознакомился(а) с материально-технической базой университета и продемонстрировал(а)';
+                const line3 = 'высокий уровень интереса к инженерно-технологическому профилю.';
+                
+                ctx.fillText(line1, w / 2, h * 0.62);
+                ctx.fillText(line2, w / 2, h * 0.67);
+                ctx.fillText(line3, w / 2, h * 0.72);
 
-                // Создаем ссылку для скачивания готового изображения
+                // Дата и город внизу
+                ctx.fillStyle = '#334155';
+                ctx.font = `bold ${Math.floor(w * 0.018)}px 'Segoe UI', Arial, sans-serif`;
+                ctx.textAlign = 'left';
+                ctx.fillText('г. Могилев, 2026 г.', w * 0.12, h * 0.85);
+
+                // Скачивание готового файла
                 const link = document.createElement('a');
                 link.download = `Sertifikat_${name.replace(/\s+/g, '_')}.jpg`;
                 link.href = canvas.toDataURL('image/jpeg', 0.95);
