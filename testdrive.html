@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест-драйв специальностей — Pro-БГУТ</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключение библиотеки конфетти -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body.testdrive-body {
@@ -384,7 +383,7 @@
                 </div>
 
                 <!-- Шаг 3 -->
-                <div class="step-card" id="step3Card" onclick="toggleStep(this)">
+                <div class="step-card" id="step3Card" onclick="openStep3()">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">3</div>
                     <div class="step-info">
@@ -397,7 +396,7 @@
 
             <!-- Секция сертификата -->
             <div class="certificate-section" id="certSection">
-                <h3>Поздравляем! Все 3 шага пройдены!</h3>
+                <h3>Поздравляем! Все шаги пройдены!</h3>
                 <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                 
                 <div class="cert-form">
@@ -430,18 +429,46 @@
         }
 
         function openStep2() {
-            window.location.href = 'quest.html';
+            const userSpecialty = localStorage.getItem('userSpecialty') || '';
+            if (userSpecialty.includes('Автоматизация технологических процессов')) {
+                // Если будет отдельный проект/файл квеста, укажите ссылку здесь (например, 'quest-automation.html')
+                window.location.href = 'quest.html';
+            } else {
+                alert('⚠️ Квест для выбранной специальности находится в разработке.');
+            }
         }
 
-        // При загрузке проверяем статус шагов и выбранную специальность
+        // Логика для Шага 3 (3D тур лабораторий в зависимости от специальности)
+        function openStep3() {
+            const userSpecialty = localStorage.getItem('userSpecialty') || '';
+            
+            // Ссылка на 3D тур (пока ставим главную или ссылку на тур)
+            let tourUrl = 'index.html'; 
+
+            if (userSpecialty.includes('Автоматизация технологических процессов')) {
+                tourUrl = 'index.html'; // Здесь в будущем будет конкретная ссылка на 3D тур для автоматизации
+            }
+
+            // Открываем тур в новой вкладке
+            window.open(tourUrl, '_blank');
+
+            // Засчитываем Шаг 3 в localStorage
+            localStorage.setItem('step3Completed', 'true');
+            
+            // Обновляем визуальное состояние карточки Шага 3
+            document.getElementById('step3Card').classList.add('completed');
+            checkAllSteps();
+        }
+
+        // При загрузке проверяем статус всех шагов
         function initTestDrive() {
             const step1Completed = localStorage.getItem('step1Completed');
             const step2Completed = localStorage.getItem('step2Completed');
+            const step3Completed = localStorage.getItem('step3Completed');
             const userSpecialty = localStorage.getItem('userSpecialty');
 
             if (step1Completed === 'true') {
-                const step1Card = document.getElementById('step1Card');
-                step1Card.classList.add('completed');
+                document.getElementById('step1Card').classList.add('completed');
                 if (userSpecialty) {
                     document.getElementById('step1Text').innerHTML = `Выбрано: <b>${userSpecialty}</b>`;
                 }
@@ -451,11 +478,10 @@
                 document.getElementById('step2Card').classList.add('completed');
             }
 
-            checkAllSteps();
-        }
+            if (step3Completed === 'true') {
+                document.getElementById('step3Card').classList.add('completed');
+            }
 
-        function toggleStep(card) {
-            card.classList.toggle('completed');
             checkAllSteps();
         }
 
