@@ -5,6 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Мобильная адаптация: подтягиваем карточку к зданию строго на телефонах, ПК не трогаем */
+        @media (max-width: 768px) {
+            .page-container {
+                height: auto !important;
+                min-height: 100vh !important;
+                padding: 15px 12px !important;
+                box-sizing: border-box !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+            }
+
+            .main-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 10px !important;
+                margin-top: 5px !important;
+                width: 100% !important;
+            }
+
+            .building-box {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin: 0 !important;
+            }
+
+            .building-img {
+                max-height: 32vh !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+
+            .info-buttons-wrapper {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-top: 0 !important;
+                padding: 18px 16px !important;
+                box-sizing: border-box !important;
+            }
+
+            .text-block h2 {
+                font-size: 18px !important;
+                line-height: 1.25 !important;
+                margin-bottom: 6px !important;
+            }
+
+            .text-block p {
+                font-size: 12px !important;
+                margin-bottom: 12px !important;
+                line-height: 1.35 !important;
+            }
+
+            .buttons-block {
+                gap: 10px !important;
+            }
+
+            .pro-btn {
+                padding: 12px 14px !important;
+                font-size: 13px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -37,9 +104,9 @@
 
                 <!-- Три интерактивные кнопки -->
                 <div class="buttons-block">
-                    <button class="pro-btn" id="btnTour">Виртуальный 360°-тур</button>
-                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв</button>
-                    <button class="pro-btn" id="btnMore">Узнать больше</button>
+                    <button class="pro-btn" id="btnTour">1. Виртуальный 360°-тур</button>
+                    <button class="pro-btn" id="btnTestDrive">2. Начать тест-драйв</button>
+                    <button class="pro-btn" id="btnMore">3. Узнать больше</button>
                 </div>
             </div>
         </main>
