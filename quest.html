@@ -18,16 +18,18 @@
         .quest-container {
             width: 100vw;
             min-height: 100vh;
-            /* Постоянный фон aes.jpg на всех шагах */
-            background-image: linear-gradient(rgba(3, 11, 24, 0.75), rgba(3, 11, 24, 0.85)), url('aes.jpg');
+            /* Исправлено отображение фона aes.jpg без чрезмерного растягивания */
+            background-color: #030b18;
+            background-image: linear-gradient(rgba(3, 11, 24, 0.7), rgba(3, 11, 24, 0.8)), url('aes.jpg');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding: 2.5vh 5vw;
-            gap: 20px;
+            padding: 2vh 4vw;
+            gap: 15px;
             box-sizing: border-box;
         }
 
@@ -38,79 +40,106 @@
             background-position: center;
             border: 1px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            padding: 1vw 2.5vw;
-            border-radius: 16px;
+            padding: 0.8vw 2vw;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
             box-sizing: border-box;
         }
 
         .quest-header .logo-text h1 {
             color: #ffffff;
-            font-size: 1.5vw;
+            font-size: 1.4vw;
             text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            margin: 0;
         }
 
         .quest-header .logo-text p {
             color: #93bde8;
-            font-size: 0.9vw;
+            font-size: 0.85vw;
+            margin: 0;
         }
 
         /* Основной контент */
         .quest-main {
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 20px;
             align-items: center;
             justify-content: center;
             flex: 1;
         }
 
-        /* Стеклянная рамка для вводного экрана и заданий */
+        /* Стеклянная рамка */
         .glass-card {
-            background: rgba(13, 40, 75, 0.85);
+            background: rgba(13, 40, 75, 0.88);
             border: 2px solid rgba(0, 210, 255, 0.5);
             box-shadow: 0 20px 45px rgba(0, 150, 255, 0.25);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 40px;
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 30px 40px;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             align-items: center;
             text-align: center;
-            max-width: 850px;
+            max-width: 750px;
             width: 100%;
-            animation: fadeIn 0.5s ease forwards;
+            animation: fadeIn 0.4s ease forwards;
         }
 
         .glass-card h2 {
             color: #4df3ff;
-            font-size: 2vw;
+            font-size: 1.8vw;
             font-weight: 800;
             margin: 0;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
         }
 
         .typewriter-text {
             color: #ffffff;
-            font-size: 1.15vw;
-            line-height: 1.6;
+            font-size: 1.1vw;
+            line-height: 1.5;
             margin: 0;
-            min-height: 80px;
+            min-height: 70px;
         }
 
-        /* Слот монтажа для Шага 1 */
+        /* Кнопка «Начать!» крупными буквами и по центру */
+        .start-btn {
+            font-size: 1.4vw !important;
+            font-weight: 800 !important;
+            letter-spacing: 1.5px;
+            padding: 14px 45px !important;
+            margin: 10px auto 0 auto !important;
+            display: block;
+        }
+
+        /* Компактный блок Шага 1 */
+        .step-content-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .step-desc {
+            color: #cbd5e1;
+            font-size: 0.95vw;
+            margin: 0;
+            max-width: 600px;
+        }
+
+        /* Слот реактора (компактнее) */
         .reactor-slot {
-            width: 160px;
-            height: 160px;
+            width: 130px;
+            height: 130px;
             border: 3px dashed #38bdf8;
-            border-radius: 20px;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -118,64 +147,86 @@
             background: rgba(0, 150, 255, 0.08);
             transition: all 0.3s ease;
             cursor: pointer;
-            margin: 10px 0;
         }
 
         .reactor-slot.drag-over {
             border-color: #4df3ff;
             background: rgba(0, 210, 255, 0.25);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
         }
 
         .reactor-slot img {
-            width: 90px;
-            height: 90px;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
         }
 
         .reactor-slot span {
             color: #93bde8;
-            font-size: 0.85vw;
+            font-size: 0.8vw;
         }
 
-        /* Панель инвентаря */
+        /* Компактный инвентарь сбоку/снизу */
         .inventory-panel {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
         }
 
         .inventory-item {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.06);
             border: 2px solid rgba(0, 210, 255, 0.4);
-            border-radius: 14px;
-            padding: 12px;
-            width: 110px;
+            border-radius: 12px;
+            padding: 10px;
+            width: 95px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: grab;
             transition: all 0.3s ease;
         }
 
         .inventory-item:hover {
             border-color: #4df3ff;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-            transform: translateY(-3px);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+            transform: translateY(-2px);
         }
 
         .inventory-item img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: contain;
         }
 
         .inventory-item span {
             color: #ffffff;
-            font-size: 0.8vw;
+            font-size: 0.75vw;
             font-weight: 600;
             text-align: center;
+        }
+
+        /* Встроенные уведомления (вместо системных alert) */
+        .inline-message {
+            font-size: 0.95vw;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 8px;
+            min-height: 24px;
+            transition: opacity 0.3s ease;
+            display: none;
+        }
+
+        .inline-message.error {
+            background: rgba(255, 77, 77, 0.2);
+            border: 1px solid #ff4d4d;
+            color: #ff6b6b;
+        }
+
+        .inline-message.success {
+            background: rgba(0, 210, 255, 0.2);
+            border: 1px solid #4df3ff;
+            color: #4df3ff;
         }
 
         /* Подсказка */
@@ -183,15 +234,15 @@
             background: rgba(255, 193, 7, 0.15);
             border: 1px solid #ffc107;
             color: #ffe066;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 0.9vw;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85vw;
             display: none;
-            max-width: 800px;
+            max-width: 600px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -200,17 +251,19 @@
 
     <div class="quest-container">
         
+        <!-- Шапка БГУТ -->
         <header class="quest-header">
             <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 45px; height: 45px;">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 40px; height: 40px;">
                 <div class="logo-text">
                     <h1>Pro-БГУТ: студент на час</h1>
                     <p>Твой путь начинается здесь</p>
                 </div>
             </div>
-            <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">Назад</button>
+            <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 15px; font-size: 0.85vw;">Назад</button>
         </header>
 
+        <!-- Основная часть -->
         <main class="quest-main">
             <div id="gameContent"></div>
         </main>
@@ -223,6 +276,7 @@
         });
 
         let hintTimer = null;
+        let messageTimer = null;
 
         // ================= ЭКРАН 1: ВСТУПЛЕНИЕ =================
         function initGame() {
@@ -231,7 +285,7 @@
                 <div class="glass-card">
                     <h2>Оператор АЭС: Спасти реактор</h2>
                     <p class="typewriter-text" id="introText"></p>
-                    <button class="pro-btn" id="startBtn" style="display: none; padding: 12px 35px; font-size: 1.1vw; margin: 0 auto;" onclick="startStep1()">Начать!</button>
+                    <button class="pro-btn start-btn" id="startBtn" style="display: none;" onclick="startStep1()">НАЧАТЬ!</button>
                 </div>
             `;
 
@@ -259,24 +313,29 @@
             container.innerHTML = `
                 <div class="glass-card">
                     <h2>Установка датчика температуры</h2>
-                    <p style="color: #e2e8f0; font-size: 1vw; margin: 0;">Система «слепа», температура реактора неизвестна. Перетащите правильный прибор из нижнего инвентаря в монтажный слот на реакторе.</p>
+                    <p class="step-desc">Перетащите правильный прибор из панели в монтажный слот на реакторе.</p>
                     
-                    <div class="reactor-slot" id="dropSlot" ondragover="allowDrop(event)" ondragleave="removeGlow(event)" ondrop="dropSensor(event)">
-                        <span>Слот реактора</span>
-                    </div>
+                    <div class="step-content-box">
+                        <div class="reactor-slot" id="dropSlot" ondragover="allowDrop(event)" ondragleave="removeGlow(event)" ondrop="dropSensor(event)">
+                            <span>Слот реактора</span>
+                        </div>
 
-                    <div class="inventory-panel">
-                        <div class="inventory-item" draggable="true" ondragstart="drag(event, 'p')">
-                            <img src="p.png" alt="Манометр">
-                            <span>Манометр</span>
-                        </div>
-                        <div class="inventory-item" draggable="true" ondragstart="drag(event, 't')">
-                            <img src="t.png" alt="Термометр">
-                            <span>Датчик температуры</span>
-                        </div>
-                        <div class="inventory-item" draggable="true" ondragstart="drag(event, 'geyg')">
-                            <img src="geyg.png" alt="Счетчик Гейгера">
-                            <span>Счетчик Гейгера</span>
+                        <!-- Встроенное сообщение игры (вместо всплывающего окна alert) -->
+                        <div class="inline-message" id="gameMessage"></div>
+
+                        <div class="inventory-panel">
+                            <div class="inventory-item" draggable="true" ondragstart="drag(event, 'p')">
+                                <img src="p.png" alt="Манометр">
+                                <span>Манометр</span>
+                            </div>
+                            <div class="inventory-item" draggable="true" ondragstart="drag(event, 't')">
+                                <img src="t.png" alt="Термометр">
+                                <span>Датчик температуры</span>
+                            </div>
+                            <div class="inventory-item" draggable="true" ondragstart="drag(event, 'geyg')">
+                                <img src="geyg.png" alt="Счетчик Гейгера">
+                                <span>Счетчик Гейгера</span>
+                            </div>
                         </div>
                     </div>
 
@@ -308,18 +367,34 @@
 
             if (data === 't') {
                 clearTimeout(hintTimer);
+                document.getElementById('hintBox').style.display = 'none';
                 slot.innerHTML = `<img src="t.png" alt="Датчик установлен">`;
                 slot.style.borderColor = '#4df3ff';
                 slot.style.background = 'rgba(0, 210, 255, 0.2)';
 
+                showGameMessage("✅ Датчик успешно установлен!", "success");
+
                 setTimeout(() => {
-                    alert('Датчик успешно установлен! Температура определена: 850°C.');
-                    // Здесь в следующем шаге подключим экран настройки контроллера
-                    alert('Переходим к следующему шагу...');
-                }, 800);
+                    alert("Датчик успешно установлен! Переходим к следующему шагу.");
+                    // Здесь в дальнейшем перейдем к шагу 2
+                }, 1500);
+
             } else {
-                alert('❌ Ошибка! Этот прибор не подходит для измерения температуры реактора.');
+                showGameMessage("❌ Ошибка, попробуйте ещё!", "error");
             }
+        }
+
+        // Функция показа внутриигрового сообщения на 3 секунды
+        function showGameMessage(text, type) {
+            const msg = document.getElementById('gameMessage');
+            msg.className = `inline-message ${type}`;
+            msg.innerText = text;
+            msg.style.display = 'block';
+
+            clearTimeout(messageTimer);
+            messageTimer = setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
         }
 
         function startHintTimer(text) {
