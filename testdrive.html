@@ -581,13 +581,12 @@
             window.location.href = 'specialty.html';
         }
 
+        // Шаг 2: Временно засчитываем прохождение шага по клику
         function openStep2() {
-            const userSpecialty = localStorage.getItem('userSpecialty') || '';
-            if (userSpecialty.includes('Автоматизация технологических процессов')) {
-                window.location.href = 'quest.html';
-            } else {
-                alert('⚠️ Квест для выбранной специальности находится в разработке.');
-            }
+            localStorage.setItem('step2Completed', 'true');
+            document.getElementById('step2Card').classList.add('completed');
+            checkAllSteps();
+            alert('🎉 Шаг 2 (Квест) успешно засчитан! (Позже здесь будет открываться ваша игра)');
         }
 
         function openStep3() {
@@ -665,7 +664,7 @@
             launchFireworks();
         }
 
-        // Программная отрисовка текста с датой справа для скачивания
+        // Скачивание сертификата и полный сброс прогресса прохождения
         function downloadCertificateWithData() {
             const name = document.getElementById('userName').value.trim() || 'Участник';
             const imgElement = document.getElementById('certTemplateImg');
@@ -681,7 +680,6 @@
                 canvas.width = img.naturalWidth || 1200;
                 canvas.height = img.naturalHeight || 800;
 
-                // Рисуем шаблон сертификата
                 ctx.drawImage(img, 0, 0);
 
                 const w = canvas.width;
@@ -715,7 +713,7 @@
                 ctx.fillText(line2, w / 2, h * 0.72);
                 ctx.fillText(line3, w / 2, h * 0.77);
 
-                // 5. Дата и город справа в едином стиле
+                // 5. Дата и город справа
                 ctx.fillStyle = '#1e293b';
                 ctx.font = `${Math.floor(w * 0.016)}px 'Segoe UI', Arial, sans-serif`;
                 ctx.textAlign = 'right';
@@ -728,19 +726,26 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+
+                // СБРОС ПРОГРЕССА ПОСЛЕ СКАЧИВАНИЯ СЕРТИФИКАТА
+                localStorage.clear();
             };
         }
 
+        // Кнопка «Поделиться» теперь ведет на Главную страницу проекта
         function shareCertificate() {
+            // Определяем абсолютный адрес главной страницы (например, index.html)
+            const mainPageUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'index.html';
+
             if (navigator.share) {
                 navigator.share({
-                    title: 'Мой сертификат Pro-БГУТ',
-                    text: 'Я успешно прошел тест-драйв специальностей в БГУТ!',
-                    url: window.location.href,
+                    title: 'Pro-БГУТ: Студент на час',
+                    text: 'Пройди тест-драйв специальностей в БГУТ и получи свой сертификат!',
+                    url: mainPageUrl,
                 }).catch(() => {});
             } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('Ссылка успешно скопирована в буфер обмена!');
+                navigator.clipboard.writeText(mainPageUrl);
+                alert('Ссылка на главную страницу успешно скопирована в буфер обмена!');
             }
         }
 
