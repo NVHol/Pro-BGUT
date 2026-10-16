@@ -431,23 +431,18 @@
         function openStep2() {
             const userSpecialty = localStorage.getItem('userSpecialty') || '';
             if (userSpecialty.includes('Автоматизация технологических процессов')) {
-                // Если будет отдельный проект/файл квеста, укажите ссылку здесь (например, 'quest-automation.html')
                 window.location.href = 'quest.html';
             } else {
                 alert('⚠️ Квест для выбранной специальности находится в разработке.');
             }
         }
 
-        // Логика для Шага 3 (3D тур лабораторий в зависимости от специальности)
+        // Шаг 3: Открытие виртуального тура по конкретной ссылке
         function openStep3() {
             const userSpecialty = localStorage.getItem('userSpecialty') || '';
             
-            // Ссылка на 3D тур (пока ставим главную или ссылку на тур)
-            let tourUrl = 'index.html'; 
-
-            if (userSpecialty.includes('Автоматизация технологических процессов')) {
-                tourUrl = 'index.html'; // Здесь в будущем будет конкретная ссылка на 3D тур для автоматизации
-            }
+            // Ссылка на виртуальный тур для Автоматизации (и запасной вариант для других)
+            let tourUrl = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
 
             // Открываем тур в новой вкладке
             window.open(tourUrl, '_blank');
@@ -455,7 +450,7 @@
             // Засчитываем Шаг 3 в localStorage
             localStorage.setItem('step3Completed', 'true');
             
-            // Обновляем визуальное состояние карточки Шага 3
+            // Отмечаем карточку Шага 3 галочкой
             document.getElementById('step3Card').classList.add('completed');
             checkAllSteps();
         }
