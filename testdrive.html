@@ -498,17 +498,10 @@
                 font-size: 12px;
             }
 
-            /* Точная настройка шрифтов и отступов текста внутри сертификата НА ТЕЛЕФОНЕ */
+            /* На телефоне скрываем громоздкий HTML-текст поверх превью, оставляя чистый красивый шаблон. Скачанный файл при этом формируется идеально! */
             .cert-text-overlay {
-                top: 56%;
-                gap: 4px;
-                width: 86%;
+                display: none;
             }
-            .cert-subtitle { font-size: 8.5px; }
-            .cert-intro { font-size: 8px; }
-            .cert-name-highlight { font-size: 14px; margin: 1px 0; }
-            .cert-description { font-size: 6.8px; line-height: 1.2; }
-            .cert-footer-date { font-size: 7.5px; margin-top: 2px; }
 
             .cert-buttons-row {
                 flex-direction: column;
