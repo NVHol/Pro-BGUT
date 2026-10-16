@@ -151,12 +151,6 @@
             text-align: left;
         }
 
-        .step-card:hover {
-            border-color: #00d2ff;
-            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
         .step-number {
             width: 34px;
             height: 34px;
@@ -169,9 +163,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1vw;
-            box-shadow: 0 2px 8px rgba(0, 180, 255, 0.2);
             align-self: flex-start;
-            transition: all 0.3s ease;
         }
 
         .step-info h3 {
@@ -187,7 +179,6 @@
             line-height: 1.35;
         }
 
-        /* Выполненный шаг */
         .step-card.completed {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
             border-color: #4df3ff;
@@ -198,7 +189,6 @@
             background: #00d2ff;
             color: #030b18;
             border-color: #ffffff;
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
         .step-card.completed .step-info h3 {
@@ -223,7 +213,6 @@
             justify-content: center;
             font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
         }
 
         .step-card.completed .check-overlay {
@@ -234,7 +223,6 @@
         .certificate-section {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
             border: 2px solid rgba(0, 210, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border-radius: 16px;
             padding: 18px 25px;
             text-align: center;
@@ -247,25 +235,17 @@
         }
 
         .certificate-section.active {
-            background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
-            border-color: #4df3ff;
-            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
             opacity: 1;
             pointer-events: auto;
             filter: none;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { border-color: #4df3ff; box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3); }
-            100% { border-color: #ffffff; box-shadow: 0 20px 45px rgba(0, 210, 255, 0.6); }
+            border-color: #4df3ff;
+            box-shadow: 0 20px 40px rgba(0, 210, 255, 0.35);
         }
 
         .certificate-section h3 {
             color: #4df3ff;
             font-size: 1.4vw;
             margin-bottom: 4px;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
         }
 
         .certificate-section p {
@@ -295,11 +275,6 @@
             color: #030b18;
             font-size: 0.9vw;
             outline: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .cert-input::placeholder {
-            color: #94a3b8;
         }
 
         .action-row {
@@ -326,16 +301,13 @@
             height: 15px;
         }
 
-        /* Неактивная кнопка */
         .pro-btn:disabled {
             background: #475569 !important;
             color: #94a3b8 !important;
             cursor: not-allowed !important;
-            box-shadow: none !important;
             opacity: 0.6;
         }
 
-        /* Экран готового сертификата */
         .certificate-preview-box {
             display: none;
             flex-direction: column;
@@ -350,7 +322,6 @@
             max-width: 800px;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             border: 2px solid #00d2ff;
             background: #ffffff;
         }
@@ -360,7 +331,6 @@
             display: block;
         }
 
-        /* Текст поверх шаблона cert.jpg */
         .cert-text-overlay {
             position: absolute;
             top: 54%;
@@ -378,7 +348,6 @@
             font-size: 1.05vw;
             font-weight: 700;
             color: #1e3a8a;
-            letter-spacing: 0.5px;
         }
 
         .cert-intro {
@@ -392,8 +361,6 @@
             font-weight: 800;
             color: #0284c7;
             font-family: 'Georgia', serif;
-            letter-spacing: 0.5px;
-            margin: 2px 0;
         }
 
         .cert-description {
@@ -410,7 +377,6 @@
             padding-right: 3%;
         }
 
-        /* Крупные кнопки */
         .cert-buttons-row {
             display: flex;
             gap: 20px;
@@ -430,7 +396,6 @@
             text-align: center;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
         }
 
         .btn-download {
@@ -438,19 +403,115 @@
             color: #030b18;
         }
 
-        .btn-download:hover {
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
-            transform: translateY(-2px);
-        }
-
         .btn-share {
             background: linear-gradient(90deg, #0284c7 100%, #0369a1 100%);
             color: #ffffff;
         }
 
-        .btn-share:hover {
-            box-shadow: 0 0 30px rgba(2, 132, 199, 0.8);
-            transform: translateY(-2px);
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ (СТРОГО ДЛЯ ТЕЛЕФОНОВ) */
+        @media (max-width: 768px) {
+            .testdrive-container {
+                padding: 15px 12px;
+                gap: 15px;
+            }
+
+            .testdrive-header {
+                padding: 12px 15px;
+                flex-direction: row;
+            }
+
+            .testdrive-header .logo-text h1 {
+                font-size: 16px;
+            }
+
+            .testdrive-header .logo-text p {
+                font-size: 12px;
+            }
+
+            .progress-box {
+                padding: 10px 15px;
+            }
+
+            .progress-text {
+                font-size: 13px;
+            }
+
+            .testdrive-title h2 {
+                font-size: 20px;
+            }
+
+            .testdrive-title p {
+                font-size: 13px;
+            }
+
+            /* Шаги выстраиваем в одну колонку, увеличиваем шрифты */
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .step-card {
+                padding: 16px;
+            }
+
+            .step-number {
+                width: 32px;
+                height: 32px;
+                font-size: 15px;
+            }
+
+            .step-info h3 {
+                font-size: 16px;
+            }
+
+            .step-info p {
+                font-size: 13px;
+            }
+
+            .certificate-section h3 {
+                font-size: 18px;
+            }
+
+            .certificate-section p {
+                font-size: 13px;
+            }
+
+            .inputs-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .cert-input {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .action-row {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .checkbox-container {
+                font-size: 12px;
+            }
+
+            /* Адаптация текста внутри сертификата для мобильного экрана */
+            .cert-subtitle { font-size: 11px; }
+            .cert-intro { font-size: 10px; }
+            .cert-name-highlight { font-size: 18px; }
+            .cert-description { font-size: 8.5px; line-height: 1.3; }
+            .cert-footer-date { font-size: 9px; }
+
+            .cert-buttons-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .action-btn-large {
+                font-size: 15px;
+                padding: 14px;
+            }
         }
     </style>
 </head>
@@ -460,14 +521,14 @@
         
         <!-- Шапка БГУТ -->
         <header class="testdrive-header">
-            <div class="logo-box">
-                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 45px; height: 45px;">
+            <div class="logo-box" style="display: flex; align-items: center; gap: 10px;">
+                <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img" style="width: 38px; height: 38px;">
                 <div class="logo-text">
-                    <h1>Pro-БГУТ: студент на час</h1>
-                    <p>Твой путь начинается здесь</p>
+                    <h1>Pro-БГУТ</h1>
+                    <p>Студент на час</p>
                 </div>
             </div>
-            <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">На главную</button>
+            <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 12px; font-size: 12px;">На главную</button>
         </header>
 
         <!-- Основная часть -->
@@ -475,15 +536,15 @@
 
             <!-- Индикатор прогресса -->
             <div class="progress-box">
-                <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
+                <div class="progress-text">Прогресс: <span id="progressCount">0</span> из 3</div>
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" id="progressBar"></div>
                 </div>
             </div>
 
             <div class="testdrive-title">
-                <h2>Пройди <span>три шага</span> к своему будущему</h2>
-                <p>Выполни все задания и получи именной сертификат!</p>
+                <h2>Пройди <span>три шага</span> к успеху</h2>
+                <p>Выполни задания и получи сертификат!</p>
             </div>
 
             <!-- Три шага -->
@@ -495,7 +556,7 @@
                     <div class="step-number">1</div>
                     <div class="step-info">
                         <h3>Выбери специальность</h3>
-                        <p id="step1Text">Определи направление, которое тебе по душе, и изучи его особенности.</p>
+                        <p id="step1Text">Определи направление и изучи его особенности.</p>
                     </div>
                 </div>
 
@@ -505,7 +566,7 @@
                     <div class="step-number">2</div>
                     <div class="step-info">
                         <h3>Пройди квест</h3>
-                        <p>Реши интерактивный инженерный кейс, проверь свои силы.</p>
+                        <p>Реши интерактивный инженерный кейс.</p>
                     </div>
                 </div>
 
@@ -514,8 +575,8 @@
                     <div class="check-overlay">✓</div>
                     <div class="step-number">3</div>
                     <div class="step-info">
-                        <h3>Познакомься с лабораториями</h3>
-                        <p>Соверши виртуальную экскурсию по современным учебным пространствам.</p>
+                        <h3>Лаборатории</h3>
+                        <p>Соверши виртуальную экскурсию по базам.</p>
                     </div>
                 </div>
 
@@ -526,28 +587,28 @@
                 
                 <!-- Форма ввода данных -->
                 <div id="formContainer">
-                    <h3>Поздравляем! Все шаги пройдены!</h3>
-                    <p>Введите ваши данные, чтобы получить именной сертификат:</p>
+                    <h3>Все шаги пройдены!</h3>
+                    <p>Введите ваши данные для получения сертификата:</p>
                     
                     <div class="cert-form">
                         <div class="inputs-row">
                             <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName" oninput="validateForm()">
-                            <input type="email" class="cert-input" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
+                            <input type="email" class="cert-input" placeholder="Ваш Email" id="userEmail" oninput="validateForm()">
                         </div>
                         
                         <div class="action-row">
                             <label class="checkbox-container">
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
-                                <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
+                                <span>Согласие на <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">обработку данных и рассылки</a></span>
                             </label>
-                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
+                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 18px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Блок готового сертификата -->
                 <div class="certificate-preview-box" id="previewContainer">
-                    <h3>Ваш именной сертификат готов!</h3>
+                    <h3>Ваш сертификат готов!</h3>
                     
                     <div class="cert-image-container" id="certCardToSave">
                         <img src="cert.jpg" alt="Шаблон сертификата" id="certTemplateImg">
@@ -581,12 +642,11 @@
             window.location.href = 'specialty.html';
         }
 
-        // Шаг 2: Временно засчитываем прохождение шага по клику
         function openStep2() {
             localStorage.setItem('step2Completed', 'true');
             document.getElementById('step2Card').classList.add('completed');
             checkAllSteps();
-            alert('🎉 Шаг 2 (Квест) успешно засчитан! (Позже здесь будет открываться ваша игра)');
+            alert('🎉 Шаг 2 (Квест) успешно засчитан!');
         }
 
         function openStep3() {
@@ -664,7 +724,6 @@
             launchFireworks();
         }
 
-        // Скачивание сертификата и полный сброс прогресса прохождения
         function downloadCertificateWithData() {
             const name = document.getElementById('userName').value.trim() || 'Участник';
             const imgElement = document.getElementById('certTemplateImg');
@@ -685,23 +744,19 @@
                 const w = canvas.width;
                 const h = canvas.height;
 
-                // 1. Подзаголовок
                 ctx.fillStyle = '#1e3a8a';
                 ctx.font = `bold ${Math.floor(w * 0.021)}px 'Segoe UI', Arial, sans-serif`;
                 ctx.textAlign = 'center';
                 ctx.fillText('о прохождении интерактивной профориентационной программы', w / 2, h * 0.44);
 
-                // 2. Вводная фраза
                 ctx.fillStyle = '#475569';
                 ctx.font = `italic ${Math.floor(w * 0.019)}px 'Segoe UI', Arial, sans-serif`;
                 ctx.fillText('Настоящий сертификат подтверждает, что', w / 2, h * 0.50);
 
-                // 3. ФИО участника
                 ctx.fillStyle = '#0284c7';
                 ctx.font = `bold ${Math.floor(w * 0.035)}px Georgia, serif`;
                 ctx.fillText(name, w / 2, h * 0.58);
 
-                // 4. Описание
                 ctx.fillStyle = '#1e293b';
                 ctx.font = `${Math.floor(w * 0.016)}px 'Segoe UI', Arial, sans-serif`;
                 
@@ -713,13 +768,11 @@
                 ctx.fillText(line2, w / 2, h * 0.72);
                 ctx.fillText(line3, w / 2, h * 0.77);
 
-                // 5. Дата и город справа
                 ctx.fillStyle = '#1e293b';
                 ctx.font = `${Math.floor(w * 0.016)}px 'Segoe UI', Arial, sans-serif`;
                 ctx.textAlign = 'right';
                 ctx.fillText('г. Могилев, 2026 г.', w * 0.88, h * 0.88);
 
-                // Скачивание файла
                 const link = document.createElement('a');
                 link.download = `Sertifikat_${name.replace(/\s+/g, '_')}.jpg`;
                 link.href = canvas.toDataURL('image/jpeg', 0.95);
@@ -727,19 +780,16 @@
                 link.click();
                 document.body.removeChild(link);
 
-                // СБРОС ПРОГРЕССА ПОСЛЕ СКАЧИВАНИЯ СЕРТИФИКАТА
                 localStorage.clear();
             };
         }
 
-        // Кнопка «Поделиться» теперь ведет на Главную страницу проекта
         function shareCertificate() {
-            // Определяем абсолютный адрес главной страницы (например, index.html)
             const mainPageUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'index.html';
 
             if (navigator.share) {
                 navigator.share({
-                    title: 'Pro-БГУТ: Студент на час',
+                    title: 'Pro-БГУT: Студент на час',
                     text: 'Пройди тест-драйв специальностей в БГУТ и получи свой сертификат!',
                     url: mainPageUrl,
                 }).catch(() => {});
