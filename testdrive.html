@@ -374,7 +374,7 @@
                 </div>
 
                 <!-- Шаг 2 -->
-                <div class="step-card" onclick="toggleStep(this)">
+                <div class="step-card" id="step2Card" onclick="openStep2()">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">2</div>
                     <div class="step-info">
@@ -384,7 +384,7 @@
                 </div>
 
                 <!-- Шаг 3 -->
-                <div class="step-card" onclick="toggleStep(this)">
+                <div class="step-card" id="step3Card" onclick="toggleStep(this)">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">3</div>
                     <div class="step-info">
@@ -429,19 +429,28 @@
             window.location.href = 'specialty.html';
         }
 
-        // При загрузке страницы проверяем, выполнен ли Шаг 1 и какая специальность выбрана
+        function openStep2() {
+            window.location.href = 'quest.html';
+        }
+
+        // При загрузке проверяем статус шагов и выбранную специальность
         function initTestDrive() {
             const step1Completed = localStorage.getItem('step1Completed');
+            const step2Completed = localStorage.getItem('step2Completed');
             const userSpecialty = localStorage.getItem('userSpecialty');
 
             if (step1Completed === 'true') {
                 const step1Card = document.getElementById('step1Card');
                 step1Card.classList.add('completed');
-                
                 if (userSpecialty) {
                     document.getElementById('step1Text').innerHTML = `Выбрано: <b>${userSpecialty}</b>`;
                 }
             }
+
+            if (step2Completed === 'true') {
+                document.getElementById('step2Card').classList.add('completed');
+            }
+
             checkAllSteps();
         }
 
