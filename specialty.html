@@ -230,7 +230,6 @@
             background: rgba(13, 40, 75, 0.95);
         }
 
-        /* Выбранная карточка при клике */
         .spec-card.selected-spec {
             border-color: #ffffff !important;
             box-shadow: 0 0 35px rgba(0, 210, 255, 0.9) !important;
@@ -438,17 +437,13 @@
             devMessage.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Сохранение выбранной специальности и завершение Шага 1
         function chooseSpecialty(specName) {
-            // Сохраняем в localStorage выбранную специальность и статус прохождения шага 1
             localStorage.setItem('userSpecialty', specName);
             localStorage.setItem('step1Completed', 'true');
 
-            // Подсвечиваем карточку
             event.currentTarget.classList.add('selected-spec');
 
-            // Показываем модальное окно
-            selectedSpecText.innerHTML = `Вы выбрали:<br><b>«${specName}»</b>.<br>Специальность успешно сохранена!`;
+            selectedSpecText.innerHTML = `Вы выбрали направление:<br><b>«${specName}»</b>`;
             successModal.style.display = 'flex';
         }
 
