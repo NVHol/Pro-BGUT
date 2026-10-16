@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Точечное подтягивание карточки вверх строго на экранах телефонов */
+        @media (max-width: 768px) {
+            .main-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            .info-buttons-wrapper {
+                margin-top: -25px !important; /* Подтягиваем карточку ближе к зданию */
+                position: relative !important;
+                z-index: 10 !important;
+                width: 92% !important;
+                box-sizing: border-box !important;
+            }
+            .building-img {
+                max-height: 35vh !important;
+                width: auto !important;
+                object-fit: contain !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -37,9 +59,9 @@
 
                 <!-- Три интерактивные кнопки -->
                 <div class="buttons-block">
-                    <button class="pro-btn" id="btnTour">1. Виртуальный 360°-тур</button>
-                    <button class="pro-btn" id="btnTestDrive">2. Начать тест-драйв</button>
-                    <button class="pro-btn" id="btnMore">3. Узнать больше</button>
+                    <button class="pro-btn" id="btnTour">Виртуальный 360°-тур</button>
+                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв</button>
+                    <button class="pro-btn" id="btnMore">Узнать больше</button>
                 </div>
             </div>
         </main>
