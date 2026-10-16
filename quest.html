@@ -18,10 +18,10 @@
         .quest-container {
             width: 100vw;
             min-height: 100vh;
-            /* Исправлено отображение фона aes.jpg без чрезмерного растягивания */
+            /* Исправлено: background-size: contain аккуратно вписывает картинку aes.jpg без лишнего растягивания */
             background-color: #030b18;
-            background-image: linear-gradient(rgba(3, 11, 24, 0.7), rgba(3, 11, 24, 0.8)), url('aes.jpg');
-            background-size: cover;
+            background-image: linear-gradient(rgba(3, 11, 24, 0.75), rgba(3, 11, 24, 0.85)), url('aes.jpg');
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             display: flex;
@@ -76,7 +76,7 @@
 
         /* Стеклянная рамка */
         .glass-card {
-            background: rgba(13, 40, 75, 0.88);
+            background: rgba(13, 40, 75, 0.9);
             border: 2px solid rgba(0, 210, 255, 0.5);
             box-shadow: 0 20px 45px rgba(0, 150, 255, 0.25);
             backdrop-filter: blur(10px);
@@ -108,14 +108,27 @@
             min-height: 70px;
         }
 
-        /* Кнопка «Начать!» крупными буквами и по центру */
-        .start-btn {
-            font-size: 1.4vw !important;
+        /* Кнопка «Начать!» строго по центру и фиксированной ширины */
+        .center-start-btn {
+            background: linear-gradient(90deg, #0099ff 0%, #00d2ff 100%) !important;
+            color: #030b18 !important;
+            font-size: 1.2vw !important;
             font-weight: 800 !important;
-            letter-spacing: 1.5px;
-            padding: 14px 45px !important;
+            letter-spacing: 1px;
+            padding: 12px 40px !important;
+            border-radius: 12px !important;
+            border: none !important;
+            cursor: pointer !important;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6) !important;
+            transition: all 0.3s ease !important;
+            width: auto !important;
             margin: 10px auto 0 auto !important;
-            display: block;
+            display: inline-block !important;
+        }
+
+        .center-start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.9) !important;
         }
 
         /* Компактный блок Шага 1 */
@@ -134,7 +147,7 @@
             max-width: 600px;
         }
 
-        /* Слот реактора (компактнее) */
+        /* Слот реактора */
         .reactor-slot {
             width: 130px;
             height: 130px;
@@ -166,7 +179,7 @@
             font-size: 0.8vw;
         }
 
-        /* Компактный инвентарь сбоку/снизу */
+        /* Инвентарь */
         .inventory-panel {
             display: flex;
             gap: 15px;
@@ -206,7 +219,7 @@
             text-align: center;
         }
 
-        /* Встроенные уведомления (вместо системных alert) */
+        /* Уведомления внутри игры */
         .inline-message {
             font-size: 0.95vw;
             font-weight: 700;
@@ -285,7 +298,7 @@
                 <div class="glass-card">
                     <h2>Оператор АЭС: Спасти реактор</h2>
                     <p class="typewriter-text" id="introText"></p>
-                    <button class="pro-btn start-btn" id="startBtn" style="display: none;" onclick="startStep1()">НАЧАТЬ!</button>
+                    <button class="center-start-btn" id="startBtn" style="display: none;" onclick="startStep1()">НАЧАТЬ!</button>
                 </div>
             `;
 
@@ -320,7 +333,7 @@
                             <span>Слот реактора</span>
                         </div>
 
-                        <!-- Встроенное сообщение игры (вместо всплывающего окна alert) -->
+                        <!-- Встроенное сообщение игры (исчезает через 3 секунды) -->
                         <div class="inline-message" id="gameMessage"></div>
 
                         <div class="inventory-panel">
@@ -374,17 +387,17 @@
 
                 showGameMessage("✅ Датчик успешно установлен!", "success");
 
+                // Переход к следующему шагу после исчезновения сообщения или клика
                 setTimeout(() => {
-                    alert("Датчик успешно установлен! Переходим к следующему шагу.");
-                    // Здесь в дальнейшем перейдем к шагу 2
-                }, 1500);
+                    alert("Переходим к настройке контроллера!");
+                    // Здесь дальше подключим шаг 2
+                }, 2000);
 
             } else {
-                showGameMessage("❌ Ошибка, попробуйте ещё!", "error");
+                showGameMessage("❌ Ошибка, попробуй ещё!", "error");
             }
         }
 
-        // Функция показа внутриигрового сообщения на 3 секунды
         function showGameMessage(text, type) {
             const msg = document.getElementById('gameMessage');
             msg.className = `inline-message ${type}`;
