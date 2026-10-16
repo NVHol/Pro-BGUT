@@ -230,7 +230,7 @@
             display: flex;
         }
 
-        /* Секция сертификата (изначально неактивная) */
+        /* Секция сертификата */
         .certificate-section {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
             border: 2px solid rgba(0, 210, 255, 0.2);
@@ -325,6 +325,60 @@
             width: 15px;
             height: 15px;
         }
+
+        /* Неактивная кнопка получения сертификата */
+        .pro-btn:disabled {
+            background: #475569 !important;
+            color: #94a3b8 !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+            opacity: 0.6;
+        }
+
+        /* Экран готового сертификата */
+        .certificate-preview-box {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .cert-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid #00d2ff;
+        }
+
+        .cert-image-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Имя поверх шаблона сертификата cert.jpg */
+        .cert-name-overlay {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #030b18;
+            font-size: 2.2vw;
+            font-weight: 800;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            width: 90%;
+            text-align: center;
+        }
+
+        .cert-buttons-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="testdrive-body" onload="initTestDrive()">
@@ -396,23 +450,45 @@
 
             <!-- Секция сертификата -->
             <div class="certificate-section" id="certSection">
-                <h3>Поздравляем! Все шаги пройдены!</h3>
-                <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                 
-                <div class="cert-form">
-                    <div class="inputs-row">
-                        <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName">
-                        <input type="email" class="cert-input" placeholder="Ваш Email (для отправки сертификата)" id="userEmail">
-                    </div>
+                <!-- Форма ввода данных -->
+                <div id="formContainer">
+                    <h3>Поздравляем! Все шаги пройдены!</h3>
+                    <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                     
-                    <div class="action-row">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="userConsent">
-                            <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных</a></span>
-                        </label>
-                        <button class="pro-btn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="getCertificate()">Получить сертификат</button>
+                    <div class="cert-form">
+                        <div class="inputs-row">
+                            <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName" oninput="validateForm()">
+                            <input type="email" class="cert-input" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
+                        </div>
+                        
+                        <div class="action-row">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="userConsent" onchange="validateForm()">
+                                <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
+                            </label>
+                            <!-- Кнопка изначально неактивна -->
+                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Блок готового сертификата (шаблон cert.jpg) -->
+                <div class="certificate-preview-box" id="previewContainer">
+                    <h3>Ваш именной сертификат готов!</h3>
+                    
+                    <div class="cert-image-container" id="certCardToSave">
+                        <!-- Подключен ваш шаблон сертификата cert.jpg -->
+                        <img src="cert.jpg" alt="Шаблон сертификата" id="certTemplateImg">
+                        <div class="cert-name-overlay" id="certUserNameDisplay">Имя Фамилия</div>
+                    </div>
+
+                    <div class="cert-buttons-row">
+                        <button class="pro-btn" style="padding: 10px 25px; font-size: 0.95vw;" onclick="downloadCertificate()">📥 Скачать сертификат</button>
+                        <button class="pro-btn" style="padding: 10px 25px; font-size: 0.95vw; background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;" onclick="shareCertificate()">🔗 Поделиться</button>
+                    </div>
+                </div>
+
             </div>
 
         </main>
@@ -437,22 +513,14 @@
             }
         }
 
-        // Шаг 3: Открытие виртуального тура и автоматическое засчитывание шага
         function openStep3() {
             const tourUrl = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
-
-            // Открываем виртуальный тур в новой вкладке
             window.open(tourUrl, '_blank');
-
-            // Засчитываем Шаг 3
             localStorage.setItem('step3Completed', 'true');
-            
-            // Отмечаем карточку галочкой
             document.getElementById('step3Card').classList.add('completed');
             checkAllSteps();
         }
 
-        // При загрузке проверяем статус всех шагов
         function initTestDrive() {
             const step1Completed = localStorage.getItem('step1Completed');
             const step2Completed = localStorage.getItem('step2Completed');
@@ -497,39 +565,55 @@
             }
         }
 
-        function launchFireworks() {
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 90,
-                    angle: 60,
-                    spread: 80,
-                    origin: { x: 0, y: 0.7 },
-                    colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
-                });
-                confetti({
-                    particleCount: 90,
-                    angle: 120,
-                    spread: 80,
-                    origin: { x: 1, y: 0.7 },
-                    colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8']
-                });
-            }
-        }
-
-        function getCertificate() {
+        // Проверка заполненности формы для активации кнопки
+        function validateForm() {
             const name = document.getElementById('userName').value.trim();
             const email = document.getElementById('userEmail').value.trim();
             const consent = document.getElementById('userConsent').checked;
+            const btn = document.getElementById('getCertBtn');
 
-            if(!name || !email) {
-                alert('Пожалуйста, заполните ФИО и Email!');
-                return;
+            if (name.length > 2 && email.includes('@') && consent) {
+                btn.removeAttribute('disabled');
+            } else {
+                btn.setAttribute('disabled', 'true');
             }
-            if(!consent) {
-                alert('Необходимо согласие на обработку персональных данных!');
-                return;
+        }
+
+        // Генерация и вывод сертификата на экран
+        function generateCertificate() {
+            const name = document.getElementById('userName').value.trim();
+            
+            // Вписываем имя на шаблон cert.jpg
+            document.getElementById('certUserNameDisplay').innerText = name;
+
+            // Переключаем отображение формы на готовый сертификат
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('previewContainer').style.display = 'flex';
+
+            launchFireworks();
+        }
+
+        function downloadCertificate() {
+            alert('📥 Функция скачивания сертификата вызвана!');
+        }
+
+        function shareCertificate() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Мой сертификат Pro-БГУТ',
+                    text: 'Я успешно прошел тест-драйв специальностей в БГУТ!',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                alert('Ссылка скопирована в буфер обмена!');
             }
-            alert(name + ', ваш именной сертификат успешно отправлен на почту ' + email + '!');
+        }
+
+        function launchFireworks() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 90, angle: 60, spread: 80, origin: { x: 0, y: 0.7 }, colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8'] });
+                confetti({ particleCount: 90, angle: 120, spread: 80, origin: { x: 1, y: 0.7 }, colors: ['#00d2ff', '#ffffff', '#4df3ff', '#38bdf8'] });
+            }
         }
     </script>
 </body>
