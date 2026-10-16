@@ -17,7 +17,6 @@
         .specialty-container {
             width: 100vw;
             min-height: 100vh;
-            /* Эффект осветления фонового изображения fon2.jpg с помощью полупрозрачной белой вуали */
             background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.88)), url('fon2.jpg');
             background-size: cover;
             background-position: center;
@@ -68,7 +67,6 @@
             text-align: center;
         }
 
-        /* Сетка для предметов (Шаг 1) */
         #subjectsView {
             display: flex;
             flex-direction: column;
@@ -141,7 +139,7 @@
             text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
         }
 
-        /* Представление специальностей механического факультета (Шаг 2) */
+        /* Механический факультет */
         #facultView {
             display: none;
             flex-direction: column;
@@ -158,7 +156,6 @@
             margin-bottom: 5px;
         }
 
-        /* Карточки с эффектом глубины */
         .faculty-cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -230,9 +227,76 @@
             box-shadow: 0 25px 50px rgba(0, 210, 255, 0.5);
             border-color: #ffffff;
             opacity: 1;
+            background: rgba(13, 40, 75, 0.95);
         }
 
-        /* Уведомление о разработке */
+        /* Выбранная карточка при клике */
+        .spec-card.selected-spec {
+            border-color: #ffffff !important;
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.9) !important;
+            transform: scale(1.04) !important;
+        }
+
+        /* Модальное окно успешного прохождения Шага 1 */
+        #successModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 11, 24, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
+            border: 2px solid #4df3ff;
+            box-shadow: 0 20px 50px rgba(0, 210, 255, 0.5);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-content h3 {
+            color: #4df3ff;
+            font-size: 1.8vw;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
+        }
+
+        .modal-content p {
+            color: #ffffff;
+            font-size: 1.05vw;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .modal-btn {
+            background: linear-gradient(90deg, #0099ff 0%, #00d2ff 100%);
+            color: #030b18;
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1vw;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.9);
+        }
+
         #devMessage {
             display: none;
             background: rgba(13, 40, 75, 0.95);
@@ -293,7 +357,6 @@
                     </div>
                 </div>
 
-                <!-- Сообщение о разработке -->
                 <div id="devMessage">
                     ⚠️ Данный раздел находится в разработке. Скоро здесь появятся специальности для этой комбинации предметов!
                 </div>
@@ -304,27 +367,27 @@
                 <div class="faculty-header-title">Механический факультет</div>
                 
                 <div class="faculty-cards-container">
-                    <div class="spec-card">
+                    <div class="spec-card" onclick="chooseSpecialty('Автоматизация технологических процессов и производств')">
                         <h3>Автоматизация технологических процессов и производств</h3>
                         <p>Разработка систем управления современными промышленными линиями и роботизированными комплексами.</p>
                     </div>
 
-                    <div class="spec-card">
+                    <div class="spec-card" onclick="chooseSpecialty('Интеллектуальные технико-технологические системы в пищевых производствах')">
                         <h3>Интеллектуальные технико-технологические системы в пищевых производствах</h3>
                         <p>Интеграция искусственного интеллекта и умных датчиков в оборудование пищевой промышленности.</p>
                     </div>
 
-                    <div class="spec-card">
+                    <div class="spec-card" onclick="chooseSpecialty('Информационные системы и технологии')">
                         <h3>Информационные системы и технологии</h3>
                         <p>Создание программного обеспечения, баз данных и корпоративных систем автоматизации предприятий.</p>
                     </div>
 
-                    <div class="spec-card">
+                    <div class="spec-card" onclick="chooseSpecialty('Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники')">
                         <h3>Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники</h3>
                         <p>Проектирование холодильных установок, криогенных систем и вакуумного технологического оборудования.</p>
                     </div>
 
-                    <div class="spec-card">
+                    <div class="spec-card" onclick="chooseSpecialty('Экологическая безопасность')">
                         <h3>Экологическая безопасность</h3>
                         <p>Защита окружающей среды, мониторинг промышленных выбросов и внедрение зеленых технологий.</p>
                     </div>
@@ -335,11 +398,22 @@
 
     </div>
 
+    <!-- Модальное окно успешного завершения Шага 1 -->
+    <div id="successModal">
+        <div class="modal-content">
+            <h3>Шаг 1 успешно пройден!</h3>
+            <p id="selectedSpecText">Вы выбрали специальность. Направление зафиксировано для вашего тест-драйва.</p>
+            <button class="modal-btn" onclick="goToTestDrive()">Перейти к шагу 2</button>
+        </div>
+    </div>
+
     <script>
         const btnBack = document.getElementById('btnBack');
         const subjectsView = document.getElementById('subjectsView');
         const facultView = document.getElementById('facultView');
         const devMessage = document.getElementById('devMessage');
+        const successModal = document.getElementById('successModal');
+        const selectedSpecText = document.getElementById('selectedSpecText');
 
         btnBack.addEventListener('click', function() {
             if (facultView.style.display === 'flex') {
@@ -362,6 +436,24 @@
         function showDevMessage() {
             devMessage.style.display = 'block';
             devMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Сохранение выбранной специальности и завершение Шага 1
+        function chooseSpecialty(specName) {
+            // Сохраняем в localStorage выбранную специальность и статус прохождения шага 1
+            localStorage.setItem('userSpecialty', specName);
+            localStorage.setItem('step1Completed', 'true');
+
+            // Подсвечиваем карточку
+            event.currentTarget.classList.add('selected-spec');
+
+            // Показываем модальное окно
+            selectedSpecText.innerHTML = `Вы выбрали:<br><b>«${specName}»</b>.<br>Специальность успешно сохранена!`;
+            successModal.style.display = 'flex';
+        }
+
+        function goToTestDrive() {
+            window.location.href = 'testdrive.html';
         }
     </script>
 </body>
