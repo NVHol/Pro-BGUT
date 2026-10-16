@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инженерный квест — Pro-БГУТ</title>
+    <title>Инженерный квест: Оператор АЭС — Pro-БГУТ</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключение библиотеки конфетти для победы в квесте -->
+    <!-- Библиотека конфетти для победы -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body.quest-body {
-            background-color: #ffffff;
+            background-color: #030b18;
             overflow-y: auto;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             margin: 0;
@@ -19,7 +19,7 @@
         .quest-container {
             width: 100vw;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.88)), url('fon2.jpg');
+            background-image: linear-gradient(rgba(3, 11, 24, 0.85), rgba(3, 11, 24, 0.92)), url('aes.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -27,7 +27,7 @@
             justify-content: flex-start;
             align-items: center;
             padding: 2.5vh 5vw;
-            gap: 25px;
+            gap: 20px;
             box-sizing: border-box;
         }
 
@@ -37,7 +37,7 @@
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(0, 210, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             padding: 1vw 2.5vw;
             border-radius: 16px;
             display: flex;
@@ -65,143 +65,275 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             text-align: center;
         }
 
-        .quest-title h2 {
-            color: #030b18;
-            font-size: 2vw;
-            font-weight: 700;
-            margin-bottom: 5px;
+        /* Панель статуса симулятора */
+        .status-panel {
+            background: rgba(13, 40, 75, 0.85);
+            border: 2px solid rgba(0, 210, 255, 0.4);
+            border-radius: 14px;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
         }
 
-        .quest-title h2 span {
-            color: #0099ff;
-        }
-
-        .quest-title p {
-            color: #475569;
+        .status-item {
             font-size: 0.95vw;
             font-weight: 600;
         }
 
-        /* Карточка с игрой/кейсом */
-        .quest-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(0, 210, 255, 0.5);
-            box-shadow: 0 15px 35px rgba(0, 150, 255, 0.15);
-            backdrop-filter: blur(12px);
+        .status-item span {
+            color: #ff4d4d;
+            font-weight: 700;
+        }
+
+        /* Основная игровая консоль */
+        .game-console {
+            background: rgba(5, 20, 40, 0.92);
+            border: 2px solid #00d2ff;
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.35);
             border-radius: 20px;
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            text-align: left;
-        }
-
-        .quest-card h3 {
-            color: #030b18;
-            font-size: 1.3vw;
-            margin: 0;
-        }
-
-        .quest-card p {
-            color: #334155;
-            font-size: 1vw;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        /* Интерактивная зона кейса */
-        .interactive-box {
-            width: 100%;
-            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
-            border: 2px solid #4df3ff;
-            border-radius: 16px;
             padding: 30px;
-            color: #ffffff;
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
-            box-sizing: border-box;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+            position: relative;
         }
 
-        .interactive-box h4 {
+        .game-title {
             color: #4df3ff;
-            font-size: 1.4vw;
+            font-size: 1.6vw;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin: 0;
             text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
         }
 
-        .task-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            width: 100%;
-        }
-
-        .task-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(0, 210, 255, 0.5);
-            padding: 15px 20px;
-            border-radius: 12px;
-            color: #ffffff;
+        .game-desc {
+            color: #cbd5e1;
             font-size: 1vw;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
+            line-height: 1.5;
+            margin: 0;
+            max-width: 900px;
         }
 
-        .task-btn:hover {
+        /* Слот монтажа для Шага 1 */
+        .reactor-slot {
+            width: 180px;
+            height: 180px;
+            border: 3px dashed #38bdf8;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 150, 255, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .reactor-slot.drag-over {
+            border-color: #4df3ff;
             background: rgba(0, 210, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+        }
+
+        .reactor-slot img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Панель инвентаря (предметы для перетаскивания) */
+        .inventory-panel {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .inventory-item {
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid rgba(0, 210, 255, 0.4);
+            border-radius: 14px;
+            padding: 12px;
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: grab;
+            transition: all 0.3s ease;
+        }
+
+        .inventory-item:hover {
             border-color: #4df3ff;
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        .task-result {
-            font-size: 1.1vw;
-            font-weight: bold;
-            color: #4df3ff;
-            min-height: 30px;
+        .inventory-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
         }
 
-        /* Блок сообщения о разработке */
-        .dev-quest-box {
-            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
-            border: 2px solid #00d2ff;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
-            border-radius: 20px;
-            padding: 50px 30px;
+        .inventory-item span {
             color: #ffffff;
+            font-size: 0.8vw;
+            font-weight: 600;
             text-align: center;
+        }
+
+        /* Подсказка */
+        .hint-box {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid #ffc107;
+            color: #ffe066;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9vw;
+            display: none;
+            max-width: 800px;
+        }
+
+        /* Шаг 2: Настройка контроллера */
+        .plc-panel {
             display: flex;
             flex-direction: column;
             gap: 15px;
             width: 100%;
-            box-sizing: border-box;
+            max-width: 700px;
+            align-items: center;
         }
 
-        .dev-quest-box h3 {
+        .plc-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            color: #ffffff;
+            font-size: 1vw;
+        }
+
+        .plc-select {
+            background: #030b18;
+            border: 2px solid #00d2ff;
             color: #4df3ff;
-            font-size: 1.6vw;
-            margin: 0;
-            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.95vw;
+            outline: none;
+            cursor: pointer;
         }
 
-        .dev-quest-box p {
-            color: #cbd5e1;
-            font-size: 1.05vw;
+        /* Шаг 3: Руки завода (мини-игра с подключением) */
+        .wiring-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .wire-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 210, 255, 0.4);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .wire-card:hover {
+            border-color: #4df3ff;
+            background: rgba(0, 210, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .wire-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .wire-card span {
+            color: #ffffff;
+            font-size: 1vw;
+            font-weight: 600;
+        }
+
+        /* Финальный экран */
+        .victory-box {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .victory-box h3 {
+            color: #4df3ff;
+            font-size: 2vw;
             margin: 0;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
+        }
+
+        .pro-info-card {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.15) 0%, rgba(0, 210, 255, 0.25) 100%);
+            border: 2px solid #4df3ff;
+            border-radius: 16px;
+            padding: 25px;
+            color: #ffffff;
+            text-align: left;
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+        }
+
+        .pro-info-card h4 {
+            color: #4df3ff;
+            font-size: 1.2vw;
+            margin: 0;
+        }
+
+        .pro-info-card ul {
+            margin: 0;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.95vw;
+            color: #e2e8f0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="quest-body" onload="initQuest()">
+<body class="quest-body" onload="initGame()">
 
     <div class="quest-container">
         
@@ -219,15 +351,24 @@
 
         <!-- Основная часть -->
         <main class="quest-main">
-            <div class="quest-title">
-                <h2>Инженерный <span>квест</span></h2>
-                <p id="specSubTitle">Загрузка выбранного направления...</p>
+            
+            <!-- Панель статуса энергоблока -->
+            <div class="status-panel">
+                <div class="status-item">Режим: <span id="sysStatus" style="color: #ff4d4d;">АВАРИЙНЫЙ СБОЙ</span></div>
+                <div class="status-item">Температура активной зоны: <span id="tempDisplay">ERR_NO_SENSOR</span></div>
             </div>
 
-            <!-- Динамический контейнер квеста -->
-            <div id="questContent">
-                <!-- Сюда подставится либо квест по Автоматизации, либо заглушка "в разработке" -->
+            <!-- Игровая консоль -->
+            <div class="game-console" id="gameConsole">
+                
+                <!-- Контент динамически меняется в зависимости от шага -->
+                <div id="stepContent"></div>
+
+                <!-- Подсказка -->
+                <div class="hint-box" id="hintBox"></div>
+
             </div>
+
         </main>
 
     </div>
@@ -237,79 +378,204 @@
             window.location.href = 'testdrive.html';
         });
 
-        // Проверяем выбранную специальность и выводим квест или заглушку
-        function initQuest() {
-            const userSpecialty = localStorage.getItem('userSpecialty') || '';
-            const questContainer = document.getElementById('questContent');
-            const subTitle = document.getElementById('specSubTitle');
+        let currentStep = 1;
+        let hintTimer = null;
 
-            subTitle.innerHTML = `Выбранное направление: <b>${userSpecialty || 'Не выбрано'}</b>`;
+        function initGame() {
+            loadStep1();
+        }
 
-            // Если выбрана специальность "Автоматизация технологических процессов и производств"
-            if (userSpecialty.includes('Автоматизация технологических процессов')) {
-                questContainer.innerHTML = `
-                    <div class="quest-card">
-                        <h3>Производственный кейс линии смешивания</h3>
-                        <p>На автоматизированном предприятии пищевой промышленности произошел сбой в системе дозирования компонентов. Вам необходимо определить корректную последовательность управляющих сигналов для восстановления стабильной работы конвейера.</p>
-                        
-                        <div class="interactive-box">
-                            <h4>Интерактивная задача по автоматизации</h4>
-                            <p style="text-align: center; color: #cbd5e1;">Какой тип датчика обратной связи обеспечивает непрерывный контроль положения исполнительного механизма?</p>
-                            
-                            <div class="task-options">
-                                <button class="task-btn" onclick="checkAnswer(false)">Концевой выключатель (дискретный)</button>
-                                <button class="task-btn" onclick="checkAnswer(true)">Инкрементальный энкодер</button>
-                                <button class="task-btn" onclick="checkAnswer(false)">Плавкий предохранитель</button>
-                                <button class="task-btn" onclick="checkAnswer(false)">Биметаллический термостат</button>
-                            </div>
+        // ================= ЗАПУСК ШАГА 1 =================
+        function loadStep1() {
+            currentStep = 1;
+            document.getElementById('sysStatus').innerText = 'КРИТИЧЕСКИЙ ПЕРЕГРЕВ';
+            document.getElementById('tempDisplay').innerText = '??? °C';
 
-                            <div class="task-result" id="taskResult"></div>
-                        </div>
+            const content = document.getElementById('stepContent');
+            content.innerHTML = `
+                <h2 class="game-title">Шаг 1. «Органы чувств» — Установка датчика</h2>
+                <p class="game-desc">Старый датчик сгорел! На мониторе мигает ошибка <b>ERR_NO_SENSOR</b>. Система «слепа», температура реактора неизвестна. Перетащите правильный прибор из нижнего инвентаря в монтажный слот на реакторе.</p>
+                
+                <div class="reactor-slot" id="dropSlot" ondragover="allowDrop(event)" ondragleave="removeGlow(event)" ondrop="dropSensor(event)">
+                    <span>Монтажный слот реактора</span>
+                </div>
+
+                <div class="inventory-panel">
+                    <div class="inventory-item" draggable="true" ondragstart="drag(event, 'p')">
+                        <img src="p.png" alt="Манометр">
+                        <span>Манометр</span>
                     </div>
-                `;
-            } 
-            // Для всех остальных специальностей показываем сообщение, что квест в разработке
-            else {
-                questContainer.innerHTML = `
-                    <div class="dev-quest-box">
-                        <h3>🛠️ Квест для этого направления находится в разработке</h3>
-                        <p>Для выбранной вами специальности интерактивный инженерный кейс создается. Скоро здесь появится увлекательное задание!</p>
-                        <button class="pro-btn" style="width: auto; padding: 10px 25px; margin: 15px auto 0 auto; font-size: 1vw;" onclick="window.location.href='testdrive.html'">Вернуться к списку шагов</button>
+                    <div class="inventory-item" draggable="true" ondragstart="drag(event, 't')">
+                        <img src="t.png" alt="Термометр">
+                        <span>Датчик температуры</span>
                     </div>
-                `;
+                    <div class="inventory-item" draggable="true" ondragstart="drag(event, 'geyg')">
+                        <img src="geyg.png" alt="Счетчик Гейгера">
+                        <span>Счетчик Гейгера</span>
+                    </div>
+                </div>
+            `;
+
+            startHintTimer("Нам нужно измерять степень нагрева активной зоны. Какой прибор отвечает за измерение температуры?");
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.add('drag-over');
+        }
+
+        function removeGlow(ev) {
+            ev.currentTarget.classList.remove('drag-over');
+        }
+
+        function drag(ev, type) {
+            ev.dataTransfer.setData("text", type);
+        }
+
+        function dropSensor(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const slot = document.getElementById('dropSlot');
+            slot.classList.remove('drag-over');
+
+            if (data === 't') {
+                clearTimeout(hintTimer);
+                document.getElementById('hintBox').style.display = 'none';
+                slot.innerHTML = `<img src="t.png" alt="Датчик установлен">`;
+                slot.style.borderColor = '#4df3ff';
+                slot.style.background = 'rgba(0, 210, 255, 0.2)';
+
+                document.getElementById('tempDisplay').innerText = '850°C (Растет!)';
+                document.getElementById('sysStatus').style.color = '#ffaa00';
+                document.getElementById('sysStatus').innerText = 'ВНИМАНИЕ: ПЕРЕГРЕВ';
+
+                setTimeout(() => {
+                    alert('Датчик успешно установлен! Температура определена: 850°C.');
+                    loadStep2();
+                }, 1000);
+            } else {
+                alert('❌ Ошибка! Этот прибор не подходит для измерения температуры реактора.');
             }
         }
 
-        // Проверка ответа в квесте (только для Автоматизации)
-        function checkAnswer(isCorrect) {
-            const resultDiv = document.getElementById('taskResult');
-            if (isCorrect) {
-                resultDiv.style.color = '#4df3ff';
-                resultDiv.innerHTML = '✅ Верно! Кейс успешно решен, система автоматизации восстановлена!';
+        // ================= ЗАПУСК ШАГА 2 =================
+        function loadStep2() {
+            currentStep = 2;
+            const content = document.getElementById('stepContent');
+            content.innerHTML = `
+                <h2 class="game-title">Шаг 2. «Мозг системы» — Настройка контроллера</h2>
+                <p class="game-desc">Датчик зафиксировал температуру 850°C, но сигнал дальше не идет. Автоматика не знает, при каких условиях включать защиту. Настройте логику контроллера.</p>
                 
-                // Засчитываем Шаг 2 в localStorage
-                localStorage.setItem('step2Completed', 'true');
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <img src="mozg.png" alt="Контроллер" style="width: 90px; height: 90px; object-fit: contain;">
+                    <div class="plc-panel">
+                        <div class="plc-row">
+                            <span>1. ЕСЛИ Температура</span>
+                            <select class="plc-select" id="condSelect">
+                                <option value="wrong">&lt; 100°C (Норма)</option>
+                                <option value="correct">&gt; 500°C (Критический нагрев)</option>
+                            </select>
+                        </div>
+                        <div class="plc-row">
+                            <span>2. ТО</span>
+                            <select class="plc-select" id="actionSelect">
+                                <option value="wrong">Отключить освещение блока</option>
+                                <option value="correct">Включить систему аварийного охлаждения</option>
+                            </select>
+                        </div>
+                        <button class="pro-btn" style="width: 100%; padding: 12px; font-size: 1vw; margin-top: 10px;" onclick="checkPLC()">Применить логику контроллера</button>
+                    </div>
+                </div>
+            `;
 
-                // Запускаем салют
-                if (typeof confetti === 'function') {
-                    confetti({
-                        particleCount: 80,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
-                }
+            startHintTimer("Реактор перегревается. Контроллер должен отдать команду на спасение, когда показатели превысят безопасный порог (> 500°C).");
+        }
 
-                // Через 1.5 секунды предлагаем вернуться к шагам тест-драйва
-                setTimeout(() => {
-                    if(confirm('Поздравляем! Шаг 2 успешно пройден. Вернуться к списку шагов тест-драйва?')) {
-                        window.location.href = 'testdrive.html';
-                    }
-                }, 1500);
+        function checkPLC() {
+            const cond = document.getElementById('condSelect').value;
+            const action = document.getElementById('actionSelect').value;
 
+            if (cond === 'correct' && action === 'correct') {
+                clearTimeout(hintTimer);
+                document.getElementById('hintBox').style.display = 'none';
+                alert('✅ Логика успешно записана в контроллер!');
+                loadStep3();
             } else {
-                resultDiv.style.color = '#ff6b6b';
-                resultDiv.innerHTML = '❌ Ошибка в схеме управления. Попробуйте выбрать другой вариант!';
+                alert('❌ Неверная логика защиты! Проверьте пороговое значение и команду охлаждения.');
             }
+        }
+
+        // ================= ЗАПУСК ШАГА 3 =================
+        function loadStep3() {
+            currentStep = 3;
+            const content = document.getElementById('stepContent');
+            content.innerHTML = `
+                <h2 class="game-title">Шаг 3. «Руки завода» — Активация механизма</h2>
+                <p class="game-desc">Контроллер готов отдать команду, но силовой узел обесточен. Выберите правильный исполнительный механизм для подачи охлаждающей воды в реактор.</p>
+                
+                <div class="wiring-grid">
+                    <div class="wire-card" onclick="wrongActuator()">
+                        <img src="klap.png" alt="Клапан продувки">
+                        <span>Запорный клапан воздуха</span>
+                    </div>
+                    <div class="wire-card" onclick="correctActuator()">
+                        <img src="nasos.png" alt="Насос охлаждения">
+                        <span>Насос аварийного водяного охлаждения</span>
+                    </div>
+                </div>
+            `;
+
+            startHintTimer("Сигнал пошел, но насос обесточен. Запустите насос аварийного охлаждения, чтобы восстановить подачу воды.");
+        }
+
+        function wrongActuator() {
+            alert('❌ Ошибка! Этот узел не решает проблему заливки активной зоны водой.');
+        }
+
+        function correctActuator() {
+            clearTimeout(hintTimer);
+            document.getElementById('hintBox').style.display = 'none';
+
+            // Засчитываем Шаг 2 в памяти тест-драйва
+            localStorage.setItem('step2Completed', 'true');
+
+            const consoleBox = document.getElementById('gameConsole');
+            consoleBox.innerHTML = `
+                <div class="victory-box" style="display: flex;">
+                    <h3>🎉 Авария предотвращена!</h3>
+                    <p style="color: #4df3ff; font-size: 1.1vw; margin: 0;">Мощные струи воды залили реактор. Температура упала до нормального уровня. Энергоблок работает стабильно!</p>
+                    
+                    <div class="pro-info-card">
+                        <h4>Что вы только что сделали?</h4>
+                        <ul>
+                            <li><b>Установили датчик</b> — «глаза и уши» системы.</li>
+                            <li><b>Запрограммировали контроллер</b> — «мозг», принимающий решения.</li>
+                            <li><b>Запустили исполнительный механизм</b> — «руки», выполняющие работу.</li>
+                        </ul>
+                        <p style="margin: 5px 0 0 0; font-size: 0.9vw; color: #93bde8;">Именно так устроено абсолютно всё на современном производстве — от атомных станций до линий по упаковке шоколада. Хотите управлять такими системами в реальной жизни? Поступайте на специальность <b>«Автоматизация технологических процессов и производств»</b>!</p>
+                    </div>
+
+                    <button class="pro-btn" style="width: auto; padding: 12px 30px; font-size: 1.1vw;" onclick="window.location.href='testdrive.html'">Получить сертификат участника</button>
+                </div>
+            `;
+
+            document.getElementById('sysStatus').style.color = '#00d2ff';
+            document.getElementById('sysStatus').innerText = 'НОМИНАЛЬНЫЙ РЕЖИМ';
+            document.getElementById('tempDisplay').innerText = '300°C (Стабильно)';
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+            }
+        }
+
+        // Таймер подсказок
+        function startHintTimer(text) {
+            clearTimeout(hintTimer);
+            hintTimer = setTimeout(() => {
+                const hint = document.getElementById('hintBox');
+                hint.innerText = "💡 Подсказка: " + text;
+                hint.style.display = 'block';
+            }, 8000);
         }
     </script>
 </body>
