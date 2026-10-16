@@ -326,7 +326,7 @@
             height: 15px;
         }
 
-        /* Неактивная кнопка получения сертификата */
+        /* Неактивная кнопка */
         .pro-btn:disabled {
             background: #475569 !important;
             color: #94a3b8 !important;
@@ -359,7 +359,7 @@
             display: block;
         }
 
-        /* Имя поверх шаблона сертификата cert.jpg */
+        /* Имя поверх шаблона cert.jpg */
         .cert-name-overlay {
             position: absolute;
             top: 52%;
@@ -374,10 +374,47 @@
             text-align: center;
         }
 
+        /* Стиль для крупных кнопок без иконок */
         .cert-buttons-row {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .action-btn-large {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 1.1vw;
+            font-weight: 800;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-download {
+            background: linear-gradient(90deg, #0099ff 0%, #00d2ff 100%);
+            color: #030b18;
+        }
+
+        .btn-download:hover {
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-share {
+            background: linear-gradient(90deg, #0284c7 100%, #0369a1 100%);
+            color: #ffffff;
+        }
+
+        .btn-share:hover {
+            box-shadow: 0 0 30px rgba(2, 132, 199, 0.8);
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -467,25 +504,23 @@
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
                                 <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <!-- Кнопка изначально неактивна -->
                             <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 9px 20px; font-size: 0.9vw; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Блок готового сертификата (шаблон cert.jpg) -->
+                <!-- Блок готового сертификата с крупными кнопками -->
                 <div class="certificate-preview-box" id="previewContainer">
                     <h3>Ваш именной сертификат готов!</h3>
                     
                     <div class="cert-image-container" id="certCardToSave">
-                        <!-- Подключен ваш шаблон сертификата cert.jpg -->
                         <img src="cert.jpg" alt="Шаблон сертификата" id="certTemplateImg">
                         <div class="cert-name-overlay" id="certUserNameDisplay">Имя Фамилия</div>
                     </div>
 
                     <div class="cert-buttons-row">
-                        <button class="pro-btn" style="padding: 10px 25px; font-size: 0.95vw;" onclick="downloadCertificate()">📥 Скачать сертификат</button>
-                        <button class="pro-btn" style="padding: 10px 25px; font-size: 0.95vw; background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;" onclick="shareCertificate()">🔗 Поделиться</button>
+                        <button class="action-btn-large btn-download" onclick="downloadCertificate()">СКАЧАТЬ</button>
+                        <button class="action-btn-large btn-share" onclick="shareCertificate()">ПОДЕЛИТЬСЯ</button>
                     </div>
                 </div>
 
@@ -565,7 +600,6 @@
             }
         }
 
-        // Проверка заполненности формы для активации кнопки
         function validateForm() {
             const name = document.getElementById('userName').value.trim();
             const email = document.getElementById('userEmail').value.trim();
@@ -579,22 +613,24 @@
             }
         }
 
-        // Генерация и вывод сертификата на экран
         function generateCertificate() {
             const name = document.getElementById('userName').value.trim();
-            
-            // Вписываем имя на шаблон cert.jpg
             document.getElementById('certUserNameDisplay').innerText = name;
 
-            // Переключаем отображение формы на готовый сертификат
             document.getElementById('formContainer').style.display = 'none';
             document.getElementById('previewContainer').style.display = 'flex';
 
             launchFireworks();
         }
 
+        // Автоматическое скачивание файла cert.jpg в загрузки пользователя
         function downloadCertificate() {
-            alert('📥 Функция скачивания сертификата вызвана!');
+            const link = document.createElement('a');
+            link.href = 'cert.jpg';
+            link.download = 'Sertifikat_Pro_BGUT.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         function shareCertificate() {
@@ -605,7 +641,8 @@
                     url: window.location.href,
                 }).catch(() => {});
             } else {
-                alert('Ссылка скопирована в буфер обмена!');
+                navigator.clipboard.writeText(window.location.href);
+                alert('Ссылка успешно скопирована в буфер обмена!');
             }
         }
 
