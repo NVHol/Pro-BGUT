@@ -247,7 +247,6 @@
             transition: all 0.5s ease;
         }
 
-        /* Активное состояние */
         .certificate-section.active {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.96) 0%, rgba(4, 14, 30, 0.99) 100%);
             border-color: #4df3ff;
@@ -329,7 +328,7 @@
         }
     </style>
 </head>
-<body class="testdrive-body">
+<body class="testdrive-body" onload="initTestDrive()">
 
     <div class="testdrive-container">
         
@@ -364,13 +363,13 @@
             <!-- Три шага -->
             <div class="steps-grid">
                 
-                <!-- Шаг 1 (Переход на отдельную страницу) -->
-                <div class="step-card" onclick="openStep1()">
+                <!-- Шаг 1 -->
+                <div class="step-card" id="step1Card" onclick="openStep1()">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">1</div>
                     <div class="step-info">
                         <h3>Выбери специальность</h3>
-                        <p>Определи направление, которое тебе по душе, и изучи его особенности.</p>
+                        <p id="step1Text">Определи направление, которое тебе по душе, и изучи его особенности.</p>
                     </div>
                 </div>
 
@@ -426,9 +425,24 @@
             window.location.href = 'index.html';
         });
 
-        // Функция перехода на страницу первого шага
         function openStep1() {
             window.location.href = 'specialty.html';
+        }
+
+        // При загрузке страницы проверяем, выполнен ли Шаг 1 и какая специальность выбрана
+        function initTestDrive() {
+            const step1Completed = localStorage.getItem('step1Completed');
+            const userSpecialty = localStorage.getItem('userSpecialty');
+
+            if (step1Completed === 'true') {
+                const step1Card = document.getElementById('step1Card');
+                step1Card.classList.add('completed');
+                
+                if (userSpecialty) {
+                    document.getElementById('step1Text').innerHTML = `Выбрано: <b>${userSpecialty}</b>`;
+                }
+            }
+            checkAllSteps();
         }
 
         function toggleStep(card) {
