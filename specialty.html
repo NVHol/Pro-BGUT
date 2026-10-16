@@ -23,7 +23,7 @@
             justify-content: flex-start;
             align-items: center;
             padding: 2.5vh 5vw;
-            gap: 20px;
+            gap: 25px;
             box-sizing: border-box;
         }
 
@@ -40,7 +40,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1100px;
             box-sizing: border-box;
         }
 
@@ -57,17 +57,17 @@
 
         /* Основной контент */
         .specialty-main {
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             text-align: center;
         }
 
         .specialty-title h2 {
             color: #030b18;
-            font-size: 2.1vw;
+            font-size: 2vw;
             font-weight: 700;
             margin-bottom: 5px;
         }
@@ -78,33 +78,57 @@
 
         .specialty-title p {
             color: #557090;
-            font-size: 1vw;
+            font-size: 0.95vw;
         }
 
-        /* Карточка-контейнер для контента шага */
-        .content-card {
-            background: rgba(255, 255, 255, 0.85);
+        /* Сетка для вариантов ответов (2 столбца) */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* Карточка-квадрат для ответа */
+        .option-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
             border: 2px solid rgba(0, 210, 255, 0.4);
             box-shadow: 0 10px 30px rgba(0, 150, 255, 0.12);
             backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 35px;
-            text-align: left;
+            padding: 35px 25px;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .content-card h3 {
+        .option-card:hover {
+            border-color: #00d2ff;
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.3);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .option-card span {
             color: #030b18;
-            font-size: 1.4vw;
-            font-weight: 700;
+            font-size: 1.2vw;
+            font-weight: 600;
         }
 
-        .content-card p {
-            color: #64748b;
-            font-size: 1vw;
-            line-height: 1.5;
+        /* Выбранный вариант */
+        .option-card.selected {
+            background: linear-gradient(135deg, rgba(13, 40, 75, 0.95) 0%, rgba(5, 20, 40, 0.98) 100%);
+            border-color: #4df3ff;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+        }
+
+        .option-card.selected span {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
         }
     </style>
 </head>
@@ -124,17 +148,27 @@
             <button class="pro-btn" id="btnBack" style="width: auto; padding: 8px 18px; font-size: 0.9vw;">Назад</button>
         </header>
 
-        <!-- Основная часть -->
+        <!-- Основная часть с вопросом и квадратами ответов -->
         <main class="specialty-main">
             <div class="specialty-title">
-                <h2>Выбор <span>специальности</span></h2>
-                <p>Изучите направления подготовки и найдите то, что подходит именно вам</p>
+                <h2>Какие предметы ЦЭ/ЦТ <span>ты планируешь сдавать?</span></h2>
+                <p>Выбери комбинацию предметов, чтобы узнать подходящие специальности</p>
             </div>
 
-            <!-- Здесь мы будем наполнять страницу выбором специальностей -->
-            <div class="content-card">
-                <h3>Шаг 1 в разработке</h3>
-                <p>Здесь будет размещен каталог образовательных программ, описание кафедр, технологий и особенностей поступления. Абитуриент сможет ознакомиться с направлениями и зачесть этот шаг.</p>
+            <!-- Два столбца с ответами (квадраты) -->
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption(this)">
+                    <span>Математика и Физика</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                    <span>Химия и Биология</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                    <span>Химия и Математика</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this)">
+                    <span>Математика и Иностранный язык</span>
+                </div>
             </div>
         </main>
 
@@ -145,6 +179,16 @@
         document.getElementById('btnBack').addEventListener('click', function() {
             window.location.href = 'testdrive.html';
         });
+
+        // Функция выбора варианта ответа
+        function selectOption(card) {
+            // Убираем выбор у других карточек
+            const cards = document.querySelectorAll('.option-card');
+            cards.forEach(c => c.classList.remove('selected'));
+            
+            // Выделяем текущую
+            card.classList.add('selected');
+        }
     </script>
 </body>
 </html>
