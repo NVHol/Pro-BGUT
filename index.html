@@ -5,210 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Гарантированное восстановление исходного вида с фото 2 */
-        body.index-body {
-            margin: 0;
-            padding: 0;
-            background: #020b18;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
-        }
-
-        .index-container {
-            width: 100vw;
-            height: 100vh;
-            background-image: url('fon.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            padding: 2.5vh 4vw;
-            box-sizing: border-box;
-            justify-content: space-between;
-        }
-
-        /* Шапка */
-        .index-header .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .index-header .logo-img {
-            width: 45px;
-            height: 45px;
-        }
-
-        .index-header .logo-text h1 {
-            color: #ffffff;
-            font-size: 1.4vw;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        .index-header .logo-text p {
-            color: #93bde8;
-            font-size: 0.9vw;
-            margin: 0;
-        }
-
-        /* Двухколоночный макет как на фото 2 */
-        .index-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex: 1;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 40px;
-        }
-
-        /* Здание слева */
-        .building-wrapper {
-            flex: 1.2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .building-img {
-            max-width: 100%;
-            max-height: 75vh;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 35px rgba(0, 210, 255, 0.3));
-        }
-
-        /* Информационная карточка справа */
-        .info-card {
-            flex: 1;
-            max-width: 520px;
-            background: linear-gradient(135deg, rgba(8, 22, 42, 0.92) 0%, rgba(4, 12, 26, 0.96) 100%);
-            border: 1.5px solid rgba(0, 210, 255, 0.4);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 210, 255, 0.15);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 35px 30px;
-            color: #ffffff;
-            box-sizing: border-box;
-        }
-
-        .info-card h2 {
-            font-size: 1.8vw;
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .info-card h2 span {
-            color: #00d2ff;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
-        }
-
-        .info-card p {
-            font-size: 0.95vw;
-            color: #a5c3e8;
-            line-height: 1.45;
-            margin-bottom: 25px;
-        }
-
-        .buttons-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .pro-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 0.95vw;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .btn-secondary {
-            background: rgba(13, 38, 70, 0.7);
-            border: 1px solid rgba(0, 210, 255, 0.4);
-            color: #ffffff;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 210, 255, 0.2);
-            border-color: #00d2ff;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, #0099ff 0%, #00d2ff 100%);
-            color: #030b18;
-            border: none;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8);
-            transform: translateY(-2px);
-        }
-
-        /* Сохраняем адаптивность ДЛЯ ТЕЛЕФОНОВ (не трогая ПК) */
-        @media (max-width: 768px) {
-            .index-container {
-                height: auto;
-                min-height: 100vh;
-                padding: 15px 12px;
-            }
-
-            .index-header .logo-text h1 { font-size: 16px; }
-            .index-header .logo-text p { font-size: 11px; }
-
-            .index-main {
-                flex-direction: column;
-                gap: 15px;
-                margin-top: 10px;
-            }
-
-            .building-wrapper {
-                flex: none;
-                width: 100%;
-            }
-
-            .building-img {
-                max-height: 30vh;
-            }
-
-            .info-card {
-                width: 100%;
-                max-width: 100%;
-                padding: 20px 16px;
-            }
-
-            .info-card h2 { font-size: 18px; }
-            .info-card p { font-size: 12px; margin-bottom: 15px; }
-
-            .pro-btn {
-                padding: 12px 14px;
-                font-size: 13px;
-            }
-        }
-    </style>
 </head>
-<body class="index-body">
+<body>
 
-    <div class="index-container">
+    <div class="page-container" style="background-image: url('fon.jpg');">
         
-        <!-- Шапка -->
-        <header class="index-header">
+        <!-- Шапка: Эмблема и заголовок -->
+        <header class="header-section">
             <div class="logo-box">
                 <img src="emblema.png" alt="Эмблема БГУТ" class="logo-img">
                 <div class="logo-text">
@@ -218,32 +21,31 @@
             </div>
         </header>
 
-        <!-- Центральная часть: Здание слева, Карточка справа (как на фото 2) -->
-        <main class="index-main">
-            <div class="building-wrapper">
+        <!-- Центральный контент -->
+        <main class="main-content">
+            <!-- Здание университета слева -->
+            <div class="building-box">
                 <img src="zdanie.png" alt="Здание БГУТ" class="building-img">
             </div>
 
-            <!-- Информационная карточка -->
-            <div class="info-card">
-                <h2>Выбор профессии — <span>инвестиции в будущее!</span></h2>
-                <p>Пройди виртуальный тест-драйв специальностей БГУТ. Сделай осознанный выбор своего будущего!</p>
+            <!-- Правая карточка: текст и кнопки -->
+            <div class="info-buttons-wrapper">
+                <div class="text-block">
+                    <h2>Выбор профессии —<br><span>инвестиции в будущее!</span></h2>
+                    <p>Пройди виртуальный тест-драйв специальностей БГУТ. Сделай осознанный выбор своего будущего!</p>
+                </div>
 
-                <div class="buttons-grid">
-                    <a href="https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb" target="_blank" class="pro-btn btn-secondary">
-                        <span class="btn-text">Виртуальный 360°-тур по университету</span>
-                    </a>
-                    <a href="testdrive.html" class="pro-btn btn-primary">
-                        <span class="btn-text">Начать тест-драйв специальностей</span>
-                    </a>
-                    <a href="specialty.html" class="pro-btn btn-secondary">
-                        <span class="btn-text">Узнать больше о приемной кампании</span>
-                    </a>
+                <!-- Три интерактивные кнопки -->
+                <div class="buttons-block">
+                    <button class="pro-btn" id="btnTour">Виртуальный 360°-тур</button>
+                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв</button>
+                    <button class="pro-btn" id="btnMore">Узнать больше</button>
                 </div>
             </div>
         </main>
 
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
