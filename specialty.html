@@ -50,11 +50,13 @@
             color: #ffffff;
             font-size: 1.5vw;
             text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            margin: 0;
         }
 
         .specialty-header .logo-text p {
             color: #93bde8;
             font-size: 0.9vw;
+            margin: 0;
         }
 
         /* Основной контент */
@@ -312,6 +314,126 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ (СТРОГО ДЛЯ ТЕЛЕФОНОВ) */
+        @media (max-width: 768px) {
+            .specialty-container {
+                padding: 12px 10px;
+                gap: 15px;
+            }
+
+            .specialty-header {
+                padding: 10px 12px;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+            }
+
+            .specialty-header .logo-box {
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                min-width: 0 !important;
+                flex: 1 !important;
+            }
+
+            .specialty-header .logo-img {
+                width: 32px !important;
+                height: 32px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .specialty-header .logo-text {
+                min-width: 0 !important;
+            }
+
+            .specialty-header .logo-text h1 {
+                font-size: 13px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                margin: 0 !important;
+                line-height: 1.2 !important;
+            }
+
+            .specialty-header .logo-text p {
+                font-size: 9.5px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                margin: 0 !important;
+            }
+
+            #btnBack {
+                flex-shrink: 0 !important;
+                width: auto !important;
+                padding: 6px 10px !important;
+                font-size: 11px !important;
+            }
+
+            .specialty-title h2 {
+                font-size: 18px !important;
+                line-height: 1.3 !important;
+            }
+
+            .specialty-title p {
+                font-size: 12px !important;
+            }
+
+            /* Располагаем карточки предметов в ОДИН столбец и увеличиваем шрифт */
+            .options-grid {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+
+            .option-card {
+                padding: 24px 18px !important;
+            }
+
+            .option-card span {
+                font-size: 16px !important;
+            }
+
+            .faculty-header-title {
+                font-size: 18px !important;
+            }
+
+            .faculty-cards-container {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+
+            .spec-card {
+                transform: none !important;
+                padding: 18px 16px !important;
+            }
+
+            .spec-card h3 {
+                font-size: 15px !important;
+            }
+
+            .spec-card p {
+                font-size: 12px !important;
+            }
+
+            .modal-content h3 {
+                font-size: 20px !important;
+            }
+
+            .modal-content p {
+                font-size: 13px !important;
+            }
+
+            .modal-btn {
+                font-size: 14px !important;
+            }
+
+            #devMessage {
+                font-size: 14px !important;
+                padding: 18px !important;
+            }
         }
     </style>
 </head>
