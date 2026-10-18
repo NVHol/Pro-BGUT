@@ -92,6 +92,11 @@
             font-weight: 600;
         }
 
+        /* На ПК перенос скрыт */
+        .mobile-break {
+            display: none;
+        }
+
         .options-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -386,6 +391,11 @@
                 font-size: 12px !important;
             }
 
+            /* Включаем перенос строки строго на телефоне */
+            .mobile-break {
+                display: inline !important;
+            }
+
             .options-grid {
                 grid-template-columns: 1fr !important;
                 gap: 12px !important;
@@ -399,7 +409,6 @@
                 font-size: 16px !important;
             }
 
-            /* Аккуратное оформление и увеличение заголовка факультета на телефоне */
             .faculty-header-title {
                 font-size: 20px !important;
                 margin-top: 5px !important;
@@ -470,7 +479,7 @@
             <div id="subjectsView">
                 <div class="specialty-title">
                     <h2>Какие предметы ЦЭ/ЦТ <br><span>ты планируешь сдавать?</span></h2>
-                    <p>Выбери комбинацию предметов, чтобы узнать подходящие специальности</p>
+                    <p>Выбери комбинацию предметов,<br class="mobile-break"> чтобы узнать подходящие специальности</p>
                 </div>
 
                 <div class="options-grid">
