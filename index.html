@@ -5,6 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* СТРОГО ДЛЯ ТЕЛЕФОНОВ (до 768px). На ПК этот блок браузер игнорирует! */
+        @media (max-width: 768px) {
+            /* 1. Сбрасываем жесткую высоту экрана, чтобы не было гигантских разрывов */
+            html, body, .page-container {
+                height: auto !important;
+                min-height: 100vh !important;
+                padding: 10px 12px 20px 12px !important;
+                box-sizing: border-box !important;
+            }
+
+            /* 2. На телефоне выстраиваем элементы вертикально */
+            .main-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 0px !important; /* Убираем пустой зазор между зданием и карточкой */
+                margin-top: 5px !important;
+            }
+
+            /* 3. Уменьшаем размер здания на мобильном */
+            .building-box {
+                width: 100% !important;
+                display: flex !important;
+                justify-content: center !important;
+                margin-bottom: -15px !important; /* Легкая нахлестка/подтягивание карточки к зданию */
+            }
+
+            .building-img {
+                max-height: 30vh !important; /* Ограничиваем высоту здания */
+                width: auto !important;
+                object-fit: contain !important;
+            }
+
+            /* 4. Подтягиваем карточку вверх и сжимаем её внутренние отступы */
+            .info-buttons-wrapper {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 16px 14px !important;
+                margin-top: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            /* 5. Уменьшаем размер шрифтов для телефона */
+            .text-block h2 {
+                font-size: 17px !important; /* Компактный заголовок */
+                line-height: 1.25 !important;
+                margin-bottom: 6px !important;
+            }
+
+            .text-block p {
+                font-size: 12px !important; /* Уменьшенный текст описания */
+                line-height: 1.35 !important;
+                margin-bottom: 12px !important;
+            }
+
+            /* 6. Уменьшаем кнопки и шрифты на них */
+            .buttons-block {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .pro-btn {
+                padding: 11px 12px !important; /* Меньше высота кнопок */
+                font-size: 13px !important;   /* Аккуратный шрифт на кнопке */
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .header-section .logo-text h1 {
+                font-size: 15px !important;
+            }
+
+            .header-section .logo-text p {
+                font-size: 11px !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
