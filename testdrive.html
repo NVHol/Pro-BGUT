@@ -168,17 +168,18 @@
             align-self: flex-start;
         }
 
+        /* Увеличенные шрифты шагов для компьютера (Фото 2) */
         .step-info h3 {
             color: #030b18;
-            font-size: 1.05vw;
+            font-size: 1.35vw;
             font-weight: 700;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
         }
 
         .step-info p {
-            color: #64748b;
-            font-size: 0.85vw;
-            line-height: 1.35;
+            color: #475569;
+            font-size: 1.05vw;
+            line-height: 1.4;
         }
 
         .step-card.completed {
@@ -198,7 +199,7 @@
         }
 
         .step-card.completed .step-info p {
-            color: #a5c3e8;
+            color: #cbd5e1;
         }
 
         .check-overlay {
@@ -414,68 +415,106 @@
         /* МОБИЛЬНАЯ АДАПТАЦИЯ (СТРОГО ДЛЯ ТЕЛЕФОНОВ) */
         @media (max-width: 768px) {
             .testdrive-container {
-                padding: 15px 12px;
-                gap: 15px;
+                padding: 12px 10px;
+                gap: 12px;
             }
 
+            /* Исправление шапки (Фото 3): предотвращаем перенос и съезжание текста */
             .testdrive-header {
-                padding: 12px 15px;
-                flex-direction: row;
+                padding: 10px 12px;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+            }
+
+            .testdrive-header .logo-box {
+                flex: 1 !important;
+                min-width: 0 !important;
+                gap: 8px !important;
+            }
+
+            .testdrive-header .logo-img {
+                width: 32px !important;
+                height: 32px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .testdrive-header .logo-text {
+                min-width: 0 !important;
             }
 
             .testdrive-header .logo-text h1 {
-                font-size: 16px;
+                font-size: 13.5px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                margin: 0 !important;
+                line-height: 1.2 !important;
             }
 
             .testdrive-header .logo-text p {
-                font-size: 11px;
+                font-size: 10px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                margin: 0 !important;
+            }
+
+            /* Фикс кнопки «На главную», чтобы она аккуратно помещалась справа */
+            #btnBack {
+                flex-shrink: 0 !important;
+                width: auto !important;
+                padding: 6px 10px !important;
+                font-size: 11px !important;
+                white-space: nowrap !important;
             }
 
             .progress-box {
-                padding: 10px 15px;
+                padding: 8px 12px;
             }
 
             .progress-text {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .testdrive-title h2 {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .testdrive-title p {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .steps-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 10px;
             }
 
             .step-card {
-                padding: 16px;
+                padding: 14px;
             }
 
             .step-number {
-                width: 32px;
-                height: 32px;
-                font-size: 15px;
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
             }
 
             .step-info h3 {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             .step-info p {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .certificate-section h3 {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .certificate-section p {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .inputs-row {
@@ -484,33 +523,32 @@
             }
 
             .cert-input {
-                font-size: 14px;
-                padding: 12px;
+                font-size: 13px;
+                padding: 10px;
             }
 
             .action-row {
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 align-items: stretch;
             }
 
             .checkbox-container {
-                font-size: 12px;
+                font-size: 11px;
             }
 
-            /* На телефоне скрываем громоздкий HTML-текст поверх превью, оставляя чистый красивый шаблон. Скачанный файл при этом формируется идеально! */
             .cert-text-overlay {
                 display: none;
             }
 
             .cert-buttons-row {
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
             }
 
             .action-btn-large {
-                font-size: 15px;
-                padding: 14px;
+                font-size: 14px;
+                padding: 12px;
             }
         }
     </style>
