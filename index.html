@@ -6,62 +6,85 @@
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* СТРОГО ДЛЯ ТЕЛЕФОНОВ (до 768px). На ПК этот блок браузер игнорирует! */
+        /* СТРОГО ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ: Жестко подтягиваем карточку к зданию */
         @media (max-width: 768px) {
-            /* 1. Сбрасываем жесткую высоту экрана, чтобы не было гигантских разрывов */
-            html, body, .page-container {
+            html, body {
                 height: auto !important;
                 min-height: 100vh !important;
-                padding: 10px 12px 20px 12px !important;
+                background-color: #040d1a !important;
+            }
+
+            .page-container {
+                position: relative !important;
+                height: auto !important;
+                min-height: 100vh !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                padding: 12px 10px 30px 10px !important;
                 box-sizing: border-box !important;
             }
 
-            /* 2. На телефоне выстраиваем элементы вертикально */
+            .header-section {
+                width: 100% !important;
+                margin-bottom: 5px !important;
+            }
+
+            .header-section .logo-text h1 {
+                font-size: 14px !important;
+            }
+
+            .header-section .logo-text p {
+                font-size: 10px !important;
+            }
+
             .main-content {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                gap: 0px !important; /* Убираем пустой зазор между зданием и карточкой */
-                margin-top: 5px !important;
+                width: 100% !important;
+                gap: 0 !important;
+                margin: 0 !important;
             }
 
-            /* 3. Уменьшаем размер здания на мобильном */
             .building-box {
                 width: 100% !important;
                 display: flex !important;
                 justify-content: center !important;
-                margin-bottom: -15px !important; /* Легкая нахлестка/подтягивание карточки к зданию */
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
             .building-img {
-                max-height: 30vh !important; /* Ограничиваем высоту здания */
+                max-height: 28vh !important;
                 width: auto !important;
                 object-fit: contain !important;
             }
 
-            /* 4. Подтягиваем карточку вверх и сжимаем её внутренние отступы */
+            /* Плотное подтягивание карточки прямо под здание */
             .info-buttons-wrapper {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 16px 14px !important;
-                margin-top: 0 !important;
+                margin-top: -10px !important; 
+                padding: 14px 12px !important;
                 box-sizing: border-box !important;
+                background: rgba(8, 24, 48, 0.92) !important;
+                border-radius: 16px !important;
             }
 
-            /* 5. Уменьшаем размер шрифтов для телефона */
             .text-block h2 {
-                font-size: 17px !important; /* Компактный заголовок */
-                line-height: 1.25 !important;
-                margin-bottom: 6px !important;
+                font-size: 16px !important;
+                line-height: 1.2 !important;
+                margin-bottom: 4px !important;
             }
 
             .text-block p {
-                font-size: 12px !important; /* Уменьшенный текст описания */
-                line-height: 1.35 !important;
-                margin-bottom: 12px !important;
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+                margin-bottom: 10px !important;
             }
 
-            /* 6. Уменьшаем кнопки и шрифты на них */
             .buttons-block {
                 display: flex !important;
                 flex-direction: column !important;
@@ -69,18 +92,10 @@
             }
 
             .pro-btn {
-                padding: 11px 12px !important; /* Меньше высота кнопок */
-                font-size: 13px !important;   /* Аккуратный шрифт на кнопке */
+                padding: 10px 12px !important;
+                font-size: 12px !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
-            }
-
-            .header-section .logo-text h1 {
-                font-size: 15px !important;
-            }
-
-            .header-section .logo-text p {
-                font-size: 11px !important;
             }
         }
     </style>
@@ -118,7 +133,7 @@
                 <div class="buttons-block">
                     <button class="pro-btn" id="btnTour">Виртуальный 360°-тур</button>
                     <button class="pro-btn" id="btnTestDrive">Начать тест-драйв</button>
-                    <button class="pro-btn" id="btnMore">Узнать больше</button>
+                    <button class="pro-btn" id="btnMore">Узнать больше о приемной кампании</button>
                 </div>
             </div>
         </main>
