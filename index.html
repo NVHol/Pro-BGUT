@@ -6,98 +6,130 @@
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* СТРОГО ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ: меняем порядок блоков и подтягиваем всё вверх */
+        /* СТРОГО ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
         @media (max-width: 768px) {
             html, body {
-                height: auto !important;
-                min-height: 100vh !important;
-                background-color: #040d1a !important;
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important; /* Убираем прокрутку, всё в одном экране */
             }
 
+            /* Делаем здание фоном на весь экран телефона */
             .page-container {
                 position: relative !important;
-                height: auto !important;
-                min-height: 100vh !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background-image: url('zdanie.png') !important; /* Здание теперь фон */
+                background-size: cover !important;
+                background-position: center !important;
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important;
-                justify-content: flex-start !important;
-                padding: 12px 10px 30px 10px !important;
+                justify-content: space-between !important;
+                padding: 15px 12px !important;
                 box-sizing: border-box !important;
             }
 
-            .header-section {
+            /* Затемняем фон под зданием, чтобы текст и карточка отлично читались */
+            .page-container::before {
+                content: '' !important;
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
                 width: 100% !important;
-                margin-bottom: 12px !important;
+                height: 100% !important;
+                background: rgba(4, 13, 26, 0.65) !important; /* Полупрозрачная темная вуаль */
+                z-index: 1 !important;
+            }
+
+            /* Все элементы интерфейса выводим поверх фонового здания */
+            .header-section, .main-content {
+                position: relative !important;
+                z-index: 2 !important;
+            }
+
+            /* Увеличиваем логотип и текст в шапке, как на компьютере */
+            .header-section .logo-box {
+                display: flex !important;
+                align-items: center !important;
+                gap: 14px !important;
+            }
+
+            .header-section .logo-img {
+                width: 52px !important;
+                height: 52px !important;
             }
 
             .header-section .logo-text h1 {
-                font-size: 14px !important;
+                font-size: 19px !important;
+                font-weight: 700 !important;
+                color: #ffffff !important;
+                margin: 0 0 2px 0 !important;
             }
 
             .header-section .logo-text p {
-                font-size: 10px !important;
+                font-size: 12px !important;
+                color: #7dd3fc !important;
+                margin: 0 !important;
             }
 
+            /* Скрываем отдельный блок со старой картинкой здания, так как она теперь фон */
+            .building-box {
+                display: none !important;
+            }
+
+            /* Рамка с текстом и кнопками поверх экрана */
             .main-content {
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important;
+                justify-content: center !important;
                 width: 100% !important;
-                gap: 12px !important;
-                margin: 0 !important;
+                margin: auto 0 !important;
             }
 
-            /* ГЛАВНЫЙ ФОКУС: Меняем местами блоки через order ТОЛЬКО на телефоне! */
             .info-buttons-wrapper {
-                order: 1 !important; /* Карточка с текстом и кнопками идет ПЕРВОЙ */
                 width: 100% !important;
                 max-width: 100% !important;
-                margin-top: 0 !important;
-                padding: 16px 14px !important;
+                background: rgba(8, 24, 48, 0.88) !important;
+                border: 1.5px solid rgba(0, 210, 255, 0.4) !important;
+                backdrop-filter: blur(14px) !important;
+                border-radius: 20px !important;
+                padding: 20px 16px !important;
                 box-sizing: border-box !important;
-                background: rgba(8, 24, 48, 0.92) !important;
-                border-radius: 16px !important;
-            }
-
-            .building-box {
-                order: 2 !important; /* Здание идет ВТОРЫМ (под карточкой) */
-                width: 100% !important;
-                display: flex !important;
-                justify-content: center !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .building-img {
-                max-height: 26vh !important;
-                width: auto !important;
-                object-fit: contain !important;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
             }
 
             .text-block h2 {
-                font-size: 16px !important;
-                line-height: 1.2 !important;
-                margin-bottom: 4px !important;
+                font-size: 18px !important;
+                line-height: 1.25 !important;
+                margin-bottom: 8px !important;
+                color: #ffffff !important;
+            }
+
+            .text-block h2 span {
+                color: #00d2ff !important;
             }
 
             .text-block p {
-                font-size: 11px !important;
-                line-height: 1.3 !important;
-                margin-bottom: 12px !important;
+                font-size: 12.5px !important;
+                line-height: 1.4 !important;
+                color: #94a3b8 !important;
+                margin-bottom: 16px !important;
             }
 
             .buttons-block {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 8px !important;
+                gap: 10px !important;
             }
 
             .pro-btn {
-                padding: 10px 12px !important;
-                font-size: 12px !important;
+                padding: 12px 14px !important;
+                font-size: 13.5px !important;
+                font-weight: 700 !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
+                border-radius: 12px !important;
             }
         }
     </style>
@@ -119,7 +151,7 @@
 
         <!-- Центральный контент -->
         <main class="main-content">
-            <!-- Здание университета слева -->
+            <!-- Здание университета слева (на ПК) -->
             <div class="building-box">
                 <img src="zdanie.png" alt="Здание БГУТ" class="building-img">
             </div>
@@ -134,7 +166,7 @@
                 <!-- Три интерактивные кнопки -->
                 <div class="buttons-block">
                     <button class="pro-btn" id="btnTour">Виртуальный 360°-тур</button>
-                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв</button>
+                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв специальностей</button>
                     <button class="pro-btn" id="btnMore">Узнать больше</button>
                 </div>
             </div>
