@@ -92,7 +92,11 @@
             font-weight: 600;
         }
 
-        /* На ПК перенос скрыт */
+        /* Переносы для ПК скрыты */
+        .pc-break {
+            display: none;
+        }
+
         .mobile-break {
             display: none;
         }
@@ -391,7 +395,11 @@
                 font-size: 12px !important;
             }
 
-            /* Включаем перенос строки строго на телефоне */
+            /* Включаем переносы строго для телефона */
+            .pc-break {
+                display: inline !important;
+            }
+
             .mobile-break {
                 display: inline !important;
             }
@@ -478,7 +486,7 @@
             <!-- Вью 1: Выбор предметов ЦЭ/ЦТ -->
             <div id="subjectsView">
                 <div class="specialty-title">
-                    <h2>Какие предметы ЦЭ/ЦТ <br><span>ты планируешь сдавать?</span></h2>
+                    <h2>Какие предметы ЦЭ/ЦТ <br class="pc-break"><span>ты планируешь сдавать?</span></h2>
                     <p>Выбери комбинацию предметов,<br class="mobile-break"> чтобы узнать подходящие специальности</p>
                 </div>
 
