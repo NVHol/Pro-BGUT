@@ -168,7 +168,7 @@
             align-self: flex-start;
         }
 
-        /* Увеличенные шрифты шагов для компьютера (Фото 2) */
+        /* Увеличенные шрифты шагов для компьютера */
         .step-info h3 {
             color: #030b18;
             font-size: 1.35vw;
@@ -304,6 +304,11 @@
             height: 15px;
         }
 
+        .buttons-group-form {
+            display: flex;
+            gap: 10px;
+        }
+
         .pro-btn:disabled {
             background: #475569 !important;
             color: #94a3b8 !important;
@@ -383,22 +388,22 @@
 
         .cert-buttons-row {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 750px;
         }
 
         .action-btn-large {
             flex: 1;
-            padding: 14px 20px;
-            font-size: 1.1vw;
+            padding: 14px 15px;
+            font-size: 1vw;
             font-weight: 800;
             border-radius: 12px;
             border: none;
             cursor: pointer;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
 
@@ -412,6 +417,17 @@
             color: #ffffff;
         }
 
+        .btn-restart {
+            background: #1e293b;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+        }
+
+        .btn-restart:hover {
+            background: #0f172a;
+            color: #ffffff;
+        }
+
         /* МОБИЛЬНАЯ АДАПТАЦИЯ (СТРОГО ДЛЯ ТЕЛЕФОНОВ) */
         @media (max-width: 768px) {
             .testdrive-container {
@@ -419,7 +435,6 @@
                 gap: 12px;
             }
 
-            /* Исправление шапки (Фото 3): предотвращаем перенос и съезжание текста */
             .testdrive-header {
                 padding: 10px 12px;
                 flex-direction: row !important;
@@ -461,7 +476,6 @@
                 margin: 0 !important;
             }
 
-            /* Фикс кнопки «На главную», чтобы она аккуратно помещалась справа */
             #btnBack {
                 flex-shrink: 0 !important;
                 width: auto !important;
@@ -533,6 +547,11 @@
                 align-items: stretch;
             }
 
+            .buttons-group-form {
+                flex-direction: column;
+                gap: 8px;
+            }
+
             .checkbox-container {
                 font-size: 11px;
             }
@@ -598,7 +617,7 @@
                     </div>
                 </div>
 
-                <!-- Шаг 2 -->
+                <!-- Шаг 2 (Квест) -->
                 <div class="step-card" id="step2Card" onclick="openStep2()">
                     <div class="check-overlay">✓</div>
                     <div class="step-number">2</div>
@@ -639,7 +658,10 @@
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
                                 <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 20px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
+                            <div class="buttons-group-form">
+                                <button class="pro-btn" id="getCertBtn" style="padding: 10px 18px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
+                                <button class="pro-btn btn-restart" style="padding: 10px 14px; font-size: 13px; text-align: center;" onclick="resetTestDrive()">Начать заново</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -662,6 +684,7 @@
                     <div class="cert-buttons-row">
                         <button class="action-btn-large btn-download" onclick="downloadCertificateWithData()">СКАЧАТЬ</button>
                         <button class="action-btn-large btn-share" onclick="shareCertificate()">ПОДЕЛИТЬСЯ</button>
+                        <button class="action-btn-large btn-restart" onclick="resetTestDrive()">НАЧАТЬ ЗАНОВО</button>
                     </div>
                 </div>
 
@@ -681,10 +704,11 @@
         }
 
         function openStep2() {
+            const questUrl = 'https://nvhol.github.io/Pro-BGUT-ISIT/';
+            window.open(questUrl, '_blank');
             localStorage.setItem('step2Completed', 'true');
             document.getElementById('step2Card').classList.add('completed');
             checkAllSteps();
-            alert('🎉 Шаг 2 (Квест) успешно засчитан!');
         }
 
         function openStep3() {
@@ -760,6 +784,11 @@
             document.getElementById('previewContainer').style.display = 'flex';
 
             launchFireworks();
+        }
+
+        function resetTestDrive() {
+            localStorage.clear();
+            window.location.reload();
         }
 
         function downloadCertificateWithData() {
