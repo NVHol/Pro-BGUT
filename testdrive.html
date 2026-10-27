@@ -60,19 +60,29 @@
 
         .header-buttons {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
-        .btn-restart-top {
-            background: rgba(13, 40, 75, 0.8) !important;
+        /* Одинаковый размер и стиль для обеих верхних кнопок */
+        .top-action-btn {
+            background: rgba(13, 40, 75, 0.85) !important;
             color: #38bdf8 !important;
-            border: 1px solid #38bdf8 !important;
+            border: 1px solid rgba(0, 210, 255, 0.5) !important;
+            padding: 8px 16px !important;
+            font-size: 0.9vw !important;
+            font-weight: 600 !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            white-space: nowrap !important;
+            transition: all 0.3s ease !important;
         }
 
-        .btn-restart-top:hover {
+        .top-action-btn:hover {
             background: rgba(13, 40, 75, 1) !important;
+            border-color: #00d2ff !important;
             color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
         }
 
         /* Основной контент */
@@ -461,7 +471,7 @@
             }
 
             .testdrive-header .logo-text h1 {
-                font-size: 13px !important;
+                font-size: 12.5px !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
@@ -470,7 +480,7 @@
             }
 
             .testdrive-header .logo-text p {
-                font-size: 9.5px !important;
+                font-size: 9px !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
@@ -478,16 +488,14 @@
             }
 
             .header-buttons {
-                flex-direction: column !important;
-                gap: 4px !important;
+                flex-direction: row !important;
+                gap: 6px !important;
                 flex-shrink: 0 !important;
             }
 
-            #btnBack, .btn-restart-top {
-                width: auto !important;
+            .top-action-btn {
                 padding: 5px 8px !important;
                 font-size: 10px !important;
-                white-space: nowrap !important;
             }
 
             .progress-box {
@@ -587,8 +595,8 @@
                 </div>
             </div>
             <div class="header-buttons">
-                <button class="pro-btn btn-restart-top" style="padding: 6px 12px; font-size: 12px;" onclick="resetTestDrive()">Начать заново</button>
-                <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 12px; font-size: 12px;">На главную</button>
+                <button class="top-action-btn" onclick="resetTestDrive()">Начать заново</button>
+                <button class="top-action-btn" id="btnBack" onclick="goHome()">На главную</button>
             </div>
         </header>
 
@@ -695,9 +703,9 @@
     </div>
 
     <script>
-        document.getElementById('btnBack').addEventListener('click', function() {
+        function goHome() {
             window.location.href = 'index.html';
-        });
+        }
 
         function openStep1() {
             window.location.href = 'specialty.html';
