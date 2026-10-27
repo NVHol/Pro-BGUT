@@ -92,7 +92,6 @@
             font-weight: 600;
         }
 
-        /* Переносы для ПК скрыты */
         .pc-break {
             display: none;
         }
@@ -150,8 +149,8 @@
             text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
         }
 
-        /* Механический факультет */
-        #facultView {
+        /* Контейнеры факультетов */
+        .faculty-section {
             display: none;
             flex-direction: column;
             gap: 20px;
@@ -307,19 +306,6 @@
             box-shadow: 0 0 30px rgba(0, 210, 255, 0.9);
         }
 
-        #devMessage {
-            display: none;
-            background: rgba(13, 40, 75, 0.95);
-            border: 2px solid #00d2ff;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
-            border-radius: 16px;
-            padding: 30px;
-            color: #ffffff;
-            font-size: 1.2vw;
-            text-align: center;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -395,7 +381,6 @@
                 font-size: 12px !important;
             }
 
-            /* Включаем переносы строго для телефона */
             .pc-break {
                 display: inline !important;
             }
@@ -456,11 +441,6 @@
             .modal-btn {
                 font-size: 14px !important;
             }
-
-            #devMessage {
-                font-size: 14px !important;
-                padding: 18px !important;
-            }
         }
     </style>
 </head>
@@ -494,50 +474,132 @@
                     <div class="option-card" onclick="selectMathPhysics()">
                         <span>Математика и Физика</span>
                     </div>
-                    <div class="option-card" onclick="showDevMessage()">
+                    <div class="option-card" onclick="selectChemBio()">
                         <span>Химия и Биология</span>
                     </div>
-                    <div class="option-card" onclick="showDevMessage()">
+                    <div class="option-card" onclick="selectChemMath()">
                         <span>Химия и Математика</span>
                     </div>
-                    <div class="option-card" onclick="showDevMessage()">
+                    <div class="option-card" onclick="selectMathForeign()">
                         <span>Математика и Иностранный язык</span>
                     </div>
                 </div>
-
-                <div id="devMessage">
-                    ⚠️ Данный раздел находится в разработке. Скоро здесь появятся специальности для этой комбинации предметов!
-                </div>
             </div>
 
-            <!-- Вью 2: Механический факультет и специальности -->
-            <div id="facultView">
+            <!-- Секция 1: Механический факультет (Мат + Физ) -->
+            <div id="mechFacultView" class="faculty-section">
                 <div class="faculty-header-title">Механический факультет</div>
-                
                 <div class="faculty-cards-container">
                     <div class="spec-card" onclick="chooseSpecialty('Автоматизация технологических процессов и производств')">
                         <h3>Автоматизация технологических процессов и производств</h3>
                         <p>Разработка систем управления современными промышленными линиями и роботизированными комплексами.</p>
                     </div>
-
                     <div class="spec-card" onclick="chooseSpecialty('Интеллектуальные технико-технологические системы в пищевых производствах')">
                         <h3>Интеллектуальные технико-технологические системы в пищевых производствах</h3>
                         <p>Интеграция искусственного интеллекта и умных датчиков в оборудование пищевой промышленности.</p>
                     </div>
-
                     <div class="spec-card" onclick="chooseSpecialty('Информационные системы и технологии')">
                         <h3>Информационные системы и технологии</h3>
                         <p>Создание программного обеспечения, баз данных и корпоративных систем автоматизации предприятий.</p>
                     </div>
-
                     <div class="spec-card" onclick="chooseSpecialty('Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники')">
                         <h3>Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники</h3>
                         <p>Проектирование холодильных установок, криогенных систем и вакуумного технологического оборудования.</p>
                     </div>
-
                     <div class="spec-card" onclick="chooseSpecialty('Экологическая безопасность')">
                         <h3>Экологическая безопасность</h3>
                         <p>Защита окружающей среды, мониторинг промышленных выбросов и внедрение зеленых технологий.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция 2: Химико-технологический факультет (Хим + Мат) -->
+            <div id="chemMathFacultView" class="faculty-section">
+                <div class="faculty-header-title">Химико-технологический факультет</div>
+                <div class="faculty-cards-container">
+                    <div class="spec-card" onclick="chooseSpecialty('Производство и переработка полимерных материалов')">
+                        <h3>Производство и переработка полимерных материалов</h3>
+                        <p>Изучение химических свойств полимеров, технологий их синтеза и переработки в современные изделия.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Производство продукции и организация общественного питания')">
+                        <h3>Производство продукции и организация общественного питания</h3>
+                        <p>Проектирование технологических процессов приготовления пищи и организация эффективной работы предприятий питания.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция 3: Химия и Биология (ХТФ + ТФ) -->
+            <div id="chemBioFacultView" class="faculty-section" style="gap: 30px;">
+                <!-- Первый факультет: ХТФ -->
+                <div>
+                    <div class="faculty-header-title" style="font-size: 1.8vw; margin-bottom: 12px;">Химико-технологический факультет</div>
+                    <div class="faculty-cards-container">
+                        <div class="spec-card" onclick="chooseSpecialty('Технология молока и молочных продуктов')">
+                            <h3>Технология молока и молочных продуктов</h3>
+                            <p>Инновационные процессы переработки молока, контроль качества и создание широкого ассортимента молочных изделий.</p>
+                        </div>
+                        <div class="spec-card" onclick="chooseSpecialty('Технология мяса и мясных продуктов')">
+                            <h3>Технология мяса и мясных продуктов</h3>
+                            <p>Современные методы переработки сырья животного происхождения и производства безопасных мясных продуктов.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Второй факультет: ТФ -->
+                <div>
+                    <div class="faculty-header-title" style="font-size: 1.8vw; margin-bottom: 12px;">Технологический факультет</div>
+                    <div class="faculty-cards-container">
+                        <div class="spec-card" onclick="chooseSpecialty('Технология хлебобулочных и кондитерских изделий')">
+                            <h3>Технология хлебобулочных и кондитерских изделий</h3>
+                            <p>Научные основы выпечки, рецептуры мучных сладостей и автоматизация хлебопекарных производств.</p>
+                        </div>
+                        <div class="spec-card" onclick="chooseSpecialty('Пищевая безопасность')">
+                            <h3>Пищевая безопасность</h3>
+                            <p>Контроль стандартов качества, сертификация сырья и готовой продукции на всех этапах пищевой цепи.</p>
+                        </div>
+                        <div class="spec-card" onclick="chooseSpecialty('Зерновая биоинженерия')">
+                            <h3>Зерновая биоинженерия</h3>
+                            <p>Глубокая переработка зерна, биотехнологии получения ценных компонентов и продуктов питания.</p>
+                        </div>
+                        <div class="spec-card" onclick="chooseSpecialty('Технология бродильных производств и виноделия')">
+                            <h3>Технология бродильных производств и виноделия</h3>
+                            <p>Процессы ферментации, микробиологический контроль и технологии производства напитков.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Секция 4: Инженерно-инновационный факультет (Мат + Ин.яз) -->
+            <div id="mathForeignFacultView" class="faculty-section">
+                <div class="faculty-header-title">Инженерно-инновационный факультет</div>
+                <div class="faculty-cards-container">
+                    <div class="spec-card" onclick="chooseSpecialty('Бизнес-инжиниринг в индустрии питания')">
+                        <h3>Бизнес-инжиниринг в индустрии питания</h3>
+                        <p>Моделирование бизнес-процессов, организация стартапов и эффективное управление предприятиями питания.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Бухгалтерский учет, анализ и аудит')">
+                        <h3>Бухгалтерский учет, анализ и аудит</h3>
+                        <p>Финансовый анализ деятельности компаний, ведение бухгалтерского учета и экономический аудит.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Товароведение')">
+                        <h3>Товароведение</h3>
+                        <p>Экспертиза качества товаров, оценка их потребительских свойств и логистика в торговой сфере.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Управление инновационными проектами в промышленности')">
+                        <h3>Управление инновационными проектами в промышленности</h3>
+                        <p>Внедрение научно-технических разработок, руководство инвестиционными и производственными проектами.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Финансы и кредит')">
+                        <h3>Финансы и кредит</h3>
+                        <p>Управление финансовыми потоками, кредитование бизнеса и анализ банковских операций.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Экономическая безопасность промышленного предприятия')">
+                        <h3>Экономическая безопасность промышленного предприятия</h3>
+                        <p>Защита интересов бизнеса, выявление финансовых рисков и предотвращение экономических угроз.</p>
+                    </div>
+                    <div class="spec-card" onclick="chooseSpecialty('Технология индустрии гостеприимства')">
+                        <h3>Технология индустрии гостеприимства</h3>
+                        <p>Организация сервиса в гостинично-ресторанном бизнесе, управление туристическими и отельными комплексами.</p>
                     </div>
                 </div>
             </div>
@@ -546,7 +608,7 @@
 
     </div>
 
-    <!-- Модальное окно успешного завершения Шага 1 -->
+    <!-- Модальное окно успешного прохождения Шага 1 -->
     <div id="successModal">
         <div class="modal-content">
             <h3>Шаг 1 успешно пройден!</h3>
@@ -558,32 +620,59 @@
     <script>
         const btnBack = document.getElementById('btnBack');
         const subjectsView = document.getElementById('subjectsView');
-        const facultView = document.getElementById('facultView');
-        const devMessage = document.getElementById('devMessage');
+        const mechFacultView = document.getElementById('mechFacultView');
+        const chemMathFacultView = document.getElementById('chemMathFacultView');
+        const chemBioFacultView = document.getElementById('chemBioFacultView');
+        const mathForeignFacultView = document.getElementById('mathForeignFacultView');
+        
         const successModal = document.getElementById('successModal');
         const selectedSpecText = document.getElementById('selectedSpecText');
 
+        function hideAllFaculties() {
+            mechFacultView.style.display = 'none';
+            chemMathFacultView.style.display = 'none';
+            chemBioFacultView.style.display = 'none';
+            mathForeignFacultView.style.display = 'none';
+        }
+
         btnBack.addEventListener('click', function() {
-            if (facultView.style.display === 'flex') {
-                facultView.style.display = 'none';
+            if (mechFacultView.style.display === 'flex' || 
+                chemMathFacultView.style.display === 'flex' || 
+                chemBioFacultView.style.display === 'flex' || 
+                mathForeignFacultView.style.display === 'flex') {
+                hideAllFaculties();
                 subjectsView.style.display = 'flex';
-            } else if (devMessage.style.display === 'block') {
-                devMessage.style.display = 'none';
             } else {
                 window.location.href = 'testdrive.html';
             }
         });
 
         function selectMathPhysics() {
-            devMessage.style.display = 'none';
             subjectsView.style.display = 'none';
-            facultView.style.display = 'flex';
+            hideAllFaculties();
+            mechFacultView.style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showDevMessage() {
-            devMessage.style.display = 'block';
-            devMessage.scrollIntoView({ behavior: 'smooth' });
+        function selectChemMath() {
+            subjectsView.style.display = 'none';
+            hideAllFaculties();
+            chemMathFacultView.style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectChemBio() {
+            subjectsView.style.display = 'none';
+            hideAllFaculties();
+            chemBioFacultView.style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectMathForeign() {
+            subjectsView.style.display = 'none';
+            hideAllFaculties();
+            mathForeignFacultView.style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function chooseSpecialty(specName) {
