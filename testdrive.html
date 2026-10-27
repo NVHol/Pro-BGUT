@@ -68,8 +68,18 @@
             text-align: center;
         }
 
+        /* Верхняя панель управления прогрессом */
+        .progress-top-panel {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
         /* Индикатор прогресса */
         .progress-box {
+            flex: 1;
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 210, 255, 0.3);
             box-shadow: 0 4px 15px rgba(0, 150, 255, 0.08);
@@ -79,7 +89,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 20px;
-            width: 100%;
             box-sizing: border-box;
         }
 
@@ -304,16 +313,22 @@
             height: 15px;
         }
 
-        .buttons-group-form {
-            display: flex;
-            gap: 10px;
-        }
-
         .pro-btn:disabled {
             background: #475569 !important;
             color: #94a3b8 !important;
             cursor: not-allowed !important;
             opacity: 0.6;
+        }
+
+        .btn-restart {
+            background: #1e293b !important;
+            color: #38bdf8 !important;
+            border: 1px solid #38bdf8 !important;
+        }
+
+        .btn-restart:hover {
+            background: #0f172a !important;
+            color: #ffffff !important;
         }
 
         .certificate-preview-box {
@@ -417,17 +432,6 @@
             color: #ffffff;
         }
 
-        .btn-restart {
-            background: #1e293b;
-            color: #38bdf8;
-            border: 1px solid #38bdf8;
-        }
-
-        .btn-restart:hover {
-            background: #0f172a;
-            color: #ffffff;
-        }
-
         /* МОБИЛЬНАЯ АДАПТАЦИЯ (СТРОГО ДЛЯ ТЕЛЕФОНОВ) */
         @media (max-width: 768px) {
             .testdrive-container {
@@ -484,12 +488,24 @@
                 white-space: nowrap !important;
             }
 
+            .progress-top-panel {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
             .progress-box {
+                width: 100% !important;
                 padding: 8px 12px;
             }
 
             .progress-text {
                 font-size: 12px;
+            }
+
+            .btn-restart {
+                width: 100% !important;
+                padding: 10px !important;
+                font-size: 12px !important;
             }
 
             .testdrive-title h2 {
@@ -547,11 +563,6 @@
                 align-items: stretch;
             }
 
-            .buttons-group-form {
-                flex-direction: column;
-                gap: 8px;
-            }
-
             .checkbox-container {
                 font-size: 11px;
             }
@@ -591,12 +602,15 @@
         <!-- Основная часть -->
         <main class="testdrive-main">
 
-            <!-- Индикатор прогресса -->
-            <div class="progress-box">
-                <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
-                <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" id="progressBar"></div>
+            <!-- Панель прогресса и кнопка сброса -->
+            <div class="progress-top-panel">
+                <div class="progress-box">
+                    <div class="progress-text">Прогресс тест-драйва: <span id="progressCount">0</span> из 3 шагов</div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
                 </div>
+                <button class="pro-btn btn-restart" style="padding: 10px 18px; font-size: 12px; white-space: nowrap;" onclick="resetTestDrive()">Начать заново</button>
             </div>
 
             <div class="testdrive-title">
@@ -658,10 +672,7 @@
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
                                 <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <div class="buttons-group-form">
-                                <button class="pro-btn" id="getCertBtn" style="padding: 10px 18px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
-                                <button class="pro-btn btn-restart" style="padding: 10px 14px; font-size: 13px; text-align: center;" onclick="resetTestDrive()">Начать заново</button>
-                            </div>
+                            <button class="pro-btn" id="getCertBtn" style="padding: 10px 20px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
                         </div>
                     </div>
                 </div>
