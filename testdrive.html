@@ -58,6 +58,23 @@
             margin: 0;
         }
 
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-restart-top {
+            background: rgba(13, 40, 75, 0.8) !important;
+            color: #38bdf8 !important;
+            border: 1px solid #38bdf8 !important;
+        }
+
+        .btn-restart-top:hover {
+            background: rgba(13, 40, 75, 1) !important;
+            color: #ffffff !important;
+        }
+
         /* Основной контент */
         .testdrive-main {
             max-width: 1200px;
@@ -304,29 +321,11 @@
             height: 15px;
         }
 
-        .buttons-group-form {
-            display: flex;
-            gap: 10px;
-        }
-
         .pro-btn:disabled {
             background: #475569 !important;
             color: #94a3b8 !important;
             cursor: not-allowed !important;
             opacity: 0.6;
-        }
-
-        .btn-restart {
-            background: #1e293b !important;
-            color: #38bdf8 !important;
-            border: 1px solid #38bdf8 !important;
-            cursor: pointer !important;
-            opacity: 1 !important;
-        }
-
-        .btn-restart:hover {
-            background: #0f172a !important;
-            color: #ffffff !important;
         }
 
         .certificate-preview-box {
@@ -401,22 +400,22 @@
 
         .cert-buttons-row {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             width: 100%;
-            max-width: 750px;
+            max-width: 600px;
         }
 
         .action-btn-large {
             flex: 1;
-            padding: 14px 15px;
-            font-size: 1vw;
+            padding: 14px 20px;
+            font-size: 1.1vw;
             font-weight: 800;
             border-radius: 12px;
             border: none;
             cursor: pointer;
             text-align: center;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             transition: all 0.3s ease;
         }
 
@@ -462,7 +461,7 @@
             }
 
             .testdrive-header .logo-text h1 {
-                font-size: 13.5px !important;
+                font-size: 13px !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
@@ -471,18 +470,23 @@
             }
 
             .testdrive-header .logo-text p {
-                font-size: 10px !important;
+                font-size: 9.5px !important;
                 white-space: nowrap !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
                 margin: 0 !important;
             }
 
-            #btnBack {
+            .header-buttons {
+                flex-direction: column !important;
+                gap: 4px !important;
                 flex-shrink: 0 !important;
+            }
+
+            #btnBack, .btn-restart-top {
                 width: auto !important;
-                padding: 6px 10px !important;
-                font-size: 11px !important;
+                padding: 5px 8px !important;
+                font-size: 10px !important;
                 white-space: nowrap !important;
             }
 
@@ -549,11 +553,6 @@
                 align-items: stretch;
             }
 
-            .buttons-group-form {
-                flex-direction: column;
-                gap: 8px;
-            }
-
             .checkbox-container {
                 font-size: 11px;
             }
@@ -587,7 +586,10 @@
                     <p>Твой путь начинается здесь</p>
                 </div>
             </div>
-            <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 12px; font-size: 12px;">На главную</button>
+            <div class="header-buttons">
+                <button class="pro-btn btn-restart-top" style="padding: 6px 12px; font-size: 12px;" onclick="resetTestDrive()">Начать заново</button>
+                <button class="pro-btn" id="btnBack" style="width: auto; padding: 6px 12px; font-size: 12px;">На главную</button>
+            </div>
         </header>
 
         <!-- Основная часть -->
@@ -660,10 +662,7 @@
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
                                 <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <div class="buttons-group-form">
-                                <button class="pro-btn" id="getCertBtn" style="padding: 10px 18px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
-                                <button class="pro-btn btn-restart" style="padding: 10px 14px; font-size: 13px; text-align: center;" onclick="resetTestDrive()">Начать заново</button>
-                            </div>
+                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 20px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
                         </div>
                     </div>
                 </div>
@@ -686,7 +685,6 @@
                     <div class="cert-buttons-row">
                         <button class="action-btn-large btn-download" onclick="downloadCertificateWithData()">СКАЧАТЬ</button>
                         <button class="action-btn-large btn-share" onclick="shareCertificate()">ПОДЕЛИТЬСЯ</button>
-                        <button class="action-btn-large btn-restart" onclick="resetTestDrive()">НАЧАТЬ ЗАНОВО</button>
                     </div>
                 </div>
 
