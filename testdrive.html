@@ -712,7 +712,13 @@
         }
 
         function openStep2() {
-            const questUrl = 'https://nvhol.github.io/Pro-BGUT-ISIT/';
+            const userSpecialty = localStorage.getItem('userSpecialty');
+            let questUrl = 'https://nvhol.github.io/Pro-BGUT-ISIT/';
+
+            if (userSpecialty === 'Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники') {
+                questUrl = 'https://nvhol.github.io/Pro-BGUT-NT';
+            }
+
             window.open(questUrl, '_blank');
             localStorage.setItem('step2Completed', 'true');
             document.getElementById('step2Card').classList.add('completed');
