@@ -6,17 +6,17 @@
     <title>Pro-БГУТ: Студент на час</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Модальное окно 360°-тура (ПК и мобильные) */
+        /* Модальное окно 360°-тура (для ПК и мобильных устройств) */
         .tour-modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(3, 11, 24, 0.85);
+            background: rgba(3, 11, 24, 0.82);
             backdrop-filter: blur(10px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
             box-sizing: border-box;
         }
 
@@ -30,42 +30,45 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* Карточка окна с фоном здания университета */
         .tour-modal-card {
             position: relative;
             width: 100%;
-            max-width: 520px;
-            max-height: 92vh;
-            overflow-y: auto;
-            background: linear-gradient(145deg, rgba(11, 33, 64, 0.97) 0%, rgba(4, 14, 30, 0.99) 100%);
-            border: 1.5px solid rgba(0, 210, 255, 0.55);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(0, 210, 255, 0.25);
-            border-radius: 20px;
-            padding: 24px 22px;
+            max-width: 540px;
+            background-image: linear-gradient(rgba(4, 14, 30, 0.78), rgba(4, 14, 30, 0.88)), url('zdanie.png');
+            background-size: cover;
+            background-position: center;
+            border: 1.5px solid rgba(0, 210, 255, 0.6);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 210, 255, 0.28);
+            border-radius: 22px;
+            padding: 32px 28px;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         .tour-modal-close {
             position: absolute;
             top: 14px;
             right: 14px;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            border: 1px solid rgba(0, 210, 255, 0.45);
-            background: rgba(13, 40, 75, 0.9);
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            background: rgba(8, 25, 50, 0.85);
             color: #4df3ff;
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.25s ease;
+            z-index: 2;
         }
 
         .tour-modal-close:hover {
@@ -74,104 +77,58 @@
         }
 
         .tour-modal-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             color: #ffffff;
             text-align: center;
-            padding-right: 28px;
+            padding: 0 28px;
             margin: 0;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
         }
 
         .tour-modal-title span {
             color: #4df3ff;
         }
 
-        /* Блок вертикального видео (7 сек) */
-        .tour-video-stage {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .tour-vertical-video-box {
-            width: min(260px, 68vw);
-            aspect-ratio: 9 / 16;
-            max-height: 52vh;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1.5px solid rgba(0, 210, 255, 0.5);
-            background: #020813;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
-        }
-
-        .tour-vertical-video-box video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .tour-skip-btn {
-            background: transparent;
-            color: #93bde8;
-            border: 1px solid rgba(147, 189, 232, 0.45);
-            border-radius: 10px;
-            padding: 8px 16px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .tour-skip-btn:hover {
-            color: #ffffff;
-            border-color: #4df3ff;
-            background: rgba(0, 210, 255, 0.15);
-        }
-
-        /* 3 кнопки выбора локации после видео */
-        .tour-locations-stage {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            gap: 12px;
-            animation: tourFadeIn 0.3s ease forwards;
-        }
-
-        .tour-locations-stage.visible {
-            display: flex;
-        }
-
         .tour-locations-subtitle {
-            font-size: 14px;
-            color: #b8d4f0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #d8ecff;
             text-align: center;
-            margin: 0 0 4px 0;
+            margin: -6px 0 4px 0;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
+        }
+
+        .tour-locations-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .tour-choice-btn {
             width: 100%;
-            padding: 14px 18px;
+            padding: 15px 20px;
             border-radius: 12px;
-            border: 1.5px solid rgba(0, 210, 255, 0.5);
-            background: linear-gradient(90deg, rgba(13, 40, 75, 0.92) 0%, rgba(10, 30, 55, 0.92) 100%);
+            border: 1.5px solid rgba(0, 210, 255, 0.55);
+            background: linear-gradient(90deg, rgba(10, 32, 62, 0.92) 0%, rgba(7, 22, 44, 0.92) 100%);
+            backdrop-filter: blur(6px);
             color: #4df3ff;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s ease;
             box-sizing: border-box;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
         }
 
         .tour-choice-btn:hover {
-            background: linear-gradient(90deg, rgba(0, 210, 255, 0.28) 0%, rgba(13, 40, 75, 0.95) 100%);
+            background: linear-gradient(90deg, rgba(0, 210, 255, 0.3) 0%, rgba(13, 40, 75, 0.96) 100%);
             color: #ffffff;
             border-color: #4df3ff;
             transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(0, 210, 255, 0.35);
+            box-shadow: 0 10px 26px rgba(0, 210, 255, 0.38);
         }
 
         /* СТРОГО ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
@@ -301,22 +258,21 @@
             }
 
             .tour-modal-card {
-                padding: 20px 14px;
-                max-height: 90vh;
+                padding: 24px 16px;
+                gap: 14px;
             }
 
             .tour-modal-title {
-                font-size: 17px;
+                font-size: 18px;
             }
 
-            .tour-vertical-video-box {
-                width: min(210px, 60vw);
-                max-height: 46vh;
+            .tour-locations-subtitle {
+                font-size: 13.5px;
             }
 
             .tour-choice-btn {
                 font-size: 14px;
-                padding: 12px 14px;
+                padding: 13px 14px;
             }
         }
     </style>
@@ -352,34 +308,23 @@
 
                 <!-- Три интерактивные кнопки -->
                 <div class="buttons-block">
-                    <button class="pro-btn" id="btnTour">Виртуальный 360°-тур по университету</button>
-                    <button class="pro-btn" id="btnTestDrive">Начать тест-драйв специальностей</button>
-                    <button class="pro-btn" id="btnMore">Узнать больше о приемной кампании</button>
+                    <button type="button" class="pro-btn" id="btnTour">Виртуальный 360°-тур по университету</button>
+                    <button type="button" class="pro-btn" id="btnTestDrive">Начать тест-драйв специальностей</button>
+                    <button type="button" class="pro-btn" id="btnMore">Узнать больше о приемной кампании</button>
                 </div>
             </div>
         </main>
 
     </div>
 
-    <!-- Модальное окно 360°-тура: видео (7 сек) -> 3 кнопки -->
+    <!-- Всплывающее окно выбора объекта 360°-тура -->
     <div class="tour-modal-overlay" id="tourModal" role="dialog" aria-modal="true" aria-labelledby="tourModalTitle">
         <div class="tour-modal-card">
             <button type="button" class="tour-modal-close" id="closeTourModal" aria-label="Закрыть окно">&times;</button>
             <h2 class="tour-modal-title" id="tourModalTitle">Виртуальный <span>360°-тур</span> по БГУТ</h2>
+            <p class="tour-locations-subtitle">Выберите объект для просмотра:</p>
 
-            <!-- Этап 1: Вертикальное видео (7 сек) -->
-            <div class="tour-video-stage" id="tourVideoStage">
-                <div class="tour-vertical-video-box">
-                    <video id="tourIntroVideo" playsinline autoplay muted preload="metadata">
-                        <source src="tour-intro.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <button type="button" class="tour-skip-btn" id="skipTourVideo">Перейти к выбору локации</button>
-            </div>
-
-            <!-- Этап 2: 3 кнопки перехода по 360°-турам -->
-            <div class="tour-locations-stage" id="tourLocationsStage">
-                <p class="tour-locations-subtitle">Выберите объект для просмотра панорамы 360°:</p>
+            <div class="tour-locations-list">
                 <button type="button" class="tour-choice-btn" data-url="https://realty.yandex.ru/d3-embedded/player/31c4cacf-c16d-4117-b470-9061cbce5e14">Первый корпус</button>
                 <button type="button" class="tour-choice-btn" data-url="https://realty.yandex.ru/d3-embedded/player/2aaa9477-e921-4601-9b7f-53fc4887f4a4">Второй корпус</button>
                 <button type="button" class="tour-choice-btn" data-url="https://realty.yandex.ru/d3-embedded/player/cf229b1b-e716-416b-ba8c-5185bdaa772a">Музей БГУТ</button>
@@ -387,6 +332,62 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnTour = document.getElementById('btnTour');
+            const tourModal = document.getElementById('tourModal');
+            const closeTourModal = document.getElementById('closeTourModal');
+            const tourChoiceButtons = document.querySelectorAll('.tour-choice-btn');
+
+            if (btnTour && tourModal) {
+                btnTour.addEventListener('click', function() {
+                    tourModal.classList.add('active');
+                });
+            }
+
+            if (closeTourModal && tourModal) {
+                closeTourModal.addEventListener('click', function() {
+                    tourModal.classList.remove('active');
+                });
+            }
+
+            if (tourModal) {
+                tourModal.addEventListener('click', function(event) {
+                    if (event.target === tourModal) {
+                        tourModal.classList.remove('active');
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && tourModal && tourModal.classList.contains('active')) {
+                    tourModal.classList.remove('active');
+                }
+            });
+
+            tourChoiceButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const url = button.getAttribute('data-url');
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+
+            const btnTestDrive = document.getElementById('btnTestDrive');
+            if (btnTestDrive) {
+                btnTestDrive.addEventListener('click', function() {
+                    window.location.href = 'testdrive.html';
+                });
+            }
+
+            const btnMore = document.getElementById('btnMore');
+            if (btnMore) {
+                btnMore.addEventListener('click', function() {
+                    window.open('https://www.abit.bgut.by/', '_blank');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
