@@ -249,6 +249,135 @@
             display: flex;
         }
 
+        /* Модальное окно выбора лаборатории (Шаг 3 для ТХТ) */
+        .lab-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 11, 24, 0.58);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .lab-modal-overlay.active {
+            display: flex;
+            animation: labFadeIn 0.25s ease forwards;
+        }
+
+        @keyframes labFadeIn {
+            from { opacity: 0; transform: translateY(8px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .lab-modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.88) 0%, rgba(240, 248, 255, 0.92) 100%), url('fon2.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(0, 153, 255, 0.45);
+            box-shadow: 0 24px 60px rgba(3, 11, 24, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+            border-radius: 22px;
+            padding: 34px 28px;
+            color: #030b18;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .lab-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(0, 153, 255, 0.35);
+            background: rgba(255, 255, 255, 0.9);
+            color: #030b18;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.22s ease;
+            box-shadow: 0 4px 12px rgba(0, 153, 255, 0.12);
+        }
+
+        .lab-modal-close:hover {
+            background: #0099ff;
+            border-color: #0099ff;
+            color: #ffffff;
+            transform: rotate(90deg);
+        }
+
+        .lab-modal-title {
+            font-size: 23px;
+            font-weight: 800;
+            color: #030b18;
+            text-align: center;
+            padding: 0 28px;
+            margin: 0;
+            line-height: 1.25;
+        }
+
+        .lab-modal-title span {
+            color: #0099ff;
+        }
+
+        .lab-modal-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #475569;
+            text-align: center;
+            margin: -4px 0 6px 0;
+        }
+
+        .lab-locations-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .lab-choice-btn {
+            width: 100%;
+            padding: 15px 22px;
+            border-radius: 14px;
+            border: 1.5px solid rgba(0, 210, 255, 0.55);
+            background: linear-gradient(95deg, #071b38 0%, #0d3163 100%);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.2px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-sizing: border-box;
+            box-shadow: 0 10px 24px rgba(7, 27, 56, 0.22);
+        }
+
+        .lab-choice-btn:hover {
+            background: linear-gradient(95deg, #0077cc 0%, #00a8ff 100%);
+            border-color: #ffffff;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(0, 153, 255, 0.35);
+        }
+
+        .lab-choice-btn:active {
+            transform: translateY(0);
+        }
+
         /* Секция сертификата */
         .certificate-section {
             background: linear-gradient(135deg, rgba(13, 40, 75, 0.75) 0%, rgba(4, 14, 30, 0.85) 100%);
@@ -537,6 +666,24 @@
                 font-size: 12px;
             }
 
+            .lab-modal-card {
+                padding: 26px 18px;
+                gap: 14px;
+            }
+
+            .lab-modal-title {
+                font-size: 18px;
+            }
+
+            .lab-modal-subtitle {
+                font-size: 13.5px;
+            }
+
+            .lab-choice-btn {
+                font-size: 14px;
+                padding: 13px 14px;
+            }
+
             .certificate-section h3 {
                 font-size: 16px;
             }
@@ -702,7 +849,25 @@
 
     </div>
 
+    <!-- Всплывающее окно: Лаборатории кафедры Теплохладотехники -->
+    <div class="lab-modal-overlay" id="labModal" role="dialog" aria-modal="true" aria-labelledby="labModalTitle" onclick="handleLabModalBackdrop(event)">
+        <div class="lab-modal-card">
+            <button type="button" class="lab-modal-close" aria-label="Закрыть окно" onclick="closeLabModal()">&times;</button>
+            <h2 class="lab-modal-title" id="labModalTitle">Лаборатории кафедры <span>Теплохладотехники</span></h2>
+            <p class="lab-modal-subtitle">Выберите секцию для виртуальной экскурсии:</p>
+
+            <div class="lab-locations-list">
+                <button type="button" class="lab-choice-btn" onclick="openLabTour('https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb')">Секция холодильной техники</button>
+                <button type="button" class="lab-choice-btn" onclick="openLabTour('https://realty.yandex.ru/d3-embedded/player/e7379b9e-c70d-4a99-9cd6-a90205aa1eed')">Секция теплотехники</button>
+                <button type="button" class="lab-choice-btn" onclick="openLabTour('https://realty.yandex.ru/d3-embedded/player/b1544864-14b2-4742-bd48-bb9d3f84a7ad')">Секция процессов и аппаратов</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        const TARGET_VACUUM_SPECIALTY = 'Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники';
+        const DEFAULT_TOUR_URL = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
+
         function goHome() {
             window.location.href = 'index.html';
         }
@@ -715,7 +880,7 @@
             const userSpecialty = localStorage.getItem('userSpecialty');
             let questUrl = 'https://nvhol.github.io/Pro-BGUT-ISIT/';
 
-            if (userSpecialty === 'Оборудование и технологии вакуумной, компрессорной и низкотемпературной техники') {
+            if (userSpecialty === TARGET_VACUUM_SPECIALTY) {
                 questUrl = 'https://nvhol.github.io/Pro-BGUT-NT';
             }
 
@@ -725,13 +890,47 @@
             checkAllSteps();
         }
 
-        function openStep3() {
-            const tourUrl = 'https://realty.yandex.ru/d3-embedded/player/1b64cc52-f595-4d30-9ecb-f7eafd748ceb';
-            window.open(tourUrl, '_blank');
+        function completeStep3() {
             localStorage.setItem('step3Completed', 'true');
             document.getElementById('step3Card').classList.add('completed');
             checkAllSteps();
         }
+
+        function openStep3() {
+            const userSpecialty = localStorage.getItem('userSpecialty');
+
+            if (userSpecialty === TARGET_VACUUM_SPECIALTY) {
+                document.getElementById('labModal').classList.add('active');
+                return;
+            }
+
+            window.open(DEFAULT_TOUR_URL, '_blank');
+            completeStep3();
+        }
+
+        function openLabTour(url) {
+            window.open(url, '_blank');
+            completeStep3();
+        }
+
+        function closeLabModal() {
+            document.getElementById('labModal').classList.remove('active');
+        }
+
+        function handleLabModalBackdrop(event) {
+            if (event.target === document.getElementById('labModal')) {
+                closeLabModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const labModal = document.getElementById('labModal');
+                if (labModal && labModal.classList.contains('active')) {
+                    closeLabModal();
+                }
+            }
+        });
 
         function initTestDrive() {
             const step1Completed = localStorage.getItem('step1Completed');
