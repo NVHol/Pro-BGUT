@@ -878,6 +878,7 @@
         ];
 
         let specialtyConfigMap = {};
+        let completeStep3OnClose = false;
 
         function parseLabEntry(rawValue, index) {
             const trimmed = (rawValue || '').trim();
@@ -1004,7 +1005,9 @@
             checkAllSteps();
         }
 
-        function renderLabModal(titleHtml, subtitleText, buttons) {
+        function renderLabModal(titleHtml, subtitleText, buttons, markCompletedOnClose) {
+            completeStep3OnClose = Boolean(markCompletedOnClose);
+
             const titleEl = document.getElementById('labModalTitle');
             const subtitleEl = document.getElementById('labModalSubtitle');
             const listEl = document.getElementById('labLocationsList');
@@ -1049,11 +1052,13 @@
                 renderLabModal(
                     config.modalTitle,
                     'Выберите секцию для виртуальной экскурсии:',
-                    buttons
+                    buttons,
+                    false
                 );
                 return;
             }
 
+            // Если в файле по выбранной специальности стоят только # — засчитываем шаг 3 после нажатия «Закрыть»
             const specLabel = userSpecialty ? ` по специальности «${userSpecialty}»` : '';
             renderLabModal(
                 'Экскурсия <span>готовится</span>',
@@ -1063,7 +1068,8 @@
                         label: 'Закрыть',
                         onClick: closeLabModal
                     }
-                ]
+                ],
+                true
             );
         }
 
@@ -1073,7 +1079,12 @@
         }
 
         function closeLabModal() {
+            const shouldComplete = completeStep3OnClose;
+            completeStep3OnClose = false;
             document.getElementById('labModal').classList.remove('active');
+            if (shouldComplete) {
+                completeStep3();
+            }
         }
 
         function handleLabModalBackdrop(event) {
