@@ -417,24 +417,37 @@
         .cert-form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
         }
 
-        .inputs-row {
-            display: flex;
+        /* Поле ФИО и кнопка "Получить сертификат" на одном уровне с равной шириной */
+        .name-button-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
+            width: 100%;
+            align-items: stretch;
         }
 
         .cert-input {
-            flex: 1;
-            padding: 9px 15px;
+            width: 100%;
+            padding: 10px 15px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             background: #ffffff;
             color: #030b18;
             font-size: 0.9vw;
             outline: none;
+            box-sizing: border-box;
+        }
+
+        .get-cert-equal-btn {
+            width: 100% !important;
+            padding: 10px 20px !important;
+            font-size: 0.9vw !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
         }
 
         /* Скрытое поле email на будущее */
@@ -444,7 +457,7 @@
 
         .action-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             gap: 15px;
         }
@@ -698,14 +711,19 @@
                 font-size: 12px;
             }
 
-            .inputs-row {
-                flex-direction: column;
+            .name-button-row {
+                grid-template-columns: 1fr;
                 gap: 10px;
             }
 
             .cert-input {
                 font-size: 13px;
                 padding: 10px;
+            }
+
+            .get-cert-equal-btn {
+                font-size: 13px !important;
+                padding: 11px 16px !important;
             }
 
             .action-row {
@@ -813,8 +831,9 @@
                     <p>Введите ваши данные, чтобы получить именной сертификат:</p>
                     
                     <div class="cert-form">
-                        <div class="inputs-row">
+                        <div class="name-button-row">
                             <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName" oninput="validateForm()">
+                            <button class="pro-btn get-cert-equal-btn" id="getCertBtn" onclick="generateCertificate()" disabled>Получить сертификат</button>
                             <input type="email" class="cert-input email-hidden-field" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
                         </div>
                         
@@ -823,7 +842,6 @@
                                 <input type="checkbox" id="userConsent" onchange="validateForm()">
                                 <span>Я даю <a href="soglasie.pdf" target="_blank" style="color: #00d2ff; text-decoration: underline;">согласие на обработку персональных данных и получение рассылок</a></span>
                             </label>
-                            <button class="pro-btn" id="getCertBtn" style="width: auto; padding: 10px 20px; font-size: 13px; text-align: center;" onclick="generateCertificate()" disabled>Получить сертификат</button>
                         </div>
                     </div>
                 </div>
