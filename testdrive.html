@@ -437,6 +437,11 @@
             outline: none;
         }
 
+        /* Скрытое поле email на будущее */
+        .email-hidden-field {
+            display: none !important;
+        }
+
         .action-row {
             display: flex;
             justify-content: space-between;
@@ -810,7 +815,7 @@
                     <div class="cert-form">
                         <div class="inputs-row">
                             <input type="text" class="cert-input" placeholder="Ваше ФИО (например, Иванов Алексей)" id="userName" oninput="validateForm()">
-                            <input type="email" class="cert-input" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
+                            <input type="email" class="cert-input email-hidden-field" placeholder="Ваш Email (для получения новостей и сертификата)" id="userEmail" oninput="validateForm()">
                         </div>
                         
                         <div class="action-row">
@@ -1058,7 +1063,6 @@
                 return;
             }
 
-            // Если в файле по выбранной специальности стоят только # — засчитываем шаг 3 после нажатия «Закрыть»
             const specLabel = userSpecialty ? ` по специальности «${userSpecialty}»` : '';
             renderLabModal(
                 'Экскурсия <span>готовится</span>',
@@ -1150,11 +1154,10 @@
 
         function validateForm() {
             const name = document.getElementById('userName').value.trim();
-            const email = document.getElementById('userEmail').value.trim();
             const consent = document.getElementById('userConsent').checked;
             const btn = document.getElementById('getCertBtn');
 
-            if (name.length > 2 && email.includes('@') && consent) {
+            if (name.length > 2 && consent) {
                 btn.removeAttribute('disabled');
             } else {
                 btn.setAttribute('disabled', 'true');
