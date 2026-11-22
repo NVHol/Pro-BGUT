@@ -12,9 +12,11 @@
 
 Производство продукции и организация общественного питания | https://nvhol.github.io/Pro-BGUT-All/ | # | # | #
 
-Технология молока и молочных продуктов | https://nvhol.github.io/Pro-BGUT-NTPro-BGUT-TG/ | # | # | #
+Технология молока и молочных продуктов | https://nvhol.github.io/Pro-BGUT-TG/ | # | # | #
 
 Технология мяса и мясных продуктов | https://nvhol.github.io/Pro-BGUT-All/ | # | # | #
+
+Технология производства и нутрициология в индустрии питания | https://nvhol.github.io/Pro-BGUT-All/ | # | # | #
 
 Технология хлебобулочных и кондитерских изделий | https://nvhol.github.io/Pro-BGUT-All/ | # | # | #
 
